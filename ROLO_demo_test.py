@@ -27,7 +27,7 @@ import cv2
 import os
 import numpy as np
 import sys
-import ROLO_utils as utils
+from utils import ROLO_utils as utils
 '''----------------------------------------main-----------------------------------------------------'''
 def main(argv):
     ''' PARAMETERS '''
