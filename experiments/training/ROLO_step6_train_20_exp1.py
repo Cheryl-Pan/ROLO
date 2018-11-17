@@ -24,10 +24,10 @@ Description:
 '''
 
 # Imports
-import ROLO_utils as utils
+import utils.ROLO_utils as utils
 
 import tensorflow as tf
-from tensorflow.models.rnn import rnn, rnn_cell
+#from tensorflow.models.rnn import rnn, rnn_cell
 import cv2
 
 import numpy as np
@@ -37,8 +37,8 @@ import random
 
 
 class ROLO_TF:
-    disp_console = False
-    restore_weights = True#False
+    disp_console = True#False
+    restore_weights = False#True
 
     # YOLO parameters
     fromfile = None
@@ -58,60 +58,90 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt' 
+    #rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
+    rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
     num_predict = 6 # final output of LSTM 6 loc parameters
     num_gt = 4
-    num_input = num_feat + num_predict # data input: 4096+6= 5002
+    num_input = num_feat + num_predict # data input: 4096+6= 4012
 
     # ROLO Training Parameters
     #learning_rate = 0.00001 #training
     learning_rate = 0.00001 #testing
 
     training_iters = 210#100000
-    batch_size = 1 #128
+    batch_size = 1 #128 a kind of piceture only have one
     display_step = 1
 
     # tf Graph input
-    x = tf.placeholder("float32", [None, num_steps, num_input])
-    istate = tf.placeholder("float32", [None, 2*num_input]) #state & cell => 2x num_input
-    y = tf.placeholder("float32", [None, num_gt])
+    x = tf.placeholder(tf.float32, shape=[None, num_steps, num_input])
+    print (x.shape)
+    istate = tf.placeholder(tf.float32, shape=[None, 2*num_input]) #state & cell => 2x num_input
+    y = tf.placeholder(tf.float32, [None, num_gt])
 
     # Define weights
-    weights = {
-        'out': tf.Variable(tf.random_normal([num_input, num_predict]))
-    }
-    biases = {
+    with tf.variable_scope("weight",reuse=True):
+        weights = {
+        'out': tf.Variable(tf.random_normal([num_input*2, num_predict]))
+         }
+    with tf.variable_scope("bias",reuse=True):
+         biases = {
         'out': tf.Variable(tf.random_normal([num_predict]))
-    }
+         }
 
-
-    def __init__(self,argvs = []):
+    def __init__(self, argvs=None):
+        if argvs is None:
+            argvs = []
         print("ROLO init")
         self.ROLO(argvs)
 
 
     def LSTM_single(self, name,  _X, _istate, _weights, _biases):
-
-        # input shape: (batch_size, n_steps, n_input)
-        _X = tf.transpose(_X, [1, 0, 2])  # permute num_steps and batch_size
+        print (_X.shape)
+        # input shape: (batch_size, n_steps, n_input) (?,6,4102)
+        _X = tf.transpose(_X, [1, 0, 2])  # permute num_steps and batch_size _X.shape:(n_steps,batch_size,n_input)
+        print (_X.shape)
         # Reshape to prepare input to hidden activation
         _X = tf.reshape(_X, [self.num_steps * self.batch_size, self.num_input]) # (num_steps*batch_size, num_input)
+        # print (_X.shape)
         # Split data because rnn cell needs a list of inputs for the RNN inner loop
-        _X = tf.split(0, self.num_steps, _X) # n_steps * (batch_size, num_input)
+        _X = tf.split(_X,self.num_steps,0) # n_steps * (batch_size, num_input)
         #print("_X: ", _X)
 
+        #cell = tf.nn.rnn_cell.LSTMCell(self.num_input) #BasicLSTMCell 4102
         cell = tf.nn.rnn_cell.LSTMCell(self.num_input, self.num_input)
         state = _istate
-        for step in range(self.num_steps):
-            outputs, state = tf.nn.rnn(cell, [_X[step]], state)
-            tf.get_variable_scope().reuse_variables()
+        # outputs, states  = tf.nn.dynamic_rnn(cell, _X, initial_state=state, time_major = True)
+        # tf.get_variable_scope().reuse_variables()
+        with tf.variable_scope('lstm_rnn'):
+          for step in range(self.num_steps):
+              outputs, state=tf.nn.static_rnn(cell,[_X[step]],dtype=tf.float32) #_X[step]:(batch_size,num_input)
+              tf.get_variable_scope().reuse_variables()
 
         #print("output: ", outputs)
         #print("state: ", state)
-        return outputs
+        return outputs  #outputis a list,include one tensor, TensorShape:[batch_size, num_input]
+
+
+    # bi-LSTM
+    def bi_lstm(self, name, _X):
+        _X = tf.transpose(_X,[1,0,2]) # [n_step,batch_size,num_input]
+        with tf.variable_scope ('forward'):
+            lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+        with tf.variable_scope('backward'):
+            lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+
+        output_bi_lstm,states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, _X, dtype=tf.float32,time_major=True)
+        #output_bi_lstm is a tuple,(output_fw,output_bw)
+        output_fw_pred = output_bi_lstm[0][-1][:,4097:4101]
+        output_bw_pred = output_bi_lstm[1][-1][:,4097:4101]
+
+        final_output = tf.add(output_fw_pred,output_bw_pred)/2 # shape:(batch_size,4)
+        # outputs = tf.concat(output_bi_lstm,2) #(n_step,batchsize,num_input*2)
+        # outputs[-1][:,4097:4101]
+        return final_output  #last time_step output,(1,tensor([batch_size,num_input*2]))
 
 
     # Experiment with dropout
@@ -129,10 +159,11 @@ class ROLO_TF:
         if self.disp_console : print "Building ROLO graph..."
 
         # Build rolo layers
-        self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
+        #self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
+        self.lstm_module = self.bi_lstm("bi_lstm",self.x)
         self.ious= tf.Variable(tf.zeros([self.batch_size]), name="ious")
         self.sess = tf.Session()
-        self.sess.run(tf.initialize_all_variables())
+        self.sess.run(tf.global_variables_initializer())
         self.saver = tf.train.Saver()
         #self.saver.restore(self.sess, self.rolo_weights_file)
         if self.disp_console : print "Loading complete!" + '\n'
@@ -156,7 +187,7 @@ class ROLO_TF:
         optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy) # Adam Optimizer
 
         # Initializing the variables
-        init = tf.initialize_all_variables()
+        init = tf.global_variables_initializer()
 
         # Launch the graph
         with tf.Session() as sess:
@@ -178,7 +209,7 @@ class ROLO_TF:
                 # for item in range(len(batch_xs)):
 
                 batch_ys = self.rolo_utils.load_rolo_gt(y_path, self.batch_size, self.num_steps, id)
-                batch_ys = self.locations_from_0_to_1(self.w_img, self.h_img, batch_ys)
+                batch_ys = utils.locations_from_0_to_1(self.w_img, self.h_img, batch_ys)
 
                 # Reshape data to get 3 seq of 5002 elements
                 batch_xs = np.reshape(batch_xs, [self.batch_size, self.num_steps, self.num_input])
@@ -216,23 +247,26 @@ class ROLO_TF:
 
     def train_20(self):
         print("TRAINING ROLO...")
-        log_file = open("output/trainging-20-log.txt", "a") #open in append mode
+        log_file = open("panchen/output/trainging-20-log.txt", "a") # open in append mode
+        print ("build_network...")
         self.build_networks()
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 100
+        epoches = 20 #20 * 100
 
         # Use rolo_input for LSTM training
-        pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
-        self.pred_location = pred[0][:, 4097:4101]
-        self.correct_prediction = tf.square(self.pred_location - self.y)
-        self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
-        self.learning_rate = 0.00001
-        self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy) # Adam Optimizer
+        with tf.variable_scope('opt'):
+            # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
+            # self.pred_location = pred[0][:, 4097:4101] #[batch_size,4097:4101]
+            self.pred_location = self.bi_lstm("bi_lstm",self.x)
+            self.correct_prediction = tf.square(self.pred_location - self.y)
+            self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
+            self.learning_rate = 0.00001
+            self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy) # Adam Optimizer
 
         # Initializing the variables
-        init = tf.initialize_all_variables()
+        init = tf.global_variables_initializer()
 
         # Launch the graph
         with tf.Session() as sess:
@@ -243,9 +277,9 @@ class ROLO_TF:
             else:
                 sess.run(init)
 
-            for epoch in range(epoches):
-                i = epoch % num_videos
-                [self.w_img, self.h_img, sequence_name, dummy, self.training_iters]= utils.choose_video_sequence(i)
+            for epoch in range(epoches): #20
+                i = epoch % num_videos #20
+                [self.w_img, self.h_img, sequence_name, dummy,self.training_iters]= utils.choose_video_sequence(i)
 
                 x_path = os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
@@ -267,7 +301,7 @@ class ROLO_TF:
                     batch_ys = self.rolo_utils.load_rolo_gt_test(y_path, self.batch_size, self.num_steps, id)
                     batch_ys = utils.locations_from_0_to_1(self.w_img, self.h_img, batch_ys)
 
-                    # Reshape data to get 3 seq of 5002 elements
+                    # Reshape data to get 3 seq of 4102 elements
                     batch_xs = np.reshape(batch_xs, [self.batch_size, self.num_steps, self.num_input])
                     batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
                     if self.disp_console: print("Batch_ys: ", batch_ys)
@@ -313,13 +347,13 @@ class ROLO_TF:
             arguments = self.rolo_utils.argv_parser(argvs)
 
             if self.rolo_utils.flag_train is True:
-                self.training(utils.x_path, utils.y_path)
+                self.training(self.rolo_utils.x_path, self.rolo_utils.y_path)
             elif self.rolo_utils.flag_track is True:
                 self.build_networks()
-                self.track_from_file(utils.file_in_path)
+                self.track_from_file(self.rolo_utils.file_in_path)
             elif self.rolo_utils.flag_detect is True:
                 self.build_networks()
-                self.detect_from_file(utils.file_in_path)
+                self.detect_from_file(self.rolo_utils.file_in_path)
             else:
                 self.train_20()
 
@@ -329,4 +363,3 @@ def main(argvs):
 
 if __name__=='__main__':
         main(' ')
-

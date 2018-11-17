@@ -30,6 +30,8 @@ import pickle
 import tensorflow as tf
 import math
 global Config
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 class ROLO_utils:
@@ -295,7 +297,7 @@ class ROLO_utils:
                 return yolo_output_batch
 
 
-        def load_rolo_gt(self, path, batch_size, num_steps, step):
+        def load_rolo_gt(self, path, batch_size, num_steps, step): #step=id
                 lines= self.load_dataset_gt(path)
                 offset= num_steps - 2  # offset is for prediction of the future
                 st= step*batch_size*num_steps
@@ -313,7 +315,7 @@ class ROLO_utils:
                 paths = [os.path.join(fold,fn) for fn in next(os.walk(fold))[2]]
                 paths = sorted(paths)
                 st= id
-                ed= id + batch_size*num_steps
+                ed= id + batch_size*num_steps # 1*6
                 paths_batch = paths[st:ed]
 
                 yolo_output_batch= []
@@ -447,7 +449,7 @@ def createFolder( path):
 
 
 def load_folder( path):
-        paths = [os.path.join(path,fn) for fn in next(os.walk(path))[2]]
+        paths = [os.path.join(path,fn) for fn in next(os.walk(path))[2]] #(root,dirs,files)
         return sorted(paths)
 
 

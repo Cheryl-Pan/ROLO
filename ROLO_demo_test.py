@@ -46,10 +46,11 @@ def main(argv):
     lines = utils.load_dataset_gt( gt_file_path)
 
     # Define the codec and create VideoWriter object
-    fourcc= cv2.cv.CV_FOURCC(*'DIVX')
+    #fourcc= cv2.cv.CV_FOURCC(*'DIVX') # no cv modul in cv2
+    fourcc = cv2.VideoWriter_fourcc(*'MJPG')
     video_name = sequence_name + '_test.avi'
     video_path = os.path.join('output/videos/', video_name)
-    video = cv2.VideoWriter(video_path, fourcc, 20, (wid, ht))
+    video = cv2.VideoWriter(video_path, fourcc, 20, (wid, ht)) #make vedio file
 
     total= 0
     rolo_avgloss= 0
@@ -65,11 +66,11 @@ def main(argv):
 
         yolo_location= utils.find_yolo_location(yolo_out_path, test_id)
         yolo_location= utils.locations_normal( wid, ht, yolo_location)
-        print(yolo_location)
+        print("yolo_location:",yolo_location)
 
         rolo_location= utils.find_rolo_location( rolo_out_path, test_id)
         rolo_location = utils.locations_normal( wid, ht, rolo_location)
-        print(rolo_location)
+        print("rolo_location:",rolo_location)
 
         gt_location = utils.find_gt_location( lines, test_id - 1)
         #gt_location= locations_from_0_to_1(None, 480, 640, gt_location)
