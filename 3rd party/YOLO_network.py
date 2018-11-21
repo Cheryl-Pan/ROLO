@@ -5,7 +5,7 @@ import cv2
 import time
 import sys
 import pickle
-import ROLO_utils as util
+from utils import ROLO_utils as util
 
 class YOLO_TF:
 	fromfile = None

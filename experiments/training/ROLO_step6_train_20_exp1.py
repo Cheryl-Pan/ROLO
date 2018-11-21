@@ -23,6 +23,8 @@ Description:
 	Webpage: http://guanghan.info/
 '''
 
+#!/usr/bin/env python
+
 # Imports
 import utils.ROLO_utils as utils
 
@@ -84,11 +86,11 @@ class ROLO_TF:
     # Define weights
     with tf.variable_scope("weight",reuse=True):
         weights = {
-        'out': tf.Variable(tf.random_normal([num_input*2, num_predict]))
+        'in': tf.Variable(tf.random_normal([num_input, num_predict]))
          }
     with tf.variable_scope("bias",reuse=True):
          biases = {
-        'out': tf.Variable(tf.random_normal([num_predict]))
+        'in': tf.Variable(tf.random_normal([num_predict]))
          }
 
     def __init__(self, argvs=None):
@@ -126,8 +128,11 @@ class ROLO_TF:
 
 
     # bi-LSTM
-    def bi_lstm(self, name, _X):
-        _X = tf.transpose(_X,[1,0,2]) # [n_step,batch_size,num_input]
+    def bi_lstm(self, name, X, weights, biases):
+        _X = tf.reshape(X,[-1,self.num_input])
+        x_in = tf.matmul(_X,weights )+ biases
+        x_in = tf.reshape(x_in,[self.batch_size,self.num_steps,self.num_input])
+        _X = tf.transpose(x_in,[1,0,2]) # [n_step,batch_size,num_input]
         with tf.variable_scope ('forward'):
             lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
         with tf.variable_scope('backward'):
@@ -160,7 +165,7 @@ class ROLO_TF:
 
         # Build rolo layers
         #self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
-        self.lstm_module = self.bi_lstm("bi_lstm",self.x)
+        self.lstm_module = self.bi_lstm("bi_lstm", self.x, self.weights['in'],self.biases['in'])
         self.ious= tf.Variable(tf.zeros([self.batch_size]), name="ious")
         self.sess = tf.Session()
         self.sess.run(tf.global_variables_initializer())
@@ -253,13 +258,13 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 #20 * 100
+        epoches = 20*100 #20 * 100
 
         # Use rolo_input for LSTM training
         with tf.variable_scope('opt'):
             # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
             # self.pred_location = pred[0][:, 4097:4101] #[batch_size,4097:4101]
-            self.pred_location = self.bi_lstm("bi_lstm",self.x)
+            self.pred_location = self.bi_lstm("bi_lstm", self.x, self.weights['in'],biases=self.biases['in'])
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
             self.learning_rate = 0.00001

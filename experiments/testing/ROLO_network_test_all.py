@@ -24,7 +24,7 @@ Description:
 '''
 
 # Imports
-import ROLO_utils as utils
+from utils import ROLO_utils as utils
 
 import tensorflow as tf
 from tensorflow.models.rnn import rnn, rnn_cell
@@ -47,7 +47,6 @@ class ROLO_TF:
     imshow = True
     filewrite_img = False
     filewrite_txt = False
-    disp_console = True
     yolo_weights_file = 'weights/YOLO_small.ckpt'
     alpha = 0.1
     threshold = 0.2
@@ -78,6 +77,7 @@ class ROLO_TF:
     y = tf.placeholder("float32", [None, num_gt])
 
     # Define weights
+
     weights = {
         'out': tf.Variable(tf.random_normal([num_input, num_predict]))
     }
@@ -103,9 +103,26 @@ class ROLO_TF:
         cell = tf.nn.rnn_cell.LSTMCell(self.num_input, self.num_input)
         state = _istate
         for step in range(self.num_steps):
-            outputs, state = tf.nn.rnn(cell, [_X[step]], state)
+            outputs, state = tf.nn.static_rnn(cell, [_X[step]], state)
             tf.get_variable_scope().reuse_variables()
         return outputs
+
+    def bi_lstm(self, name, _X):
+        _X = tf.transpose(_X,[1,0,2]) # [n_step,batch_size,num_input]
+        with tf.variable_scope ('forward'):
+            lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+        with tf.variable_scope('backward'):
+            lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+
+        output_bi_lstm,states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, _X, dtype=tf.float32,time_major=True)
+        #output_bi_lstm is a tuple,(output_fw,output_bw)
+        output_fw_pred = output_bi_lstm[0][-1][:,4097:4101]
+        output_bw_pred = output_bi_lstm[1][-1][:,4097:4101]
+
+        final_output = tf.add(output_fw_pred,output_bw_pred)/2 # shape:(batch_size,4)
+        # outputs = tf.concat(output_bi_lstm,2) #(n_step,batchsize,num_input*2)
+        # outputs[-1][:,4097:4101]
+        return final_output  #last time_step output,(1,tensor([batch_size,num_input*2]))
 
 
     # Experiment with dropout
