@@ -79,10 +79,10 @@ class ROLO_TF:
 
     # Define weights
     weights = {
-        'out': tf.Variable(tf.random_normal([num_input, num_predict]))
+        'in': tf.Variable(tf.random_normal([num_input, num_predict]))
     }
     biases = {
-        'out': tf.Variable(tf.random_normal([num_predict]))
+        'in': tf.Variable(tf.random_normal([num_predict]))
     }
 
     def __init__(self, argvs=[]):
@@ -107,14 +107,17 @@ class ROLO_TF:
         # print("state: ", state)
         return outputs
 
-    def bi_lstm(self, name, _X):
-        _X = tf.transpose(_X, [1, 0, 2])  # [n_step,batch_size,num_input]
+    def bi_lstm(self, name, _X, weights, biases):
+        _X = tf.reshape(_X,[-1,self.num_input])
+        _X = tf.matmul(_X,weights) + biases
+        x_in = tf.reshape(_X, [self.batch_size, self.num_steps, self.num_input])
+        x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
         with tf.variable_scope('forward'):
             lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
         with tf.variable_scope('backward'):
             lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
 
-        output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, _X, dtype=tf.float32,
+        output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
                                                                  time_major=True)
         # output_bi_lstm is a tuple,(output_fw,output_bw)
         output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
@@ -156,7 +159,7 @@ class ROLO_TF:
         print("TESTING ROLO...")
         # Use rolo_input for LSTM training
         #pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
-        pred_location = self.bi_lstm('bi_lstm_test',self.x)
+        pred_location = self.bi_lstm('bi_lstm_test',self.x,self.weights['in'],self.biases['in'])
         # print("pred: ", pred)
         # pred_location = pred[0][:, 4097:4101]
         print("pred_location: ", pred_location)
@@ -202,17 +205,17 @@ class ROLO_TF:
                 batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
                 print("Batch_ys: ", batch_ys)
 
-                pred_location = sess.run(pred_location, feed_dict={self.x: batch_xs, self.y: batch_ys,
+                pred_location_out = sess.run(pred_location, feed_dict={self.x: batch_xs, self.y: batch_ys,
                                                                         self.istate: np.zeros(
                                                                             (self.batch_size, 2 * self.num_input))})
-                print("ROLO Pred: ", pred_location)
+                print("ROLO Pred: ", pred_location_out)
                 # print("len(pred) = ", len(pred_location))
-                print("ROLO Pred in pixel: ", pred_location[0][0] * self.w_img, pred_location[0][1] * self.h_img,
-                      pred_location[0][2] * self.w_img, pred_location[0][3] * self.h_img)
+                print("ROLO Pred in pixel: ", pred_location_out[0][0] * self.w_img, pred_location_out[0][1] * self.h_img,
+                      pred_location_out[0][2] * self.w_img, pred_location_out[0][3] * self.h_img)
                 # print("correct_prediction int: ", (pred_location + 0.1).astype(int))
 
                 # Save pred_location to file
-                utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)
+                utils.save_rolo_output_test(self.output_path, pred_location_out, id, self.num_steps, self.batch_size)
 
                 # sess.run(optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
 

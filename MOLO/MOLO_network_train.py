@@ -23,7 +23,7 @@ Description:
 '''
 
 # Imports
-import ROLO_utils as utils
+from utils import ROLO_utils as utils
 
 import tensorflow as tf
 from tensorflow.models.rnn import rnn, rnn_cell

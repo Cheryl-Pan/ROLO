@@ -2,9 +2,9 @@ import sys, os
 sys.path.append(os.path.abspath("../utils/"))
 import time, random
 
-from utils_io_coord import *
-from utils_io_list import *
-from utils_dataset import *
+from update.utils.utils_io_coord import *
+from update.utils.utils_io_list import *
+from update.utils.utils_dataset import *
 
 import numpy as np
 import tensorflow as tf

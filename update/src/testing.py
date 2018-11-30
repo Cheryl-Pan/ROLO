@@ -1,7 +1,13 @@
-from utils_dataset import *
-from utils_draw_coord import debug_decimal_coord
-from utils_io_folder import *
-from utils_io_coord import *
+import sys, os
+sys.path.append("..")
+
+from update.utils.utils_dataset import *
+from update.utils.utils_draw_coord import debug_decimal_coord
+from update.utils.utils_io_folder import *
+from update.utils.utils_io_coord import *
+
+
+
 
 def get_batch_by_repeat(ndarray, batchsize):
     batch_ndarray = []
