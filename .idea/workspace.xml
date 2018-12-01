@@ -29326,9 +29326,6 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29380,11 +29377,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="283">
-              <caret line="347" column="30" lean-forward="true" selection-start-line="347" selection-start-column="30" selection-end-line="347" selection-end-column="30" />
+              <caret line="347" column="30" selection-start-line="347" selection-start-column="30" selection-end-line="347" selection-end-column="30" />
               <folding>
                 <element signature="e#886#918#0" expanded="true" />
                 <marker date="1543666509305" expanded="true" signature="6125:7178" ph="..." />
@@ -29393,11 +29390,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="265" column="17" lean-forward="true" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
+            <state relative-caret-position="-189">
+              <caret line="265" column="17" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
               <folding>
                 <element signature="e#860#897#0" expanded="true" />
               </folding>
@@ -29728,7 +29725,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543629542076</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="for training, using lstm_single_2, and the num of lstm unit is 3000.">
+      <created>1543666777239</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1543666777239</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -29768,9 +29772,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Using bi-lstm for tracking." />
-    <MESSAGE value="for training, using lstm_single_2, and the num of lstm unit is 3000." />
     <MESSAGE value="gpu 0" />
-    <option name="LAST_COMMIT_MESSAGE" value="gpu 0" />
+    <MESSAGE value="for training, using lstm_single_2, and the num of lstm unit is 3000." />
+    <option name="LAST_COMMIT_MESSAGE" value="for training, using lstm_single_2, and the num of lstm unit is 3000." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/output/frames/Car4/5.jpg">
@@ -29998,23 +30002,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
+    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="347" column="30" lean-forward="true" selection-start-line="347" selection-start-column="30" selection-end-line="347" selection-end-column="30" />
+        <state relative-caret-position="-189">
+          <caret line="265" column="17" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
           <folding>
-            <element signature="e#886#918#0" expanded="true" />
-            <marker date="1543666509305" expanded="true" signature="6125:7178" ph="..." />
+            <element signature="e#860#897#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
+    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="265" column="17" lean-forward="true" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
+        <state relative-caret-position="283">
+          <caret line="347" column="30" selection-start-line="347" selection-start-column="30" selection-end-line="347" selection-end-column="30" />
           <folding>
-            <element signature="e#860#897#0" expanded="true" />
+            <element signature="e#886#918#0" expanded="true" />
+            <marker date="1543666509305" expanded="true" signature="6125:7178" ph="..." />
           </folding>
         </state>
       </provider>
