@@ -27,7 +27,7 @@ Description:
 from utils import ROLO_utils as utils
 
 import tensorflow as tf
-from tensorflow.models.rnn import rnn, rnn_cell
+#from tensorflow.models.rnn import rnn, rnn_cell
 import cv2
 
 import numpy as np
