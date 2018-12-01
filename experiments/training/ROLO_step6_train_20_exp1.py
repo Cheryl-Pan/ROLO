@@ -308,7 +308,7 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 10  # 20 * 100
+        epoches = 20 * 100  # 20 * 100
 
         # Use rolo_input for LSTM training
         with tf.variable_scope('opt'):
@@ -326,9 +326,10 @@ class ROLO_TF:
         # Initializing the variables
         init = tf.global_variables_initializer()
 
-        config = tf.ConfigProto(log_device_placement = True)
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
         # Launch the graph
-        with tf.Session() as sess:
+        with tf.Session(config=config) as sess:
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
