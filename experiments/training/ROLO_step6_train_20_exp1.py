@@ -26,6 +26,12 @@ Description:
 # !/usr/bin/env python
 
 # Imports
+import os,sys
+
+
+abspath = os.path.abspath("..")  # ~/ROLO/experiments
+rootpath = os.path.split(abspath)[0]  # ~/ROLO
+sys.path.append(rootpath)
 from utils import ROLO_utils as utils
 
 import tensorflow as tf
@@ -36,7 +42,7 @@ import numpy as np
 import os.path
 import time
 import random
-import os
+
 # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 # os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 

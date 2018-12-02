@@ -1,5 +1,7 @@
 import sys, os
-sys.path.append(os.path.abspath("../utils/"))
+abspath =os.path.abspath("..")
+rootpath = os.path.split(abspath)[0]
+sys.path.append(rootpath)
 import time, random
 
 from update.utils.utils_io_coord import *
