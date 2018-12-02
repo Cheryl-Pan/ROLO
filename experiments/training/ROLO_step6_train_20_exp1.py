@@ -48,7 +48,7 @@ import random
 
 
 class ROLO_TF:
-    disp_console = True  # False
+    disp_console = False  # False
     restore_weights = False  # True
 
     # YOLO parameters
@@ -396,7 +396,8 @@ class ROLO_TF:
                         loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys,
                                                                   self.istate: np.zeros(
                                                                       (self.batch_size, 2 * self.num_input))})
-                        if self.disp_console: print "Iter " + str(
+                        #if self.disp_console:
+                        print "Iter " + str(
                             id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
                             loss)  # + "{:.5f}".format(self.accuracy)
                         total_loss += loss
