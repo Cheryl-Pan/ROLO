@@ -294,7 +294,7 @@ class ROLO_TF:
 
                     self.rolo_weights_file= 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
 
-                    self.num_steps = 3  # number of frames as an input sequence
+                    self.num_steps = 6  # number of frames as an input sequence
                     print("TESTING ROLO on video sequence: ", sequence_name)
                     self.testing(x_path, y_path)
 

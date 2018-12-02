@@ -308,13 +308,13 @@ class ROLO_TF:
 
     def train_20(self):
         print("TRAINING ROLO...")
-        log_file = open("panchen/output/trainging-20-log.txt", "a")  # open in append mode
+        log_file = open("panchen/output/training-20-log.txt", "a")  # open in append mode
         print ("build_network...")
         self.build_networks()
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 100  # 20 * 100
+        epoches = 20 * 10  # 20 * 100
 
         # Use rolo_input for LSTM training
         with tf.variable_scope('opt'):
@@ -343,6 +343,7 @@ class ROLO_TF:
             else:
                 sess.run(init)
 
+            total_time = 0
             for epoch in range(epoches):  # 20
                 i = epoch % num_videos  # 20
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
@@ -353,7 +354,7 @@ class ROLO_TF:
                 utils.createFolder(self.output_path)
                 total_loss = 0
                 id = 0
-                total_time = 0
+
                 start_time = time.time()
 
                 # Keep training until reach max iterations
@@ -396,10 +397,10 @@ class ROLO_TF:
                         loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys,
                                                                   self.istate: np.zeros(
                                                                       (self.batch_size, 2 * self.num_input))})
-                        #if self.disp_console:
-                        print "Iter " + str(
-                            id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
-                            loss)  # + "{:.5f}".format(self.accuracy)
+                        if self.disp_console:print "Iter " + str(
+                                id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
+                                loss)  # + "{:.5f}".format(self.accuracy)
+
                         total_loss += loss
                     id += 1
                     if self.disp_console: print(id)
@@ -407,8 +408,6 @@ class ROLO_TF:
                 cycle_time = time.time() - start_time
                 print('epoch is %d, time is %.2f' % (epoch, cycle_time))
                 total_time += cycle_time
-                if i + 1 == num_videos:
-                    print 'total_time is %.2f' % total_time
                 # print "Optimization Finished!"
                 avg_loss = total_loss / id
                 print "Avg loss: " + sequence_name + ": " + str(avg_loss)
@@ -416,8 +415,10 @@ class ROLO_TF:
                 log_file.write(str("{:.3f}".format(avg_loss)) + '  ')
                 if i + 1 == num_videos:
                     log_file.write('\n')
+                    log_file.write(str(total_time) + '\n')
                     save_path = self.saver.save(sess, self.rolo_weights_file)
                     print("Model saved in file: %s" % save_path)
+                    print 'total_time is %.2f' % total_time
 
         log_file.close()
         return
