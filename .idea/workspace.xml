@@ -29325,9 +29325,6 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/97.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/update/src/training.py" beforeDir="false" afterPath="$PROJECT_DIR$/update/src/training.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29352,26 +29349,26 @@
           <entry key="jpg" value="1" />
           <entry key="npy" value="3" />
           <entry key="py" value="56" />
-          <entry key="txt" value="7" />
+          <entry key="txt" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="1" />
-          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="PLAIN_TEXT" value="12" />
           <entry key="Python" value="56" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4720" />
-          <entry key="txt" value="138" />
+          <entry key="py" value="4724" />
+          <entry key="txt" value="154" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="138" />
-          <entry key="Python" value="4720" />
+          <entry key="PLAIN_TEXT" value="154" />
+          <entry key="Python" value="4724" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -29379,13 +29376,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="210">
+              <caret line="399" column="44" lean-forward="true" selection-start-line="399" selection-start-column="44" selection-end-line="399" selection-end-column="44" />
               <folding>
-                <marker date="1543718999230" expanded="true" signature="6264:7317" ph="..." />
+                <marker date="1543744853002" expanded="true" signature="6265:7318" ph="..." />
               </folding>
             </state>
           </provider>
@@ -29394,10 +29391,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
+            <state relative-caret-position="117">
               <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/trainging-20-log.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -29430,7 +29432,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/update/utils/utils_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -29470,7 +29472,6 @@
       <list>
         <option value="$PROJECT_DIR$/utils/__init__.py" />
         <option value="$PROJECT_DIR$/ROLO_demo_test.py" />
-        <option value="$PROJECT_DIR$/experiments/training/panchen/output/trainging-20-log.txt" />
         <option value="$PROJECT_DIR$/MOLO/MOLO_network_train.py" />
         <option value="$PROJECT_DIR$/3rd party/YOLO_network.py" />
         <option value="$PROJECT_DIR$/update/unit_test/test_utils_convert_coord.py" />
@@ -29481,9 +29482,10 @@
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
         <option value="$PROJECT_DIR$/utils/ROLO_utils.py" />
-        <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/update/src/training.py" />
         <option value="$PROJECT_DIR$/update/utils/utils_dataset.py" />
+        <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
+        <option value="$PROJECT_DIR$/experiments/training/panchen/output/trainging-20-log.txt" />
       </list>
     </option>
   </component>
@@ -29519,6 +29521,27 @@
               <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
               <item name="ROLO" type="462c0819:PsiDirectoryNode" />
               <item name="experiments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="panchen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="panchen" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
@@ -29749,7 +29772,21 @@
       <option name="project" value="LOCAL" />
       <updated>1543671080079</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="for training, using lstm_single_2, and the num of lstm unit is 3000.">
+      <created>1543720303879</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1543720303879</updated>
+    </task>
+    <task id="LOCAL-00010" summary="console:false">
+      <created>1543744956273</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1543744956273</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -29763,20 +29800,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="63" width="1400" height="773" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22770123" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32892805" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4981871" weight="0.39647576" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49746192" visible="true" weight="0.39647576" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33920705" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32892805" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49891225" weight="0.32892805" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49746192" visible="true" weight="0.32892805" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5025381" side_tool="true" visible="true" weight="0.32892805" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49746192" weight="0.32892805" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5025381" side_tool="true" weight="0.39647576" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49963742" weight="0.32892805" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -29789,9 +29827,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Using bi-lstm for tracking." />
     <MESSAGE value="gpu 0" />
-    <MESSAGE value="for training, using lstm_single_2, and the num of lstm unit is 3000." />
     <MESSAGE value="utils moudle." />
-    <option name="LAST_COMMIT_MESSAGE" value="utils moudle." />
+    <MESSAGE value="for training, using lstm_single_2, and the num of lstm unit is 3000." />
+    <MESSAGE value="console:false" />
+    <option name="LAST_COMMIT_MESSAGE" value="console:false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/output/frames/Car4/5.jpg">
@@ -29906,13 +29945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/trainging-20-log.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="7" selection-start-column="7" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/update/src/rnn.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -29980,13 +30012,6 @@
         <state relative-caret-position="-339" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3582">
@@ -30024,16 +30049,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <marker date="1543718999230" expanded="true" signature="6264:7317" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/update/src/training.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -30045,6 +30060,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/trainging-20-log.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="399" column="44" lean-forward="true" selection-start-line="399" selection-start-column="44" selection-end-line="399" selection-end-column="44" />
+          <folding>
+            <marker date="1543744853002" expanded="true" signature="6265:7318" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
