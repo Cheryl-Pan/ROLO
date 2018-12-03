@@ -274,9 +274,9 @@ class ROLO_TF:
 
                     [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
 
-                    x_path = os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
-                    y_path = os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                    self.output_path = os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test/')
+                    x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
+                    y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
+                    self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
                     utils.createFolder(self.output_path)
 
                     #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_nodrop_30_2.ckpt'  #no dropout
