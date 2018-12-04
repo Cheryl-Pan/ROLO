@@ -24,6 +24,10 @@ Description:
 '''
 
 # Imports
+import os,sys
+abspath = os.path.abspath("..")  # ~/ROLO/experiments
+rootpath = os.path.split(abspath)[0]  # ~/ROLO
+sys.path.append(rootpath)
 from utils import ROLO_utils as utils
 
 import tensorflow as tf
@@ -61,7 +65,7 @@ class ROLO_TF:
     rolo_weights_file = 'null'
     #rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
-    num_steps = 3  # number of frames as an input sequence
+    num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
     num_predict = 6 # final output of LSTM 6 loc parameters
     num_gt = 4
@@ -129,13 +133,15 @@ class ROLO_TF:
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
         lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
         lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        with tf.variable_scope('bidirectional_lstm'):
+        with tf.variable_scope('bidirectional_lstm')as scope:
             # forward direction
-            with tf.variable_scope('fw_direction') as fw_scope:
+            with tf.variable_scope('fw_direction') :
                 outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
+                tf.get_variable_scope().reuse_variables()
             with tf.variable_scope('bw_directional'):
                 input_reverse = tf.reverse(x_in,axis=[0])
                 tmp, states_bw = tf.nn.dynamic_rnn(lstm_cell_bw,input_reverse,dtype=tf.float32, time_major=True)
+                tf.get_variable_scope().reuse_variables()
                 outputs_bw = tf.reverse(tmp, axis=[0])
 
         output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
@@ -167,11 +173,13 @@ class ROLO_TF:
 
 
     def testing(self, x_path, y_path):
+        log_file = open("test-log.txt", 'a')
         total_loss = 0
         # Use rolo_input for LSTM training
-        pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
+        #pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         #print("pred: ", pred)
-        self.pred_location = pred[0][:, 4097:4101]
+        #self.pred_location = pred[0][:, 4097:4101]
+        self.pred_location = self.lstm_single_2(self.x)
         #print("pred_location: ", self.pred_location)
         #print("self.y: ", self.y)
         self.correct_prediction = tf.square(self.pred_location - self.y)
@@ -181,7 +189,8 @@ class ROLO_TF:
         #optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy) # Adam Optimizer
 
         # Initializing the variables
-        init = tf.initialize_all_variables()
+        init = tf.global_variables_initializer()
+        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -228,8 +237,6 @@ class ROLO_TF:
                 # Save pred_location to file
                 utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)
 
-                #sess.run(optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
-
                 if id % self.display_step == 0:
                     # Calculate batch loss
                     loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
@@ -238,13 +245,12 @@ class ROLO_TF:
                 id += 1
                 #print(id)
 
-            #print "Testing Finished!"
             avg_loss = total_loss/id
-            print "Avg loss: " + str(avg_loss)
-            print "Time Spent on Tracking: " + str(total_time)
-            print "fps: " + str(id/total_time)
-            #save_path = self.saver.save(sess, self.rolo_weights_file)
-            #print("Model saved in file: %s" % save_path)
+            print("Avg loss: " + str(avg_loss))
+            print ("Time Spent on Tracking: " + str(total_time))
+            print ("fps: " + str(id / total_time))
+            print ("Testing Finished!")
+            log_file.write(str("Avg loss: %.3f \nTime: %.3f \nfps: %.3f" % (avg_loss,total_time,id/total_time)))
 
         return None
 
@@ -267,7 +273,7 @@ class ROLO_TF:
                 self.detect_from_file(utils.file_in_path)
             else:
                 print "Default: running ROLO test."
-                self.build_networks()
+                # self.build_networks()
 
                 evaluate_st = 0
                 evaluate_ed = 29
@@ -294,9 +300,9 @@ class ROLO_TF:
                     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step9_exp2.ckpt'
                     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step1_exp2.ckpt'
 
-                    self.rolo_weights_file= 'training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
+                    self.rolo_weights_file= '../training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
 
-                    self.num_steps = 6  # number of frames as an input sequence
+                    # self.num_steps = 6  # number of frames as an input sequence
                     print("TESTING ROLO on video sequence: ", sequence_name)
                     self.testing(x_path, y_path)
 
