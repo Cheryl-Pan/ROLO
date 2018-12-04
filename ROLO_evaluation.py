@@ -116,7 +116,7 @@ def evaluate_benchmark_avg_IOU(method_id):        # calculate AUC(Average Under 
 
     method_name= choose_benchmark_method(method_id)
     file_name= 'output/IOU/avgIOU_' + method_name + '.txt'
-    f=  open(file_name, 'w')
+    f = open(file_name, 'w')
 
     for sequence_id in range(evaluate_st, evaluate_ed + 1):
 
@@ -124,7 +124,7 @@ def evaluate_benchmark_avg_IOU(method_id):        # calculate AUC(Average Under 
 
         # Load benchmark detection loc
         mat_file = choose_mat_file(method_id, sequence_id)
-        [locations, st_frame_num, ed_frame_num] = load_mat_results(mat_file, False, False, True, 0)
+        [locations, st_frame_num, ed_frame_num] = load_mat_results(mat_file, False, False, True, 0) #
 
         # Load ground truth detection loc
         gt_file_path= os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
@@ -1002,7 +1002,7 @@ def evaluate_kalman_AUC():        # calculate AUC(Average Under Curve)
 
 def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each sequence
     ''' PARAMETERS '''
-    num_steps= 3
+    num_steps= 6
     output_video = False
     display_video = False
 
@@ -1329,13 +1329,13 @@ def evaluate_avg_IOU_kalman_TRE():        # calculate AUC(Average Under Curve) T
     log_file.write('\n\n')
 '''----------------------------------------main-----------------------------------------------------'''
 def main(argv):
-    #evaluate_avg_IOU()
-    #evaluate_avg_IOU_TRE()
+    evaluate_avg_IOU()
+    evaluate_avg_IOU_TRE()
     #evaluate_avg_IOU_kalman()
     #evaluate_avg_IOU_kalman_TRE()
 
-    #evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
-    #evaluate_AUC_TRE()
+    evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
+    evaluate_AUC_TRE()
     #evaluate_kalman_AUC()
     #evaluate_kalman_AUC_TRE()
 
@@ -1349,7 +1349,7 @@ def main(argv):
     #    evaluate_benchmark_avg_IOU_SRE(method_id)
 
     #for method_id in range(9, 10):
-    #   evaluate_benchmark_AUC_OPE(method_id)
+       #evaluate_benchmark_AUC_OPE(method_id)
 
     #for method_id in range(0, 9):
     #    evaluate_benchmark_AUC_TRE(method_id)
@@ -1358,8 +1358,8 @@ def main(argv):
     #    evaluate_benchmark_AUC_SRE(method_id)
 
     draw_AUC_OPE()
-    #draw_AUC_TRE()
-    #draw_AUC_SRE()
+    draw_AUC_TRE()
+    draw_AUC_SRE()
 
     #draw_step_IOU_curve()
     #draw_step_fps_curve()
