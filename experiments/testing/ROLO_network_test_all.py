@@ -182,8 +182,10 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.initialize_all_variables()
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
         # Launch the graph
-        with tf.Session() as sess:
+        with tf.Session(config=config) as sess:
 
             if (self.restore_weights == True):
                 sess.run(init)
