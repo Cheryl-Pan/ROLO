@@ -250,13 +250,12 @@ class ROLO_TF:
 
                     # Save pred_location to file
                     utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)
-                    print id
                     if id % self.display_step == 0:
                         # Calculate batch loss
                         loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
                         #print "Iter " + str(id*self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss) #+ "{:.5f}".format(self.accuracy)
                         total_loss += loss
-                    #print(id)
+                    id += 1
 
                 avg_loss = total_loss/id
                 print("Avg loss: " + str(avg_loss))
