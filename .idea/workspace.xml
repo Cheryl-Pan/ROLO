@@ -29326,6 +29326,7 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/experiments/testing/test_all.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/training/train_all.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" afterDir="false" />
     </list>
@@ -29353,7 +29354,7 @@
           <entry key="avi" value="1" />
           <entry key="jpg" value="2" />
           <entry key="npy" value="3" />
-          <entry key="py" value="74" />
+          <entry key="py" value="75" />
           <entry key="txt" value="16" />
         </counts>
       </usages-collector>
@@ -29361,19 +29362,19 @@
         <counts>
           <entry key="Image" value="2" />
           <entry key="PLAIN_TEXT" value="20" />
-          <entry key="Python" value="74" />
+          <entry key="Python" value="75" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="5476" />
+          <entry key="py" value="5490" />
           <entry key="txt" value="301" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="301" />
-          <entry key="Python" value="5476" />
+          <entry key="Python" value="5490" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -29381,14 +29382,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="198" column="47" lean-forward="true" selection-start-line="198" selection-start-column="47" selection-end-line="198" selection-end-column="47" />
+            <state relative-caret-position="196">
+              <caret line="179" column="44" lean-forward="true" selection-end-line="329" />
               <folding>
-                <marker date="1544009551655" expanded="true" signature="6040:6046" ph="..." />
+                <marker date="1544010307546" expanded="true" signature="6040:6046" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="318" column="42" lean-forward="true" selection-start-line="318" selection-start-column="42" selection-end-line="318" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -29450,8 +29460,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="354" column="16" selection-start-line="354" selection-start-column="16" selection-end-line="354" selection-end-column="16" />
+            <state relative-caret-position="234">
+              <caret line="197" lean-forward="true" selection-end-line="453" />
             </state>
           </provider>
         </entry>
@@ -29508,6 +29518,7 @@
         <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/experiments/testing/test_all.py" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
+        <option value="$PROJECT_DIR$/experiments/training/train_all.py" />
       </list>
     </option>
   </component>
@@ -29577,23 +29588,6 @@
               <item name="training" type="462c0819:PsiDirectoryNode" />
               <item name="panchen" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-              <item name="experiments" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-              <item name="panchen" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-              <item name="experiments" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-              <item name="panchen" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="ROLO_model" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -29621,7 +29615,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ROLO_network_test_all">
+  <component name="RunManager" selected="Python.train_all">
     <configuration name="ROLO_evaluation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ROLO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -29656,27 +29650,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ROLO_network_test_single" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ROLO" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/experiments/testing" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -29727,20 +29700,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train_all" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ROLO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/experiments/training" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiments/training/train_all.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.ROLO_step6_train_20_exp1" />
-      <item itemvalue="Python.ROLO_network_test_single" />
       <item itemvalue="Python.ROLO_evaluation" />
       <item itemvalue="Python.ROLO_network_test_all" />
       <item itemvalue="Python.test_all" />
+      <item itemvalue="Python.train_all" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train_all" />
         <item itemvalue="Python.ROLO_network_test_all" />
         <item itemvalue="Python.test_all" />
         <item itemvalue="Python.ROLO_step6_train_20_exp1" />
         <item itemvalue="Python.ROLO_evaluation" />
-        <item itemvalue="Python.ROLO_network_test_single" />
       </list>
     </recent_temporary>
   </component>
@@ -29937,7 +29931,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543997845085</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="tf.variable_scope,reuse=tf.AUOT_REUSE">
+      <created>1544009582333</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1544009582333</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView">
@@ -30269,16 +30270,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-647">
-          <caret line="183" column="31" selection-start-line="183" selection-start-column="31" selection-end-line="183" selection-end-column="31" />
-          <folding>
-            <element signature="e#862#899#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1544">
@@ -30289,20 +30280,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
+    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="354" column="16" selection-start-line="354" selection-start-column="16" selection-end-line="354" selection-end-column="16" />
+        <state relative-caret-position="196">
+          <caret line="179" column="44" lean-forward="true" selection-end-line="329" />
+          <folding>
+            <marker date="1544010307546" expanded="true" signature="6040:6046" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
+    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="198" column="47" lean-forward="true" selection-start-line="198" selection-start-column="47" selection-end-line="198" selection-end-column="47" />
+        <state relative-caret-position="-647">
+          <caret line="183" column="31" selection-start-line="183" selection-start-column="31" selection-end-line="183" selection-end-column="31" />
           <folding>
-            <marker date="1544009551655" expanded="true" signature="6040:6046" ph="..." />
+            <element signature="e#862#899#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="197" lean-forward="true" selection-end-line="453" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="318" column="42" lean-forward="true" selection-start-line="318" selection-start-column="42" selection-end-line="318" selection-end-column="42" />
         </state>
       </provider>
     </entry>

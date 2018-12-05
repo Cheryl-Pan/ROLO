@@ -197,7 +197,6 @@ class ROLO_TF:
         config.gpu_options.allow_growth = True
         # Launch the graph
         with tf.Session(config=config) as sess:
-
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
