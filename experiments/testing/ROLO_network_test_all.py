@@ -131,8 +131,8 @@ class ROLO_TF:
 
     def lstm_single_2(self, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
-        lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+        lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True,reuse=True)
+        lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True,reuse=True)
         with tf.variable_scope('bidirectional_lstm')as scope:
             # forward direction
             with tf.variable_scope('fw_direction') :
@@ -252,6 +252,7 @@ class ROLO_TF:
             print ("fps: " + str(id / total_time))
             print ("Testing Finished!")
             log_file.write(str("Avg loss: %.3f \nTime: %.3f \nfps: %.3f" % (avg_loss,total_time,id/total_time)))
+        log_file.close()
 
         return None
 
