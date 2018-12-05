@@ -133,7 +133,7 @@ class ROLO_TF:
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
         lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
         lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        with tf.variable_scope('bidirectional_lstm—test')as scope:
+        with tf.variable_scope('bidirectional_lstm_test')as scope:
             # forward direction
             with tf.variable_scope('fw_direction') :
                 outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
