@@ -509,17 +509,17 @@ def draw_AUC_OPE():
 
     '''test last 8'''
     plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.476]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    #plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.459]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.454]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.444]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.428]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.459]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.454]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.444]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.428]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
     plot.plot(x, yolo_kalman_AUC_score*100, color = 'k', label = "YOLO+SORT [0.406]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.406]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.392]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.366]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.318]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.406]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.392]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.366]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.318]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
 
 
 
@@ -574,17 +574,17 @@ def draw_AUC_TRE():
 
     '''test all 30'''
     plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.562]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.548]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.462]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.459]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.432]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    #plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.429]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.427]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.425]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.414]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.414]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.397]", linestyle= '-',  markersize= 5, linewidth= 2, markevery= 1)
-
+    # plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.548]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.462]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.459]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.432]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # #plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.429]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.427]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.425]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.414]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.414]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.397]", linestyle= '-',  markersize= 5, linewidth= 2, markevery= 1)
+    #
     plot.plot(x, yolo_kalman_AUC_score*100, color = 'k', label = "YOLO+SORT [0.322]", linestyle= '--',  markersize= 5, linewidth= 2, markevery= 1)
 
     plot.axis([0, 1, 0, 100])
@@ -638,16 +638,16 @@ def draw_AUC_SRE():
 
     plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.564]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
     #plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.440]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.391]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.391]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
     plot.plot(x, yolo_kalman_AUC_score*100, color = 'k', label = "YOLO+SORT [0.341]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.341]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.331]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.320]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.302]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.295]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.295]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.286]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.284]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.341]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.331]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.320]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.302]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.295]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.295]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.286]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.284]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
 
 
     plot.axis([0, 1, 0, 100])
@@ -704,7 +704,7 @@ def draw_step_fps_curve():
 
 def evaluate_AUC_TRE():        # calculate AUC(Average Under Curve) TRE
     ''' PARAMETERS '''
-    num_steps= 3
+    num_steps= 6
     TRE_num = 20
 
     evaluate_st = 0
@@ -856,7 +856,7 @@ def evaluate_kalman_AUC_TRE():        # calculate AUC(Average Under Curve) TRE
 
 def evaluate_AUC():        # calculate AUC(Average Under Curve)
     ''' PARAMETERS '''
-    num_steps= 3
+    num_steps= 6
 
     evaluate_st = 0
     evaluate_ed = 29
@@ -1027,10 +1027,12 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
         lines = utils.load_dataset_gt( gt_file_path)
 
         # Define the codec and create VideoWriter object
-        fourcc= cv2.cv.CV_FOURCC(*'DIVX')
+        # fourcc= cv2.cv.CV_FOURCC(*'DIVX')
+        fourcc= cv2.VideoWriter_fourcc(*'MJPG')
         video_name = sequence_name + '_test.avi'
         video_path = os.path.join('output/videos/', video_name)
-        if output_video is True: video = cv2.VideoWriter(video_path, fourcc, 20, (wid, ht))
+        if output_video is True:
+            video = cv2.VideoWriter(video_path, fourcc, 20, (wid, ht))
 
         total= 0
         rolo_avgloss= 0
@@ -1056,8 +1058,10 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
             #print('gt: ' + str(test_id))
             #print(gt_location)
 
-            if display_video is True: frame = utils.debug_3_locations(img, gt_location, yolo_location, rolo_location)
-            if output_video is True: video.write(frame)
+            if display_video is True:
+                frame = utils.debug_3_locations(img, gt_location, yolo_location, rolo_location)
+            if output_video is True:
+                video.write(frame)
             #cv2.imshow('frame',frame)
             #cv2.waitKey(100)
 
@@ -1101,7 +1105,7 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
 
 def evaluate_avg_IOU_kalman():    # calculate AOS(Average Overlap Score) for each sequence
     ''' PARAMETERS '''
-    num_steps= 3
+    num_steps= 6
     output_video = False
     display_video = False
 
@@ -1122,7 +1126,7 @@ def evaluate_avg_IOU_kalman():    # calculate AOS(Average Overlap Score) for eac
         lines = utils.load_dataset_gt( gt_file_path)
 
         # Define the codec and create VideoWriter object
-        fourcc= cv2.cv.CV_FOURCC(*'DIVX')
+        fourcc= cv2.VideoWriter_fourcc(*'MJPG')
         video_name = sequence_name + '_test.avi'
         video_path = os.path.join('output/videos_kalman/', video_name)
         if output_video is True: video = cv2.VideoWriter(video_path, fourcc, 20, (wid, ht))
@@ -1180,7 +1184,7 @@ def evaluate_avg_IOU_kalman():    # calculate AOS(Average Overlap Score) for eac
 
 def evaluate_avg_IOU_TRE():        # calculate AUC(Average Under Curve) TRE
     ''' PARAMETERS '''
-    num_steps= 3
+    num_steps= 6
     TRE_num = 20
 
     evaluate_st = 0
@@ -1331,7 +1335,7 @@ def evaluate_avg_IOU_kalman_TRE():        # calculate AUC(Average Under Curve) T
 def main(argv):
     evaluate_avg_IOU()
     evaluate_avg_IOU_TRE()
-    #evaluate_avg_IOU_kalman()
+    evaluate_avg_IOU_kalman()
     #evaluate_avg_IOU_kalman_TRE()
 
     evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
