@@ -169,8 +169,8 @@ class ROLO_TF:
         self.ious= tf.Variable(tf.zeros([self.batch_size]), name="ious")
         self.sess = tf.Session()
         self.sess.run(tf.initialize_all_variables())
-        self.saver = tf.train.Saver()
-        self.saver.restore(self.sess, self.rolo_weights_file)
+        # # self.saver = tf.train.Saver()
+        # self.saver.restore(self.sess, self.rolo_weights_file)
         self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
 
         if self.disp_console : print "Loading complete!" + '\n'
@@ -178,7 +178,6 @@ class ROLO_TF:
 
     def testing(self):
         log_file = open("test-log.txt", 'a')
-        total_loss = 0
         # Use rolo_input for LSTM training
         #pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         #print("pred: ", pred)
@@ -193,6 +192,7 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.global_variables_initializer()
+        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -200,8 +200,6 @@ class ROLO_TF:
 
             if (self.restore_weights == True):
                 sess.run(init)
-                self.saver = tf.train.import_meta_graph(
-                    "../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
                 self.saver.restore(sess, self.rolo_weights_file)
                 print ("Loading complete!" + '\n')
             else:
@@ -222,6 +220,7 @@ class ROLO_TF:
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test+1,sequence_name)
             # Keep training until reach max iterations
+                total_loss = 0
                 id = 0  # don't change this
                 while id < self.testing_iters - self.num_steps:
                     # Load training data & ground truth
