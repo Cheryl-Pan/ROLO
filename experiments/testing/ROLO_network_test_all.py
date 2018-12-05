@@ -263,7 +263,7 @@ class ROLO_TF:
                 print ("Time Spent on Tracking: " + str(total_time))
                 print ("fps: " + str(id / total_time))
                 print ("Testing Finished!")
-                log_file.write(str("Avg loss: %.3f \nTime: %.3f \nfps: %.3f" % (avg_loss,total_time,id/total_time)))
+                log_file.write(str("video: %d \nAvg loss: %.3f \nTime: %.3f \nfps: %.3f" % (test,avg_loss,total_time,id/total_time)))
         log_file.close()
 
         return None
