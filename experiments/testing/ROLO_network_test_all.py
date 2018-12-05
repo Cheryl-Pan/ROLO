@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License. 
 
+
 '''
 Script File: ROLO_network_test_all.py
 
@@ -62,7 +63,7 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_weights_file = 'null'
+    rolo_weights_file = '../training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
     #rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
@@ -169,11 +170,13 @@ class ROLO_TF:
         self.sess = tf.Session()
         self.sess.run(tf.initialize_all_variables())
         self.saver = tf.train.Saver()
-        #self.saver.restore(self.sess, self.rolo_weights_file)
+        self.saver.restore(self.sess, self.rolo_weights_file)
+        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
+
         if self.disp_console : print "Loading complete!" + '\n'
 
 
-    def testing(self, x_path, y_path):
+    def testing(self):
         log_file = open("test-log.txt", 'a')
         total_loss = 0
         # Use rolo_input for LSTM training
@@ -186,7 +189,6 @@ class ROLO_TF:
         self.correct_prediction = tf.square(self.pred_location - self.y)
         #print("self.correct_prediction: ", self.correct_prediction)
         self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
-        #print("self.accuracy: ", self.accuracy)
         #optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy) # Adam Optimizer
 
         # Initializing the variables
@@ -200,58 +202,69 @@ class ROLO_TF:
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
-                print "Loading complete!" + '\n'
+                print ("Loading complete!" + '\n')
             else:
                 sess.run(init)
 
-            id = 0 #don't change this
+
             total_time = 0.0
             #id= 1
+            evaluate_st = 0
+            evaluate_ed = 29
 
+            for test in range(evaluate_st, evaluate_ed + 1):
+                [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
+
+                x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
+                y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
+                utils.createFolder(self.output_path)
+                print 'video: %d   TESTING ROLO on video sequence: %s' % (test+1,sequence_name)
             # Keep training until reach max iterations
-            while id < self.testing_iters - self.num_steps:
-                # Load training data & ground truth
-                batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps, id) # [num_of_examples, num_input] (depth == 1)
+                id = 0  # don't change this
+                while id < self.testing_iters - self.num_steps:
+                    # Load training data & ground truth
+                    batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps, id) # [num_of_examples, num_input] (depth == 1)
 
-                # Apply dropout to batch_xs
-                #for item in range(len(batch_xs)):
-                #    batch_xs[item] = self.dropout_features(batch_xs[item], 0.4)
+                    # Apply dropout to batch_xs
+                    #for item in range(len(batch_xs)):
+                    #    batch_xs[item] = self.dropout_features(batch_xs[item], 0.4)
 
-                batch_ys = self.rolo_utils.load_rolo_gt_test(y_path, self.batch_size, self.num_steps, id)
-                batch_ys = utils.locations_from_0_to_1(self.w_img, self.h_img, batch_ys)
+                    batch_ys = self.rolo_utils.load_rolo_gt_test(y_path, self.batch_size, self.num_steps, id)
+                    batch_ys = utils.locations_from_0_to_1(self.w_img, self.h_img, batch_ys)
 
-                # Reshape data to get 3 seq of 5002 elements
-                batch_xs = np.reshape(batch_xs, [self.batch_size, self.num_steps, self.num_input])
-                batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
-                #print("Batch_ys: ", batch_ys)
+                    # Reshape data to get 3 seq of 5002 elements
+                    batch_xs = np.reshape(batch_xs, [self.batch_size, self.num_steps, self.num_input])
+                    batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
+                    #print("Batch_ys: ", batch_ys)
 
-                start_time = time.time()
-                pred_location= sess.run(self.pred_location,feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
-                cycle_time = time.time() - start_time
-                total_time += cycle_time
+                    start_time = time.time()
+                    pred_location= sess.run(self.pred_location,feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
+                    cycle_time = time.time() - start_time
+                    total_time += cycle_time
 
-                #print("ROLO Pred: ", pred_location)
-                #print("len(pred) = ", len(pred_location))
-                #print("ROLO Pred in pixel: ", pred_location[0][0]*self.w_img, pred_location[0][1]*self.h_img, pred_location[0][2]*self.w_img, pred_location[0][3]*self.h_img)
-                #print("correct_prediction int: ", (pred_location + 0.1).astype(int))
+                    #print("ROLO Pred: ", pred_location)
+                    #print("len(pred) = ", len(pred_location))
+                    #print("ROLO Pred in pixel: ", pred_location[0][0]*self.w_img, pred_location[0][1]*self.h_img, pred_location[0][2]*self.w_img, pred_location[0][3]*self.h_img)
+                    #print("correct_prediction int: ", (pred_location + 0.1).astype(int))
 
-                # Save pred_location to file
-                utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)
+                    # Save pred_location to file
+                    utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)
+                    print id
+                    if id % self.display_step == 0:
+                        # Calculate batch loss
+                        loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
+                        #print "Iter " + str(id*self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss) #+ "{:.5f}".format(self.accuracy)
+                        total_loss += loss
+                    id += 1
+                    #print(id)
 
-                if id % self.display_step == 0:
-                    # Calculate batch loss
-                    loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
-                    #print "Iter " + str(id*self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss) #+ "{:.5f}".format(self.accuracy)
-                    total_loss += loss
-                id += 1
-                #print(id)
-
-            avg_loss = total_loss/id
-            print("Avg loss: " + str(avg_loss))
-            print ("Time Spent on Tracking: " + str(total_time))
-            print ("fps: " + str(id / total_time))
-            print ("Testing Finished!")
-            log_file.write(str("Avg loss: %.3f \nTime: %.3f \nfps: %.3f" % (avg_loss,total_time,id/total_time)))
+                avg_loss = total_loss/id
+                print("Avg loss: " + str(avg_loss))
+                print ("Time Spent on Tracking: " + str(total_time))
+                print ("fps: " + str(id / total_time))
+                print ("Testing Finished!")
+                log_file.write(str("Avg loss: %.3f \nTime: %.3f \nfps: %.3f" % (avg_loss,total_time,id/total_time)))
         log_file.close()
 
         return None
@@ -277,36 +290,36 @@ class ROLO_TF:
                 print "Default: running ROLO test."
                 # self.build_networks()
 
-                evaluate_st = 0
-                evaluate_ed = 29
-
-                for test in range(evaluate_st, evaluate_ed + 1):
-
-                    [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
-
-                    x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
-                    y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                    self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
-                    utils.createFolder(self.output_path)
-
-                    #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_nodrop_30_2.ckpt'  #no dropout
-                    #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_online.ckpt'
-                    #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/MOLO/model_MOT.ckpt'
-                    #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/MOLO/model_MOT_0.2.ckpt'
-
-                    #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp0.ckpt'
-                    #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step3_exp1.ckpt'
-                    #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp2.ckpt'
-
-                    #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step3_exp2.ckpt'
-                    #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step9_exp2.ckpt'
-                    #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step1_exp2.ckpt'
-
-                    self.rolo_weights_file= '../training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
-
-                    # self.num_steps = 6  # number of frames as an input sequence
-                    print("TESTING ROLO on video sequence: ", sequence_name)
-                    self.testing(x_path, y_path)
+                # evaluate_st = 0
+                # evaluate_ed = 29
+                #
+                # for test in range(evaluate_st, evaluate_ed + 1):
+                #
+                #     [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
+                #
+                #     x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
+                #     y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
+                #     self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
+                #     utils.createFolder(self.output_path)
+                #
+                #     #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_nodrop_30_2.ckpt'  #no dropout
+                #     #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_online.ckpt'
+                #     #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/MOLO/model_MOT.ckpt'
+                #     #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/MOLO/model_MOT_0.2.ckpt'
+                #
+                #     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp0.ckpt'
+                #     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step3_exp1.ckpt'
+                #     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp2.ckpt'
+                #
+                #     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step3_exp2.ckpt'
+                #     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step9_exp2.ckpt'
+                #     #self.rolo_weights_file= '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step1_exp2.ckpt'
+                #
+                #     # self.rolo_weights_file= '../training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
+                #
+                #     # self.num_steps = 6  # number of frames as an input sequence
+                #     print("TESTING ROLO on video sequence: ", sequence_name)
+                self.testing()
 
 
     '''----------------------------------------main-----------------------------------------------------'''
