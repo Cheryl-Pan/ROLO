@@ -256,7 +256,6 @@ class ROLO_TF:
                         loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
                         #print "Iter " + str(id*self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss) #+ "{:.5f}".format(self.accuracy)
                         total_loss += loss
-                    id += 1
                     #print(id)
 
                 avg_loss = total_loss/id
