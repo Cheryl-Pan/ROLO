@@ -31,7 +31,7 @@ sys.path.append(rootpath)
 from utils import ROLO_utils as utils
 
 import tensorflow as tf
-#from tensorflow.models.rnn import rnn, rnn_cell
+# from tensorflow.models.rnn import rnn, rnn_cell
 import cv2
 
 import numpy as np
@@ -131,9 +131,9 @@ class ROLO_TF:
 
     def lstm_single_2(self, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
-        lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True,reuse=True)
-        lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True,reuse=True)
-        with tf.variable_scope('bidirectional_lstm')as scope:
+        lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+        lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+        with tf.variable_scope('bidirectional_lstm',reuse= tf.AUTO_REUSE)as scope:
             # forward direction
             with tf.variable_scope('fw_direction') :
                 outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
