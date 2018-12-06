@@ -207,8 +207,8 @@ class ROLO_TF:
 
             total_time = 0.0
             #id= 1
-            evaluate_st = 0
-            evaluate_ed = 29
+            evaluate_st = 28
+            evaluate_ed = 28
 
             for test in range(evaluate_st, evaluate_ed + 1):
                 [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)

@@ -29325,9 +29325,6 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/97.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation_all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ROLO_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/ROLO_evaluation.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29366,14 +29363,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="5579" />
-          <entry key="txt" value="321" />
+          <entry key="py" value="5580" />
+          <entry key="txt" value="331" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="321" />
-          <entry key="Python" value="5579" />
+          <entry key="PLAIN_TEXT" value="331" />
+          <entry key="Python" value="5580" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -29384,8 +29381,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2008">
-              <caret line="178" column="22" lean-forward="true" selection-start-line="178" selection-start-column="22" selection-end-line="178" selection-end-column="22" />
+            <state relative-caret-position="212">
+              <caret line="213" column="103" selection-start-line="213" selection-start-column="103" selection-end-line="213" selection-end-column="103" />
               <folding>
                 <marker date="1544010307546" expanded="true" signature="6040:6046" ph="..." />
               </folding>
@@ -29393,27 +29390,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="41" selection-start-line="41" selection-end-line="64" selection-end-column="17" />
+            <state relative-caret-position="-172">
+              <caret line="856" column="4" selection-start-line="856" selection-start-column="4" selection-end-line="856" selection-end-column="4" />
               <folding>
                 <element signature="e#14844#21793#0" />
                 <element signature="e#21824#24906#0" />
                 <element signature="e#24888#27913#0" />
                 <element signature="e#27948#28544#0" />
-                <element signature="e#35653#38672#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evaluation_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+            <state relative-caret-position="226">
+              <caret line="231" selection-start-line="231" selection-end-line="231" />
               <folding>
                 <element signature="e#242#459#0" />
                 <element signature="e#3312#10262#0" />
@@ -29470,8 +29466,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4740">
-              <caret line="316" column="22" selection-start-line="316" selection-start-column="22" selection-end-line="316" selection-end-column="22" />
+            <state relative-caret-position="156">
+              <caret line="842" column="33" selection-start-line="842" selection-start-column="33" selection-end-line="842" selection-end-column="33" />
               <folding>
                 <element signature="e#843#863#0" expanded="true" />
               </folding>
@@ -29521,6 +29517,7 @@
       <find>AOS</find>
       <find>evaluate_avg_IOU()</find>
       <find>matlab.engine</find>
+      <find>train</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/benchmark/DATA/Bird1/rolo_out_train</dir>
@@ -29548,10 +29545,10 @@
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py" />
         <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/experiments/testing/test_all.py" />
-        <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
         <option value="$PROJECT_DIR$/experiments/training/train_all.py" />
         <option value="$PROJECT_DIR$/ROLO_evaluation.py" />
         <option value="$PROJECT_DIR$/evaluation_all.py" />
+        <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
       </list>
     </option>
   </component>
@@ -29600,6 +29597,17 @@
               <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
               <item name="ROLO" type="462c0819:PsiDirectoryNode" />
               <item name="experiments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="testing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -29965,7 +29973,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544015038467</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="evaluation">
+      <created>1544063515710</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1544063515710</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView">
@@ -29979,14 +29994,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="23" y="70" width="1400" height="773" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21174765" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21174765" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32892805" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5946338" visible="true" weight="0.39647576" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5946338" visible="true" weight="0.39647576" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.64249456" weight="0.33920705" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -30037,7 +30051,8 @@
     <MESSAGE value="tf.variable_scope,reuse=True" />
     <MESSAGE value="tf.variable_scope,reuse=tf.AUOT_REUSE" />
     <MESSAGE value="train_all:bi_lstm" />
-    <option name="LAST_COMMIT_MESSAGE" value="train_all:bi_lstm" />
+    <MESSAGE value="evaluation" />
+    <option name="LAST_COMMIT_MESSAGE" value="evaluation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -30046,11 +30061,6 @@
           <url>file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py</url>
           <line>80</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/evaluation_all.py</url>
-          <line>128</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -30320,47 +30330,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+    <entry file="file://$PROJECT_DIR$/evaluation_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4740">
-          <caret line="316" column="22" selection-start-line="316" selection-start-column="22" selection-end-line="316" selection-end-column="22" />
+        <state relative-caret-position="226">
+          <caret line="231" selection-start-line="231" selection-end-line="231" />
           <folding>
-            <element signature="e#843#863#0" expanded="true" />
+            <element signature="e#242#459#0" />
+            <element signature="e#3312#10262#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2008">
-          <caret line="178" column="22" lean-forward="true" selection-start-line="178" selection-start-column="22" selection-end-line="178" selection-end-column="22" />
+        <state relative-caret-position="212">
+          <caret line="213" column="103" selection-start-line="213" selection-start-column="103" selection-end-line="213" selection-end-column="103" />
           <folding>
             <marker date="1544010307546" expanded="true" signature="6040:6046" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="842" column="33" selection-start-line="842" selection-start-column="33" selection-end-line="842" selection-end-column="33" />
+          <folding>
+            <element signature="e#843#863#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="41" selection-start-line="41" selection-end-line="64" selection-end-column="17" />
+        <state relative-caret-position="-172">
+          <caret line="856" column="4" selection-start-line="856" selection-start-column="4" selection-end-line="856" selection-end-column="4" />
           <folding>
             <element signature="e#14844#21793#0" />
             <element signature="e#21824#24906#0" />
             <element signature="e#24888#27913#0" />
             <element signature="e#27948#28544#0" />
-            <element signature="e#35653#38672#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/evaluation_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
-          <folding>
-            <element signature="e#242#459#0" />
-            <element signature="e#3312#10262#0" />
           </folding>
         </state>
       </provider>
