@@ -31,6 +31,8 @@ import os
 import numpy as np
 import sys
 import utils.ROLO_utils as utils
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plot
 import pickle
 import scipy.io
@@ -1333,12 +1335,12 @@ def evaluate_avg_IOU_kalman_TRE():        # calculate AUC(Average Under Curve) T
     log_file.write('\n\n')
 '''----------------------------------------main-----------------------------------------------------'''
 def main(argv):
-    evaluate_avg_IOU()
+    #evaluate_avg_IOU()
     # evaluate_avg_IOU_TRE()
     # evaluate_avg_IOU_kalman()
     #evaluate_avg_IOU_kalman_TRE()
 
-    evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
+    #evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
     # evaluate_AUC_TRE()
     #evaluate_kalman_AUC()
     #evaluate_kalman_AUC_TRE()
