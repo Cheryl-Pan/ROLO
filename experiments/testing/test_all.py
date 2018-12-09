@@ -163,8 +163,8 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.initialize_all_variables()
-        self.saver = tf.train.Saver()
-        # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
+        # self.saver = tf.train.Saver()
+        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         # Launch the graph
         with tf.Session() as sess:
 

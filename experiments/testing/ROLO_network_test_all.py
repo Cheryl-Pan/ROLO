@@ -71,7 +71,7 @@ class ROLO_TF:
     num_predict = 6 # final output of LSTM 6 loc parameters
     num_gt = 4
     num_input = num_feat + num_predict # data input: 4096+6= 5002
-    num_unit = 3000
+    num_unit = num_input
 
     # ROLO Parameters
     batch_size = 1
@@ -146,8 +146,10 @@ class ROLO_TF:
                 outputs_bw = tf.reverse(tmp, axis=[0])
             # tf.get_variable_scope().reuse_variables()
 
-        output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
-        output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
+        output_fw = outputs_fw[-1][:,4096:4101]
+        output_bw = outputs_bw[-1][:,4096:4101]
+        # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
+        # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
         final_out = tf.add(output_fw, output_bw) /2
         return final_out
 
@@ -207,8 +209,8 @@ class ROLO_TF:
 
             total_time = 0.0
             #id= 1
-            evaluate_st = 28
-            evaluate_ed = 28
+            evaluate_st = 0
+            evaluate_ed = 29
 
             for test in range(evaluate_st, evaluate_ed + 1):
                 [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)

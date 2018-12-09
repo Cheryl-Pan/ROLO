@@ -194,9 +194,12 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.initialize_all_variables()
+        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
 
         # Launch the graph
-        with tf.Session() as sess:
+        with tf.Session(config) as sess:
 
             if self.restore_weights:
                 sess.run(init)
@@ -276,7 +279,7 @@ class ROLO_TF:
             self.detect_from_file(utils.file_in_path)
         else:
             print "Default: running ROLO test."
-            self.build_networks()
+            # self.build_networks()
 
             test = 8
             [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)

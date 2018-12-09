@@ -430,7 +430,7 @@ def draw_AUC_OPE():
 
     num_methods = 9 + 1
 
-    with open('output/evaluation/AUC_score.pickle') as f:
+    with open('output/AUC_score.pickle') as f:
         [yolo_AUC_score, rolo_AUC_score] = pickle.load(f)
     yolo_AUC_score.append(0)
     rolo_AUC_score.append(0)
@@ -1333,13 +1333,13 @@ def evaluate_avg_IOU_kalman_TRE():        # calculate AUC(Average Under Curve) T
     log_file.write('\n\n')
 '''----------------------------------------main-----------------------------------------------------'''
 def main(argv):
-    # evaluate_avg_IOU()
+    evaluate_avg_IOU()
     # evaluate_avg_IOU_TRE()
     # evaluate_avg_IOU_kalman()
     #evaluate_avg_IOU_kalman_TRE()
 
     evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
-    evaluate_AUC_TRE()
+    # evaluate_AUC_TRE()
     #evaluate_kalman_AUC()
     #evaluate_kalman_AUC_TRE()
 
