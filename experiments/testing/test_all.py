@@ -22,7 +22,11 @@ Description:
 '''
 
 # Imports
-from utils import ROLO_utils as utils
+import os,sys
+abspath = os.path.abspath("..")  # ~/ROLO/experiments
+rootpath = os.path.split(abspath)[0]  # ~/ROLO
+sys.path.append(rootpath)
+import utils.ROLO_utils as utils
 
 import tensorflow as tf
 #from tensorflow.models.rnn import rnn, rnn_cell

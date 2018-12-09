@@ -121,7 +121,7 @@ def evaluate_AUC():        # calculate AUC(Average Under Curve)
         print("(thresh, yolo_AUC_score) = ", thresh, ' ', yolo_avg_score/num_evaluate)
         print("(thresh, rolo_AUC_score) = ", thresh, ' ', rolo_avg_score/num_evaluate)
 
-    with open('output/AUC_score.pickle', 'w') as f:
+    with open('output/AUC_score_test_all.pickle', 'w') as f:
         pickle.dump([yolo_AUC_score, rolo_AUC_score], f)
 
     #draw_AUC()
@@ -130,7 +130,7 @@ def draw_AUC_OPE():
 
     num_methods = 9 + 1
 
-    with open('output/evaluation/AUC_score.pickle') as f:
+    with open('output/AUC_score_test_all.pickle') as f:
         [yolo_AUC_score, rolo_AUC_score] = pickle.load(f)
     yolo_AUC_score.append(0)
     rolo_AUC_score.append(0)
@@ -233,3 +233,4 @@ def draw_AUC_OPE():
 
 if __name__=='__main__':
     evaluate_AUC()
+    draw_AUC_OPE()
