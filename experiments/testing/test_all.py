@@ -85,7 +85,7 @@ class ROLO_TF:
     }
 
     def __init__(self, argvs=[]):
-        self.num_unit = 3000
+        self.num_unit = self.num_input
         print("ROLO init")
         self.ROLO(argvs)
 
@@ -120,8 +120,10 @@ class ROLO_TF:
                 outputs_bw = tf.reverse(tmp, axis=[0])
             # tf.get_variable_scope().reuse_variables()
 
-        output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
-        output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
+        output_fw = outputs_fw[-1][:, 4097:4101]
+        output_bw = outputs_bw[-1][:, 4097:4101]
+        # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
+        # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
         final_out = tf.add(output_fw, output_bw) /2
         return final_out
 
@@ -261,7 +263,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_all/')
                 utils.createFolder(self.output_path)
 
                 # self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_nodrop_30_2.ckpt'  #no dropout
