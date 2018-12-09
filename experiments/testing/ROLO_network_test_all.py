@@ -146,11 +146,12 @@ class ROLO_TF:
                 outputs_bw = tf.reverse(tmp, axis=[0])
             # tf.get_variable_scope().reuse_variables()
 
-        output_fw = outputs_fw[-1][:,4096:4101]
-        output_bw = outputs_bw[-1][:,4096:4101]
+        output_fw = outputs_fw[-1][:,4097:4101]
+        output_bw = outputs_bw[-1][:,4097:4101]
         # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
         # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
         final_out = tf.add(output_fw, output_bw) /2
+        print  final_out.shape
         return final_out
 
 
