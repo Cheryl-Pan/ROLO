@@ -196,10 +196,10 @@ class ROLO_TF:
         # Initializing the variables
         init = tf.global_variables_initializer()
         self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
-        config = tf.ConfigProto()
-        config.gpu_options.allow_growth = True
+        # config = tf.ConfigProto()
+        # config.gpu_options.allow_growth = True
         # Launch the graph
-        with tf.Session(config=config) as sess:
+        with tf.Session() as sess:
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
