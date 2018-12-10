@@ -97,11 +97,11 @@ class ROLO_TF:
     # Define weights
     with tf.variable_scope("weight", reuse=True):
         weights = {
-            'in': tf.Variable(tf.random_normal([num_input, num_input]))
+            'out': tf.Variable(tf.random_normal([num_input, num_gt]))
         }
     with tf.variable_scope("bias", reuse=True):
         biases = {
-            'in': tf.Variable(tf.random_normal([num_input]))
+            'out': tf.Variable(tf.random_normal([num_gt]))
         }
 
     def __init__(self, argvs=None):
@@ -109,6 +109,8 @@ class ROLO_TF:
             argvs = []
         print("ROLO init")
         self.ROLO(argvs)
+        # self.LSTM_single("lstm",self.x,self.istate,self.weights,self.biases)
+        # self.lstm_single_2(self.x)
 
     def LSTM_single(self, name, _X, _istate, _weights, _biases):
         print (_X.shape)
@@ -117,10 +119,11 @@ class ROLO_TF:
         print (_X.shape)
         # Reshape to prepare input to hidden activation
         _X = tf.reshape(_X, [self.num_steps * self.batch_size, self.num_input])  # (num_steps*batch_size, num_input)
-        # print (_X.shape)
+        print (_X.shape)
         # Split data because rnn cell needs a list of inputs for the RNN inner loop
         _X = tf.split(_X, self.num_steps, 0)  # n_steps * (batch_size, num_input)
         # print("_X: ", _X)
+        print _X
 
         # cell = tf.nn.rnn_cell.LSTMCell(self.num_input) #BasicLSTMCell 4102
         cell = tf.nn.rnn_cell.LSTMCell(self.num_input, self.num_input)
@@ -139,15 +142,10 @@ class ROLO_TF:
     # bi-LSTM
     # def bi_lstm(self, name, X):
     #     _X = tf.reshape(X, [-1, self.num_input])
-    #     w_in = self.weights['in']
-    #     b_in = self.biases['in']
-    #     _X = tf.matmul(_X, w_in) + b_in
     #     x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
     #     x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
-    #     with tf.variable_scope('forward'):
-    #         lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-    #     with tf.variable_scope('backward'):
-    #         lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+    #     lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+    #     lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
     #
     #     output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
     #                                                              time_major=True)
@@ -174,7 +172,6 @@ class ROLO_TF:
                 outputs_bw = tf.reverse(tmp, axis=[0])
 
         output_fw=outputs_fw[-1][:,4097:4101]
-        print output_fw.shape
         output_bw = outputs_bw[-1][:,4097:4101]
         final_out = tf.add(output_fw, output_bw)/2
 

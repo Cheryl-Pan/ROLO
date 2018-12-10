@@ -63,7 +63,7 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_weights_file = '../training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
+    rolo_weights_file = '../training/panchen/output/ROLO_model'
     #rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
@@ -196,13 +196,13 @@ class ROLO_TF:
         # Initializing the variables
         init = tf.global_variables_initializer()
         self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
-        # config = tf.ConfigProto()
-        # config.gpu_options.allow_growth = True
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
         # Launch the graph
-        with tf.Session() as sess:
+        with tf.Session(config=config) as sess:
             if (self.restore_weights == True):
                 sess.run(init)
-                self.saver.restore(sess, self.rolo_weights_file)
+                self.saver.restore(sess, tf.train.latest_checkpoint(self.rolo_weights_file))
                 print ("Loading complete!" + '\n')
             else:
                 sess.run(init)

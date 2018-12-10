@@ -76,7 +76,7 @@ class ROLO_TF:
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
     num_predict = 6  # final output of LSTM 6 loc parameters
-    num_unit = 3000
+    num_unit = 4096+6
     num_gt = 4
     num_input = num_feat + num_predict  # data input: 4096+6= 4012
 
@@ -97,11 +97,11 @@ class ROLO_TF:
     # Define weights
     with tf.variable_scope("weight", reuse=True):
         weights = {
-            'in': tf.Variable(tf.random_normal([num_input, num_input]))
+            'out': tf.Variable(tf.random_normal([num_input, num_gt]))
         }
     with tf.variable_scope("bias", reuse=True):
         biases = {
-            'in': tf.Variable(tf.random_normal([num_input]))
+            'out': tf.Variable(tf.random_normal([num_gt]))
         }
 
     def __init__(self, argvs=None):
@@ -109,6 +109,8 @@ class ROLO_TF:
             argvs = []
         print("ROLO init")
         self.ROLO(argvs)
+        # self.LSTM_single("lstm",self.x,self.istate,self.weights,self.biases)
+        # self.lstm_single_2(self.x)
 
     def LSTM_single(self, name, _X, _istate, _weights, _biases):
         print (_X.shape)
@@ -117,10 +119,11 @@ class ROLO_TF:
         print (_X.shape)
         # Reshape to prepare input to hidden activation
         _X = tf.reshape(_X, [self.num_steps * self.batch_size, self.num_input])  # (num_steps*batch_size, num_input)
-        # print (_X.shape)
+        print (_X.shape)
         # Split data because rnn cell needs a list of inputs for the RNN inner loop
         _X = tf.split(_X, self.num_steps, 0)  # n_steps * (batch_size, num_input)
         # print("_X: ", _X)
+        print _X
 
         # cell = tf.nn.rnn_cell.LSTMCell(self.num_input) #BasicLSTMCell 4102
         cell = tf.nn.rnn_cell.LSTMCell(self.num_input, self.num_input)
@@ -137,53 +140,52 @@ class ROLO_TF:
         return outputs  # outputis a list,include one tensor, TensorShape:[batch_size, num_input]
 
     # bi-LSTM
-    # def bi_lstm(self, name, X):
-    #     _X = tf.reshape(X, [-1, self.num_input])
-    #     w_in = self.weights['in']
-    #     b_in = self.biases['in']
-    #     _X = tf.matmul(_X, w_in) + b_in
-    #     x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
-    #     x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
-    #     with tf.variable_scope('forward'):
-    #         lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-    #     with tf.variable_scope('backward'):
-    #         lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-    #
-    #     output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
-    #                                                              time_major=True)
-    #     # output_bi_lstm is a tuple,(output_fw,output_bw)
-    #     output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
-    #     output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
-    #
-    #     final_output = tf.add(output_fw_pred, output_bw_pred) / 2  # shape:(batch_size,4)
-    #     # outputs = tf.concat(output_bi_lstm,2) #(n_step,batchsize,num_input*2)
-    #     # outputs[-1][:,4097:4101]
-    #     return final_output  # last time_step output,(1,tensor([batch_size,num_input*2]))
+    def bi_lstm(self, name, X, weight, bias):
+        _X = tf.reshape(X, [-1, self.num_input])
+        x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
+        x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
+        lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+        lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
 
-    # def lstm_single_2(self, x_input):
-    #     x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
-    #     lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-    #     lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-    #     with tf.variable_scope('bidirectional_lstm')as scope:
-    #         # forward direction
-    #         with tf.variable_scope('fw_direction') as fw_scope:
-    #             outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
-    #         with tf.variable_scope('bw_direction'):
-    #             input_reverse = tf.reverse(x_in,axis=[0])
-    #             tmp, states_bw = tf.nn.dynamic_rnn(lstm_cell_bw,input_reverse,dtype=tf.float32, time_major=True)
-    #             outputs_bw = tf.reverse(tmp, axis=[0])
-    #
-    #     output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
-    #     output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
-    #     final_out = tf.add(output_fw, output_bw) /2
-    #     return final_out
+        output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
+                                                                 time_major=True)
+        # output_bi_lstm is a tuple,(output_fw,output_bw)
+        # output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
+        # output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
 
-    def bi_lstm_2(self, X):
+        out = tf.add(output_bi_lstm[0][-1], output_bi_lstm[1][-1]) / 2
+        final_out = tf.matmul(out, weight) + bias
+
+        # outputs = tf.concat(output_bi_lstm,2) #(n_step,batchsize,num_input*2)
+        # outputs[-1][:,4097:4101]
+        return final_out  # last time_step output,(1,tensor([batch_size,num_input*2]))
+
+    def lstm_single_2(self, x_input):
+        x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
+        lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+        lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+        with tf.variable_scope('bidirectional_lstm')as scope:
+            # forward direction
+            with tf.variable_scope('fw_direction') as fw_scope:
+                outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
+            with tf.variable_scope('bw_direction'):
+                input_reverse = tf.reverse(x_in,axis=[0])
+                tmp, states_bw = tf.nn.dynamic_rnn(lstm_cell_bw,input_reverse,dtype=tf.float32, time_major=True)
+                outputs_bw = tf.reverse(tmp, axis=[0])
+
+        output_fw=outputs_fw[-1][:,4097:4101]
+        output_bw = outputs_bw[-1][:,4097:4101]
+        final_out = tf.add(output_fw, output_bw)/2
+
+        # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
+        # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
+        # final_out = tf.add(output_fw, output_bw) /2
+        return final_out
+
+    def bi_lstm_2(self, name, X):
         x_in = tf.transpose(X, [1, 0, 2])  # [n_step,batch_size,num_input]
-        with tf.variable_scope('forward'):
-            lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-        with tf.variable_scope('backward'):
-            lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+        lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+        lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
 
         output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
                                                                  time_major=True)
@@ -212,7 +214,7 @@ class ROLO_TF:
 
         # Build rolo layers
         # self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
-        self.lstm_module = self.bi_lstm_2(self.x)
+        self.lstm_module = self.bi_lstm("bi_lstm", self.x, self.weights, self.biases)
         # self.lstm_module = self.bi_lstm_2('bi_lstm_2',self.x)
         self.ious = tf.Variable(tf.zeros([self.batch_size]), name="ious")
         self.sess = tf.Session()
@@ -314,15 +316,13 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 10  # 20 * 100
+        epoches = 20 * 100   # 20 * 100
 
         # Use rolo_input for LSTM training
         with tf.variable_scope('opt'):
-            pred = self.bi_lstm_2(self.x)
-            self.pred_location = pred #[batch_size,4097:4101]
-            # self.pred_location = self.bi_lstm("bi_lstm_train", self.x)
-            # self.pred_location = self.bi_lstm_2('bi_lstm_2',self.x)
-            # self.pred_location = self.lstm_single_2(self.x)
+            # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
+            # self.pred_location = pred[0][:, 4097:4101] #[batch_size,4097:4101]
+            self.pred_location = self.bi_lstm("bi_lstm",self.x,self.weights, self.biases)
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
             self.learning_rate = 0.00001
@@ -350,7 +350,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train_bi/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train_fc/')
                 utils.createFolder(self.output_path)
                 total_loss = 0
                 id = 0
