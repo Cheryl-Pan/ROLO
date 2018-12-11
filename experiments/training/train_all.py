@@ -215,10 +215,10 @@ class ROLO_TF:
         # self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
         self.lstm_module = self.bi_lstm("bi_lstm", self.x)
         # self.lstm_module = self.bi_lstm_2('bi_lstm_2',self.x)
-        self.ious = tf.Variable(tf.zeros([self.batch_size]), name="ious")
-        self.sess = tf.Session()
-        self.sess.run(tf.global_variables_initializer())
-        self.saver = tf.train.Saver()
+        # self.ious = tf.Variable(tf.zeros([self.batch_size]), name="ious")
+        # self.sess = tf.Session()
+        # self.sess.run(tf.global_variables_initializer())
+        # self.saver = tf.train.Saver()
         # self.saver.restore(self.sess, self.rolo_weights_file)
         if self.disp_console: print "Loading complete!" + '\n'
 
@@ -331,7 +331,7 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-
+        self.saver = tf.train.Saver()
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
