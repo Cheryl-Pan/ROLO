@@ -27,6 +27,7 @@ Description:
 # Imports
 import os,sys
 abspath = os.path.abspath("..")  # ~/ROLO/experiments
+print abspath
 rootpath = os.path.split(abspath)[0]  # ~/ROLO
 sys.path.append(rootpath)
 from utils import ROLO_utils as utils
@@ -63,7 +64,8 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_weights_file = '../training/panchen/output/ROLO_model'
+
+    rolo_weights_file = '../training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
     #rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
@@ -94,7 +96,9 @@ class ROLO_TF:
 
     def __init__(self,argvs = []):
         print("ROLO init")
+        # tf.reset_default_graph()
         self.ROLO(argvs)
+
 
 
     def LSTM_single(self, name,  _X, _istate, _weights, _biases):
@@ -185,16 +189,19 @@ class ROLO_TF:
         #print("pred: ", pred)
         #self.pred_location = pred[0][:, 4097:4101]
         self.pred_location = self.lstm_single_2(self.x)
-        #print("pred_location: ", self.pred_location)
-        #print("self.y: ", self.y)
+
         self.correct_prediction = tf.square(self.pred_location - self.y)
-        #print("self.correct_prediction: ", self.correct_prediction)
+
         self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
-        #optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy) # Adam Optimizer
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-        self.saver = tf.train.Saver()
+        include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
+        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        self.saver = tf.train.Saver(variables_to_restore)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
@@ -202,7 +209,7 @@ class ROLO_TF:
         with tf.Session(config=config) as sess:
             if (self.restore_weights == True):
                 sess.run(init)
-                self.saver.restore(sess, tf.train.latest_checkpoint(self.rolo_weights_file))
+                self.saver.restore(sess, self.rolo_weights_file)
                 print ("Loading complete!" + '\n')
             else:
                 sess.run(init)
@@ -288,7 +295,7 @@ class ROLO_TF:
                 self.detect_from_file(utils.file_in_path)
             else:
                 print "Default: running ROLO test."
-                self.build_networks()
+                # self.build_networks()
 
                 # evaluate_st = 0
                 # evaluate_ed = 29
