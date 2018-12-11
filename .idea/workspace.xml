@@ -29326,7 +29326,7 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ROLO_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/ROLO_evaluation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29381,11 +29381,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="177" column="53" selection-start-line="177" selection-start-column="53" selection-end-line="177" selection-end-column="53" />
+            <state relative-caret-position="-1702">
+              <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
               <folding>
                 <marker date="1544498969192" expanded="true" signature="6123:6129" ph="..." />
               </folding>
@@ -29405,11 +29405,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="1337" column="5" selection-start-line="1337" selection-start-column="5" selection-end-line="1337" selection-end-column="5" />
+            <state relative-caret-position="-849">
+              <caret line="858" column="4" selection-start-line="858" selection-start-column="4" selection-end-line="858" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -29523,12 +29523,12 @@
         <option value="$PROJECT_DIR$/experiments/training/panchen/output/trainging-20-log.txt" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py" />
         <option value="$PROJECT_DIR$/experiments/testing/test_all.py" />
-        <option value="$PROJECT_DIR$/ROLO_evaluation.py" />
         <option value="$PROJECT_DIR$/evaluation_all.py" />
         <option value="$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/a.py" />
         <option value="$PROJECT_DIR$/experiments/training/train_all.py" />
         <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
+        <option value="$PROJECT_DIR$/ROLO_evaluation.py" />
       </list>
     </option>
   </component>
@@ -30038,7 +30038,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544449593684</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="train_all:bi_lstm">
+      <created>1544499058972</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1544499058972</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView">
@@ -30054,12 +30061,12 @@
     <frame x="82" y="64" width="1400" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13560551" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13560551" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32892805" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.5946338" visible="true" weight="0.25403818" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5946338" visible="true" weight="0.25403818" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.64249456" weight="0.46549192" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -30430,20 +30437,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="1337" column="5" selection-start-line="1337" selection-start-column="5" selection-end-line="1337" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="177" column="53" selection-start-line="177" selection-start-column="53" selection-end-line="177" selection-end-column="53" />
+        <state relative-caret-position="-1702">
+          <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
           <folding>
             <marker date="1544498969192" expanded="true" signature="6123:6129" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-849">
+          <caret line="858" column="4" selection-start-line="858" selection-start-column="4" selection-end-line="858" selection-end-column="4" />
         </state>
       </provider>
     </entry>

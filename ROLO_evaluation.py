@@ -1340,7 +1340,7 @@ def main(argv):
     # evaluate_avg_IOU_kalman()
     #evaluate_avg_IOU_kalman_TRE()
 
-    #evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
+    evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
     # evaluate_AUC_TRE()
     #evaluate_kalman_AUC()
     #evaluate_kalman_AUC_TRE()
