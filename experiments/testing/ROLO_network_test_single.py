@@ -289,10 +289,7 @@ class ROLO_TF:
             self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
             utils.createFolder(self.output_path)
 
-            # self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_dropout_20.ckpt'
-            # self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_dropout_30.ckpt'
-            # self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_dropout_30_2.ckpt'
-            #self.rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_30_2_nd_newfit.ckpt'
+
             self.testing(x_path, y_path)
 
     '''----------------------------------------main-----------------------------------------------------'''

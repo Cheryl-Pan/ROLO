@@ -139,24 +139,31 @@ class ROLO_TF:
         # print("state: ", state)
         return outputs  # outputis a list,include one tensor, TensorShape:[batch_size, num_input]
 
-    # bi-LSTM
-    # def bi_lstm(self, name, X):
-    #     _X = tf.reshape(X, [-1, self.num_input])
-    #     x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
-    #     x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
-    #     lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-    #     lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-    #
-    #     output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
-    #                                                              time_major=True)
-    #     # output_bi_lstm is a tuple,(output_fw,output_bw)
-    #     output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
-    #     output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
-    #
-    #     final_output = tf.add(output_fw_pred, output_bw_pred) / 2  # shape:(batch_size,4)
-    #     # outputs = tf.concat(output_bi_lstm,2) #(n_step,batchsize,num_input*2)
-    #     # outputs[-1][:,4097:4101]
-    #     return final_output  # last time_step output,(1,tensor([batch_size,num_input*2]))
+    def lstm(self,x_input):
+        x_in = tf.transpose(x_input,[1,0,2])
+        print x_in.shape
+        x_in = tf.reshape(x_in,[self.num_steps * self.batch_size, self.num_input])
+        print x_in.shape
+        x_reverse = tf.reverse(x_in,axis=[0])
+        x_in = tf.split(x_in,self.num_steps)
+        x_in_bw = tf.split(x_reverse,self.num_steps)
+        cell = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_input,forget_bias=1.0,state_is_tuple=True)
+        cell_b = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_input,forget_bias=1.0,state_is_tuple=True)
+        output = list()
+        with tf.variable_scope('lstm_rnn'):
+            for timestep in range(self.num_steps):
+                with tf.variable_scope('fw'):
+                    output_fw, _ =  tf.nn.static_rnn(cell,[x_in[timestep]], dtype=tf.float32)
+                with tf.variable_scope('bw'):
+                    # input_reverse = tf.reverse(x_in,axis=0)
+                    output_bw, _ = tf.nn.static_rnn(cell_b,[x_in_bw[timestep]],dtype=tf.float32)
+                    # output_bw = tf.reverse(tmp,axis=0)
+                tf.get_variable_scope().reuse_variables()
+                out = tf.add(output_fw[0], output_bw[0] )/2
+                output.append(out)
+
+        return output[-1][:,4097:4101]
+
 
     def lstm_single_2(self, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
@@ -215,9 +222,9 @@ class ROLO_TF:
         self.lstm_module = self.lstm_single_2(self.x)
         # self.lstm_module = self.bi_lstm_2('bi_lstm_2',self.x)
         self.ious = tf.Variable(tf.zeros([self.batch_size]), name="ious")
-        self.sess = tf.Session()
-        self.sess.run(tf.global_variables_initializer())
-        self.saver = tf.train.Saver()
+        # self.sess = tf.Session()
+        # self.sess.run(tf.global_variables_initializer())
+        # self.saver = tf.train.Saver()
         # self.saver.restore(self.sess, self.rolo_weights_file)
         if self.disp_console: print "Loading complete!" + '\n'
 
@@ -241,7 +248,7 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-
+        self.saver = tf.train.Saver()
         # Launch the graph
         with tf.Session() as sess:
 
@@ -314,7 +321,7 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 100   # 20 * 100
+        epoches = 20 * 20   # 20 * 100
 
         # Use rolo_input for LSTM training
         with tf.variable_scope('opt'):
@@ -323,6 +330,7 @@ class ROLO_TF:
             # self.pred_location = self.bi_lstm("bi_lstm_train", self.x)
             # self.pred_location = self.bi_lstm_2('bi_lstm_2',self.x)
             self.pred_location = self.lstm_single_2(self.x)
+            tf.add_to_collection('lstm_single_2', self.pred_location)
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
             self.learning_rate = 0.00001
@@ -331,7 +339,7 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-
+        self.saver = tf.train.Saver()
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph

@@ -140,7 +140,7 @@ class ROLO_TF:
         return outputs  # outputis a list,include one tensor, TensorShape:[batch_size, num_input]
 
     # bi-LSTM
-    def bi_lstm(self, name, X, weight, bias):
+    def bi_lstm(self, name, X):
         _X = tf.reshape(X, [-1, self.num_input])
         x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
         x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
@@ -154,10 +154,9 @@ class ROLO_TF:
         # output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
 
         out = tf.add(output_bi_lstm[0][-1], output_bi_lstm[1][-1]) / 2
+        weight = self.weights['out']
+        bias = self.biases['out']
         final_out = tf.matmul(out, weight) + bias
-
-        # outputs = tf.concat(output_bi_lstm,2) #(n_step,batchsize,num_input*2)
-        # outputs[-1][:,4097:4101]
         return final_out  # last time_step output,(1,tensor([batch_size,num_input*2]))
 
     def lstm_single_2(self, x_input):
@@ -214,7 +213,7 @@ class ROLO_TF:
 
         # Build rolo layers
         # self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
-        self.lstm_module = self.bi_lstm("bi_lstm", self.x, self.weights, self.biases)
+        self.lstm_module = self.bi_lstm("bi_lstm", self.x)
         # self.lstm_module = self.bi_lstm_2('bi_lstm_2',self.x)
         self.ious = tf.Variable(tf.zeros([self.batch_size]), name="ious")
         self.sess = tf.Session()
@@ -316,13 +315,14 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 100   # 20 * 100
+        epoches = 20 * 20   # 20 * 100
 
         # Use rolo_input for LSTM training
         with tf.variable_scope('opt'):
             # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
             # self.pred_location = pred[0][:, 4097:4101] #[batch_size,4097:4101]
-            self.pred_location = self.bi_lstm("bi_lstm",self.x,self.weights, self.biases)
+            self.pred_location = self.bi_lstm("bi_lstm",self.x)
+            tf.add_to_collection("bi_lstm",self.pred_location)
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
             self.learning_rate = 0.00001
