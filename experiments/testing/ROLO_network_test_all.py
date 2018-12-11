@@ -151,7 +151,6 @@ class ROLO_TF:
         # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
         # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
         final_out = tf.add(output_fw, output_bw) /2
-        print  final_out.shape
         return final_out
 
 
@@ -176,7 +175,7 @@ class ROLO_TF:
         # self.saver.restore(self.sess, self.rolo_weights_file)
         self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
 
-        if self.disp_console : print "Loading complete!" + '\n'
+        if self.disp_console : print "Loading  graph complete!" + '\n'
 
 
     def testing(self):
@@ -195,7 +194,7 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
+        # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -288,7 +287,7 @@ class ROLO_TF:
                 self.detect_from_file(utils.file_in_path)
             else:
                 print "Default: running ROLO test."
-                # self.build_networks()
+                self.build_networks()
 
                 # evaluate_st = 0
                 # evaluate_ed = 29
