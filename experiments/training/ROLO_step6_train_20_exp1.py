@@ -321,7 +321,7 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 20   # 20 * 100
+        epoches = 20 * 2   # 20 * 100
 
         # Use rolo_input for LSTM training
         with tf.variable_scope('opt'):
