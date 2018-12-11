@@ -171,9 +171,9 @@ class ROLO_TF:
         self.ious= tf.Variable(tf.zeros([self.batch_size]), name="ious")
         self.sess = tf.Session()
         self.sess.run(tf.initialize_all_variables())
-        # # self.saver = tf.train.Saver()
+        self.saver = tf.train.Saver()
         # self.saver.restore(self.sess, self.rolo_weights_file)
-        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
+        # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
 
         if self.disp_console : print "Loading  graph complete!" + '\n'
 
