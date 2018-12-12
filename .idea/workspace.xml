@@ -29326,7 +29326,6 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29383,10 +29382,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="209" column="46" lean-forward="true" selection-start-line="209" selection-start-column="46" selection-end-line="209" selection-end-column="46" />
+            <state relative-caret-position="173">
+              <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
               <folding>
-                <marker date="1544577058624" expanded="true" signature="6196:6202" ph="..." />
+                <marker date="1544577356505" expanded="true" signature="6196:6202" ph="..." />
               </folding>
             </state>
           </provider>
@@ -29644,7 +29643,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.train_all">
+  <component name="RunManager" selected="Python.ROLO_network_test_all">
     <configuration name="ROLO_network_test_all" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ROLO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -29759,9 +29758,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ROLO_network_test_all" />
         <item itemvalue="Python.train_all" />
         <item itemvalue="Python.ROLO_step6_train_20_exp1" />
-        <item itemvalue="Python.ROLO_network_test_all" />
         <item itemvalue="Python.check" />
         <item itemvalue="Python.a" />
       </list>
@@ -29777,20 +29776,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542078505495</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Using bi-lstm for tracking.">
-      <created>1542416326092</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1542416326092</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Using bi-lstm for tracking.">
-      <created>1542810537016</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1542810537016</updated>
     </task>
     <task id="LOCAL-00003" summary="for training, using lstm_single_2, and the num of lstm unit is 3000.">
       <created>1543562980320</created>
@@ -30121,7 +30106,21 @@
       <option name="project" value="LOCAL" />
       <updated>1544541394988</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="train_all:bi_lstm">
+      <created>1544577096604</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1544577096607</updated>
+    </task>
+    <task id="LOCAL-00051" summary="train_all:bi_lstm">
+      <created>1544577819337</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1544577819337</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TodoView">
@@ -30135,7 +30134,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="13" y="84" width="1400" height="773" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24075417" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -30533,10 +30531,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="209" column="46" lean-forward="true" selection-start-line="209" selection-start-column="46" selection-end-line="209" selection-end-column="46" />
+        <state relative-caret-position="173">
+          <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
           <folding>
-            <marker date="1544577058624" expanded="true" signature="6196:6202" ph="..." />
+            <marker date="1544577356505" expanded="true" signature="6196:6202" ph="..." />
           </folding>
         </state>
       </provider>
