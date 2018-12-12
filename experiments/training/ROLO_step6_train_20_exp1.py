@@ -316,7 +316,7 @@ class ROLO_TF:
     def train_20(self):
         print("TRAINING ROLO...")
         log_file = open("panchen/output/training-20-log.txt", "a")  # open in append mode
-        print ("build_network...")
+        # print ("build_network...")
         # self.build_networks()
 
         ''' TUNE THIS'''
@@ -328,12 +328,15 @@ class ROLO_TF:
 
         self.pred_location = self.lstm_single_2(self.x)
         # tf.add_to_collection('lstm_single_2', self.pred_location)
-        self.correct_prediction = tf.square(self.pred_location - self.y)
-        self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
-        self.learning_rate = 0.00001
-        self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(
-            self.accuracy)  # Adam Optimizer
+        with tf.name_scope('loss'):
+            self.correct_prediction = tf.square(self.pred_location - self.y)
+            self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
+            tf.summary.scalar('loss', self.accuracy)
 
+        self.learning_rate = 0.00001
+        self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
+
+        merged_summary = tf.summary.merge_all()
         # Initializing the variables
         init = tf.global_variables_initializer()
         self.saver = tf.train.Saver(max_to_keep=2,keep_checkpoint_every_n_hours=1)
@@ -341,12 +344,16 @@ class ROLO_TF:
         config.gpu_options.allow_growth = True
         # Launch the graph
         with tf.Session(config=config) as sess:
+            writer = tf.summary.FileWriter('panchen/output')
+            writer.add_graph(sess.graph)
+
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
                 print "Loading complete!" + '\n'
             else:
                 sess.run(init)
+
 
             total_time = 0
             for epoch in range(epoches):  # 20
@@ -399,9 +406,10 @@ class ROLO_TF:
 
                     if id % self.display_step == 0:
                         # Calculate batch loss
-                        loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys,
+                        loss, summary = sess.run([self.accuracy,merged_summary], feed_dict={self.x: batch_xs, self.y: batch_ys,
                                                                   self.istate: np.zeros(
                                                                       (self.batch_size, 2 * self.num_input))})
+                        writer.add_summary(summary, id)
                         if self.disp_console:print "Iter " + str(
                                 id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
                                 loss)  # + "{:.5f}".format(self.accuracy)

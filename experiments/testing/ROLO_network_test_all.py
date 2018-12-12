@@ -191,9 +191,13 @@ class ROLO_TF:
         self.pred_location = self.lstm_single_2(self.x)
         # self.pred_location = tf.get_collection('lstm_single_2')
         self.correct_prediction = tf.square(self.pred_location - self.y)
-        self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
+        with tf.name_scope('loss'):
+            self.loss = tf.reduce_mean(self.correct_prediction) * 100
+            tf.summary.scalar('loss', self.loss)
 
+        merged_summary = tf.summary.merge_all()
         # Initializing the variables
+
         init = tf.global_variables_initializer()
         # include = ['opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
         #            'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
@@ -207,6 +211,7 @@ class ROLO_TF:
         config.gpu_options.allow_growth = True
         # Launch the graph
         with tf.Session(config=config) as sess:
+            writer = tf.summary.FileWriter('log', sess.graph)
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, ckpt)
@@ -219,6 +224,7 @@ class ROLO_TF:
             #id= 1
             evaluate_st = 0
             evaluate_ed = 29
+
 
             for test in range(evaluate_st, evaluate_ed + 1):
                 [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
@@ -260,7 +266,8 @@ class ROLO_TF:
                     utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)
                     if id % self.display_step == 0:
                         # Calculate batch loss
-                        loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
+                        loss,summary = sess.run([self.loss,merged_summary], feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
+                        writer.add_summary(summary, id)
                         #print "Iter " + str(id*self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss) #+ "{:.5f}".format(self.accuracy)
                         total_loss += loss
                     id += 1
