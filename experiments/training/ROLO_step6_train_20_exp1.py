@@ -317,7 +317,7 @@ class ROLO_TF:
         print("TRAINING ROLO...")
         log_file = open("panchen/output/training-20-log.txt", "a")  # open in append mode
         print ("build_network...")
-        self.build_networks()
+        # self.build_networks()
 
         ''' TUNE THIS'''
         num_videos = 20
