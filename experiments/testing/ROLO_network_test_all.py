@@ -80,8 +80,8 @@ class ROLO_TF:
     display_step = 1
 
     # tf Graph input
-    x = tf.placeholder("float32", [None, num_steps, num_input])
-    istate = tf.placeholder("float32", [None, 2*num_input]) #state & cell => 2x num_input
+    x = tf.placeholder("float32", [None, num_steps, num_input],name='input_x')
+    istate = tf.placeholder("float32", [None, 2*num_input],name='y') #state & cell => 2x num_input
     y = tf.placeholder("float32", [None, num_gt])
 
     # Define weights
@@ -188,28 +188,27 @@ class ROLO_TF:
         #pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         #print("pred: ", pred)
         #self.pred_location = pred[0][:, 4097:4101]
-        graph = tf.get_default_graph()
-        # self.pred_location = self.lstm_single_2(self.x)
-        self.pred_location = tf.get_collection('lstm_single_2')
+        self.pred_location = self.lstm_single_2(self.x)
+        # self.pred_location = tf.get_collection('lstm_single_2')
         self.correct_prediction = tf.square(self.pred_location - self.y)
         self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-        # include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
-        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        # self.saver = tf.train.Saver(variables_to_restore)
-        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
+        include = ['opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+                   'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+                   'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+                   'opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
+        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        self.saver = tf.train.Saver(variables_to_restore)
+        # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
         with tf.Session(config=config) as sess:
             if (self.restore_weights == True):
                 sess.run(init)
-                self.saver.restore(sess, self.rolo_weights_file)
+                self.saver.restore(sess, tf.train.latest_checkpoint(self.rolo_weights_file))
                 print ("Loading complete!" + '\n')
             else:
                 sess.run(init)
@@ -248,10 +247,9 @@ class ROLO_TF:
                     #print("Batch_ys: ", batch_ys)
 
                     start_time = time.time()
-                    pred_location= sess.run(self.pred_location,feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
+                    pred_location= sess.run(self.pred_location,feed_dict={self.x: batch_xs})
                     cycle_time = time.time() - start_time
                     total_time += cycle_time
-
                     #print("ROLO Pred: ", pred_location)
                     #print("len(pred) = ", len(pred_location))
                     #print("ROLO Pred in pixel: ", pred_location[0][0]*self.w_img, pred_location[0][1]*self.h_img, pred_location[0][2]*self.w_img, pred_location[0][3]*self.h_img)
