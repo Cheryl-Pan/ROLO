@@ -173,8 +173,8 @@ class ROLO_TF:
         #self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
         self.lstm_module = self.lstm_single_2(self.x)
         self.ious= tf.Variable(tf.zeros([self.batch_size]), name="ious")
-        self.sess = tf.Session()
-        self.sess.run(tf.initialize_all_variables())
+        # self.sess = tf.Session()
+        # self.sess.run(tf.initialize_all_variables())
         # self.saver = tf.train.Saver()
         # self.saver.restore(self.sess, self.rolo_weights_file)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
@@ -188,21 +188,21 @@ class ROLO_TF:
         #pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         #print("pred: ", pred)
         #self.pred_location = pred[0][:, 4097:4101]
-        self.pred_location = self.lstm_single_2(self.x)
-
+        graph = tf.get_default_graph()
+        # self.pred_location = self.lstm_single_2(self.x)
+        self.pred_location = tf.get_collection('lstm_single_')[0]
         self.correct_prediction = tf.square(self.pred_location - self.y)
-
         self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-        include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
-        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(variables_to_restore)
-        # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
+        # include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+        #            'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
+        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        # self.saver = tf.train.Saver(variables_to_restore)
+        self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -295,7 +295,7 @@ class ROLO_TF:
                 self.detect_from_file(utils.file_in_path)
             else:
                 print "Default: running ROLO test."
-                # self.build_networks()
+                self.build_networks()
 
                 # evaluate_st = 0
                 # evaluate_ed = 29
