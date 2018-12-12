@@ -65,7 +65,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
 
-    rolo_weights_file = '../training/panchen/output/ROLO_model/model_step6_exp1.ckpt'
+    rolo_weights_file = '../training/panchen/output/ROLO_model'
     #rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
@@ -195,12 +195,13 @@ class ROLO_TF:
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-        include = ['opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-                   'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-                   'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-                   'opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
-        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(variables_to_restore)
+        # include = ['opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+        #            'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+        #            'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+        #            'opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
+        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        self.saver = tf.train.Saver()
+        ckpt = tf.train.latest_checkpoint(self.rolo_weights_file)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
@@ -208,7 +209,7 @@ class ROLO_TF:
         with tf.Session(config=config) as sess:
             if (self.restore_weights == True):
                 sess.run(init)
-                self.saver.restore(sess, tf.train.latest_checkpoint(self.rolo_weights_file))
+                self.saver.restore(sess, ckpt)
                 print ("Loading complete!" + '\n')
             else:
                 sess.run(init)

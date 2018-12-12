@@ -220,7 +220,7 @@ class ROLO_TF:
         # Build rolo layers
         # self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
         self.lstm_module = self.lstm_single_2(self.x)
-        # self.lstm_module = self.bi_lstm_2('bi_lstm_2',self.x)
+
         self.ious = tf.Variable(tf.zeros([self.batch_size]), name="ious")
         # self.sess = tf.Session()
         # self.sess.run(tf.global_variables_initializer())
@@ -321,25 +321,22 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 3   # 20 * 100
+        epoches = 20 * 2   # 20 * 100
 
         # Use rolo_input for LSTM training
-        with tf.variable_scope('opt'):
-            # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
-            # self.pred_location = pred[0][:, 4097:4101] #[batch_size,4097:4101]
-            # self.pred_location = self.bi_lstm("bi_lstm_train", self.x)
-            # self.pred_location = self.bi_lstm_2('bi_lstm_2',self.x)
-            self.pred_location = self.lstm_single_2(self.x)
-            tf.add_to_collection('lstm_single_2', self.pred_location)
-            self.correct_prediction = tf.square(self.pred_location - self.y)
-            self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
-            self.learning_rate = 0.00001
-            self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(
-                self.accuracy)  # Adam Optimizer
+
+
+        self.pred_location = self.lstm_single_2(self.x)
+        # tf.add_to_collection('lstm_single_2', self.pred_location)
+        self.correct_prediction = tf.square(self.pred_location - self.y)
+        self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
+        self.learning_rate = 0.00001
+        self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(
+            self.accuracy)  # Adam Optimizer
 
         # Initializing the variables
         init = tf.global_variables_initializer()
-        self.saver = tf.train.Saver(max_to_keep=4,keep_checkpoint_every_n_hours=2)
+        self.saver = tf.train.Saver(max_to_keep=2,keep_checkpoint_every_n_hours=1)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
