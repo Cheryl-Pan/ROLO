@@ -190,7 +190,7 @@ class ROLO_TF:
         #self.pred_location = pred[0][:, 4097:4101]
         graph = tf.get_default_graph()
         # self.pred_location = self.lstm_single_2(self.x)
-        self.pred_location = tf.get_collection('lstm_single_')[0]
+        self.pred_location = tf.get_collection('lstm_single_')
         self.correct_prediction = tf.square(self.pred_location - self.y)
         self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
 
