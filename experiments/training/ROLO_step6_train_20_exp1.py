@@ -344,7 +344,7 @@ class ROLO_TF:
         config.gpu_options.allow_growth = True
         # Launch the graph
         with tf.Session(config=config) as sess:
-            writer = tf.summary.FileWriter('panchen/output')
+            writer = tf.summary.FileWriter('panchen/output/log')
             writer.add_graph(sess.graph)
 
             if (self.restore_weights == True):
