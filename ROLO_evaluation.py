@@ -1335,7 +1335,7 @@ def evaluate_avg_IOU_kalman_TRE():        # calculate AUC(Average Under Curve) T
     log_file.write('\n\n')
 '''----------------------------------------main-----------------------------------------------------'''
 def main(argv):
-    #evaluate_avg_IOU()
+    evaluate_avg_IOU()
     # evaluate_avg_IOU_TRE()
     # evaluate_avg_IOU_kalman()
     #evaluate_avg_IOU_kalman_TRE()

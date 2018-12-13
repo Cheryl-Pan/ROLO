@@ -321,7 +321,7 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 20
-        epoches = 20 * 2   # 20 * 100
+        epoches = 20 * 30   # 20 * 100
 
         # Use rolo_input for LSTM training
 
@@ -331,7 +331,7 @@ class ROLO_TF:
         with tf.name_scope('loss'):
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
-            tf.summary.scalar('loss', self.accuracy)
+            tf.summary.histogram('loss', self.accuracy)
 
         self.learning_rate = 0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
@@ -339,7 +339,7 @@ class ROLO_TF:
         merged_summary = tf.summary.merge_all()
         # Initializing the variables
         init = tf.global_variables_initializer()
-        self.saver = tf.train.Saver(max_to_keep=2,keep_checkpoint_every_n_hours=1)
+        self.saver = tf.train.Saver(max_to_keep=3)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -406,10 +406,10 @@ class ROLO_TF:
 
                     if id % self.display_step == 0:
                         # Calculate batch loss
-                        loss, summary = sess.run([self.accuracy,merged_summary], feed_dict={self.x: batch_xs, self.y: batch_ys,
+                        loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys,
                                                                   self.istate: np.zeros(
                                                                       (self.batch_size, 2 * self.num_input))})
-                        writer.add_summary(summary, id)
+
                         if self.disp_console:print "Iter " + str(
                                 id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
                                 loss)  # + "{:.5f}".format(self.accuracy)
@@ -417,6 +417,10 @@ class ROLO_TF:
                         total_loss += loss
                     id += 1
                     if self.disp_console: print(id)
+
+                    if id % 1000 == 0:
+                        summary = sess.run(merged_summary,feed_dict={self.x:batch_xs,self.y:batch_ys})
+                        writer.add_summary(summary, id)
 
                 cycle_time = time.time() - start_time
                 print('epoch is %d, time is %.2f' % (epoch, cycle_time))
@@ -429,9 +433,8 @@ class ROLO_TF:
                 if i + 1 == num_videos:
                     log_file.write('\n')
                     log_file.write(str(total_time) + '\n')
-                    save_path = self.saver.save(sess, self.rolo_weights_file)
-                    print("Model saved in file: %s" % save_path)
                     print 'total_time is %.2f' % total_time
+                self.saver.save(sess, self.rolo_weights_file, global_step=100)
 
         log_file.close()
         return

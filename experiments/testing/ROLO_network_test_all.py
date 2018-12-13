@@ -87,10 +87,10 @@ class ROLO_TF:
     # Define weights
 
     weights = {
-        'out': tf.Variable(tf.random_normal([num_input, num_predict]))
+        'out': tf.Variable(tf.random_normal([num_input, num_predict]),name="weight")
     }
     biases = {
-        'out': tf.Variable(tf.random_normal([num_predict]))
+        'out': tf.Variable(tf.random_normal([num_predict]), name='biases')
     }
 
 
@@ -189,6 +189,8 @@ class ROLO_TF:
         #print("pred: ", pred)
         #self.pred_location = pred[0][:, 4097:4101]
         self.pred_location = self.lstm_single_2(self.x)
+        for v in tf.all_variables():
+            print(v.name)
         # self.pred_location = tf.get_collection('lstm_single_2')
         self.correct_prediction = tf.square(self.pred_location - self.y)
         with tf.name_scope('loss'):
@@ -199,12 +201,12 @@ class ROLO_TF:
         # Initializing the variables
 
         init = tf.global_variables_initializer()
-        # include = ['opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-        #            'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-        #            'opt/bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-        #            'opt/bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
-        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver()
+        include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
+        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        self.saver = tf.train.Saver(variables_to_restore)
         ckpt = tf.train.latest_checkpoint(self.rolo_weights_file)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
@@ -301,7 +303,7 @@ class ROLO_TF:
                 self.detect_from_file(utils.file_in_path)
             else:
                 print "Default: running ROLO test."
-                self.build_networks()
+                # self.build_networks()
 
                 # evaluate_st = 0
                 # evaluate_ed = 29
