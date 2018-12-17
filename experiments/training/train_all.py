@@ -49,7 +49,7 @@ import random
 
 class ROLO_TF:
     disp_console = False  # False
-    restore_weights = False  # True
+    restore_weights = True  # True
 
     # YOLO parameters
     fromfile = None
@@ -82,7 +82,7 @@ class ROLO_TF:
 
     # ROLO Training Parameters
     # learning_rate = 0.00001 #training
-    learning_rate = 0.00001  # testing
+    learning_rate = 0.0001  # testing
 
     training_iters = 210  # 100000
     batch_size = 1  # a kind of piceture only have one
@@ -311,31 +311,36 @@ class ROLO_TF:
         print("TRAINING ROLO...")
         log_file = open("panchen/output/training-20-log.txt", "a")  # open in append mode
         print ("build_network...")
-        self.build_networks()
+        # self.build_networks()
 
         ''' TUNE THIS'''
-        num_videos = 20
-        epoches = 20 * 20   # 20 * 100
+        num_videos = 22
+        epoches = 20 * 40   # 20 * 100
 
         # Use rolo_input for LSTM training
-        with tf.variable_scope('opt'):
-            # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
-            # self.pred_location = pred[0][:, 4097:4101] #[batch_size,4097:4101]
-            self.pred_location = self.bi_lstm("bi_lstm",self.x)
-            tf.add_to_collection("bi_lstm",self.pred_location)
+        self.pred_location = self.bi_lstm("bi_lstm",self.x)
+        with tf.name_scope('loss'):
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
-            self.learning_rate = 0.00001
-            self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(
-                self.accuracy)  # Adam Optimizer
+            tf.summary.histogram('loss', self.accuracy)
+        self.learning_rate = 0.0001
+        self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
 
+        merged_summary = tf.summary.merge_all()
         # Initializing the variables
         init = tf.global_variables_initializer()
-        self.saver = tf.train.Saver()
+        include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
+        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        self.saver = tf.train.Saver(variables_to_restore,max_to_keep=3)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
         with tf.Session(config=config) as sess:
+            writer = tf.summary.FileWriter('log_train_all')
+            writer.add_graph(sess.graph)
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
@@ -405,6 +410,10 @@ class ROLO_TF:
                     id += 1
                     if self.disp_console: print(id)
 
+                    if id % 1000 == 0:
+                        summary = sess.run(merged_summary,feed_dict={self.x:batch_xs,self.y:batch_ys})
+                        writer.add_summary(summary, id)
+
                 cycle_time = time.time() - start_time
                 print('epoch is %d, time is %.2f' % (epoch, cycle_time))
                 total_time += cycle_time
@@ -419,6 +428,7 @@ class ROLO_TF:
                     save_path = self.saver.save(sess, self.rolo_weights_file)
                     print("Model saved in file: %s" % save_path)
                     print 'total_time is %.2f' % total_time
+                self.saver.save(sess, self.rolo_weights_file, global_step=100)
 
         log_file.close()
         return
