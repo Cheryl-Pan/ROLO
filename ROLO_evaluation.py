@@ -488,40 +488,40 @@ def draw_AUC_OPE():
     '''
 
     'test all 30'
-    #plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.564]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)   #exp all frames
-    plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.458]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)  #exp 1/3 frames
-    #plot.plot(x, benchmark_AUC_score[9]*100, color = 'y', label = "CNN-SVM[0.520]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
-    #plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.440]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.410]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.366]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.356]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.343]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-
-    plot.plot(x, yolo_kalman_AUC_score*100, color = 'k', label = "YOLO+SORT [0.341]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-
-    plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.333]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.325]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.320]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.315]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.311]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
+    # #plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.564]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)   #exp all frames
+    # plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.458]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)  #exp 1/3 frames
+    # #plot.plot(x, benchmark_AUC_score[9]*100, color = 'y', label = "CNN-SVM[0.520]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
+    # #plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.440]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.410]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.366]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.356]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.343]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    #
+    # plot.plot(x, yolo_kalman_AUC_score*100, color = 'k', label = "YOLO+SORT [0.341]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    #
+    # plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.333]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.325]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.320]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.315]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    # plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.311]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
 
 
 
 
 
     '''test last 8'''
-    # plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.476]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.459]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.454]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.444]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.428]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, yolo_kalman_AUC_score*100, color = 'k', label = "YOLO+SORT [0.406]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.406]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.392]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.366]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
-    # plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.318]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, rolo_AUC_score*100, color = 'g', label = "ROLO [0.476]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, yolo_AUC_score*100, color = 'g', label = "YOLO [0.459]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[6]*100, color = 'm', label = "LSK [0.454]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[8]*100, color = 'y', label = "VTS [0.444]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[7]*100, color = 'm', label = "VTD [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[1]*100, color = 'r', label = "CXT [0.433]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[0]*100, color = 'r', label = "STRUCK [0.428]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, yolo_kalman_AUC_score*100, color = 'k', label = "YOLO+SORT [0.406]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[4]*100, color = 'c', label = "CSK [0.406]", linestyle='-', markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[5]*100, color = 'c', label = "RS [0.392]", linestyle='--',  markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[3]*100, color = 'b', label = "OAB [0.366]", linestyle='--', markersize= 5, linewidth= 2, markevery= 1)
+    plot.plot(x, benchmark_AUC_score[2]*100, color = 'b', label = "TLD [0.318]", linestyle='-',  markersize= 5, linewidth= 2, markevery= 1)
 
 
 

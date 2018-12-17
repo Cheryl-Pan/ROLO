@@ -159,7 +159,7 @@ class ROLO_TF:
         final_out = tf.matmul(out, weight) + bias
         return final_out  # last time_step output,(1,tensor([batch_size,num_input*2]))
 
-    def lstm_single_2(self, x_input):
+    def lstm_single_2(self,name, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
         lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
         lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
@@ -172,13 +172,10 @@ class ROLO_TF:
                 tmp, states_bw = tf.nn.dynamic_rnn(lstm_cell_bw,input_reverse,dtype=tf.float32, time_major=True)
                 outputs_bw = tf.reverse(tmp, axis=[0])
 
-        output_fw=outputs_fw[-1][:,4097:4101]
-        output_bw = outputs_bw[-1][:,4097:4101]
-        final_out = tf.add(output_fw, output_bw)/2
-
-        # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
-        # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
-        # final_out = tf.add(output_fw, output_bw) /2
+        out = tf.add(outputs_fw[-1], outputs_bw[-1])/2
+        weight = self.weights['out']
+        bias = self.biases['out']
+        final_out = tf.matmul(out, weight) + bias
         return final_out
 
     def bi_lstm_2(self, name, X):
@@ -249,7 +246,7 @@ class ROLO_TF:
             if self.restore_weights == True:
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
-                print "Loading complete!" + '\n'
+                print "Model loading complete!" + '\n'
             else:
                 sess.run(init)
 
@@ -310,7 +307,7 @@ class ROLO_TF:
     def train_20(self):
         print("TRAINING ROLO...")
         log_file = open("panchen/output/training-20-log.txt", "a")  # open in append mode
-        print ("build_network...")
+        # print ("build_network...")
         # self.build_networks()
 
         ''' TUNE THIS'''
@@ -318,12 +315,12 @@ class ROLO_TF:
         epoches = 20 * 40   # 20 * 100
 
         # Use rolo_input for LSTM training
-        self.pred_location = self.bi_lstm("bi_lstm",self.x)
+        self.pred_location = self.lstm_single_2("bi_lstm",self.x)
         with tf.name_scope('loss'):
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
             tf.summary.histogram('loss', self.accuracy)
-        self.learning_rate = 0.0001
+        self.learning_rate = 0.0001 #0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
 
         merged_summary = tf.summary.merge_all()
