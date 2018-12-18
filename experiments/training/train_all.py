@@ -49,7 +49,7 @@ import random
 
 class ROLO_TF:
     disp_console = False  # False
-    restore_weights = True  # True
+    restore_weights = False  # True
 
     # YOLO parameters
     fromfile = None
@@ -71,7 +71,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
     # rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
-    rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
+    rolo_weights_file = 'panchen/output/ROLO_model'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -352,7 +352,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train_fc/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train/')
                 utils.createFolder(self.output_path)
                 total_loss = 0
                 id = 0

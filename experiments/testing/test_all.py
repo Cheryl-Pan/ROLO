@@ -184,7 +184,7 @@ class ROLO_TF:
         # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         # print("pred: ", pred)
         # self.pred_location = pred[0][:, 4097:4101]
-        self.pred_location = self.lstm_single_2(self.x)
+        self.pred_location = self.lstm_single_2('bilstm',self.x)
         for v in tf.all_variables():
             print(v.name)
         # self.pred_location = tf.get_collection('lstm_single_2')
