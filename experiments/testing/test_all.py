@@ -89,10 +89,10 @@ class ROLO_TF:
     # Define weights
 
     weights = {
-        'out': tf.Variable(tf.random_normal([num_input, num_predict]), name="weight")
+        'out': tf.Variable(tf.random_normal([num_input, num_gt]), name="weight")
     }
     biases = {
-        'out': tf.Variable(tf.random_normal([num_predict]), name='biases')
+        'out': tf.Variable(tf.random_normal([num_gt]), name='biases')
     }
 
     def __init__(self, argvs=[]):
