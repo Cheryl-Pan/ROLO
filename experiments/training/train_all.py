@@ -338,7 +338,7 @@ class ROLO_TF:
         with tf.Session(config=config) as sess:
             writer = tf.summary.FileWriter('log_train_all')
             writer.add_graph(sess.graph)
-            if (self.restore_weights == True):
+            if (self.restore_weights == True): #False
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
                 print "Loading complete!" + '\n'
@@ -352,7 +352,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train_fc/')
                 utils.createFolder(self.output_path)
                 total_loss = 0
                 id = 0
