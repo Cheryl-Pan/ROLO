@@ -331,7 +331,7 @@ class ROLO_TF:
                    'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
                    'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
         variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(variables_to_restore,max_to_keep=3)
+        self.saver = tf.train.Saver(variables_to_restore,max_to_keep=4)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -425,7 +425,8 @@ class ROLO_TF:
                     save_path = self.saver.save(sess, self.rolo_weights_file)
                     print("Model saved in file: %s" % save_path)
                     print 'total_time is %.2f' % total_time
-                self.saver.save(sess, self.rolo_weights_file, global_step=100)
+                if epoch+1 % 100 == 0 :
+                    self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
 
         log_file.close()
         return
