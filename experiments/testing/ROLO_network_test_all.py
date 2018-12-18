@@ -224,8 +224,8 @@ class ROLO_TF:
 
             total_time = 0.0
             #id= 1
-            evaluate_st = 22
-            evaluate_ed = 29
+            evaluate_st = 0
+            evaluate_ed = 21
 
 
             for test in range(evaluate_st, evaluate_ed + 1):
