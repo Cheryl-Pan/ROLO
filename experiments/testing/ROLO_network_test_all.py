@@ -233,7 +233,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test+1,sequence_name)
             # Keep training until reach max iterations
