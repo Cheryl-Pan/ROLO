@@ -431,10 +431,13 @@ class ROLO_TF:
 
                 log_file.write(str("{:.3f}".format(avg_loss)) + '  ')
                 if i + 1 == num_videos:
-                    log_file.write('\n')
-                    log_file.write(str(total_time) + '\n')
+                    log_file.write('\n'+ 'epoch is ' + str(epoch) + '\n')
+                    log_file.write('total time: '+str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
-                self.saver.save(sess, self.rolo_weights_file, global_step=100)
+
+                if epoch+1  % 100 == 0:
+                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step = epoch+1)
+                    print ("Model saved in file: %s" % save_path)
 
         log_file.close()
         return

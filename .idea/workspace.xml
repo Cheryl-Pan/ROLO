@@ -29327,7 +29327,7 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/experiments/training/train_BiLSTM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/training/train_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/train_all.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29352,30 +29352,30 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="avi" value="1" />
-          <entry key="checkpoint" value="2" />
+          <entry key="checkpoint" value="3" />
           <entry key="jpg" value="2" />
           <entry key="npy" value="3" />
-          <entry key="py" value="99" />
-          <entry key="txt" value="16" />
+          <entry key="py" value="101" />
+          <entry key="txt" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="2" />
-          <entry key="PLAIN_TEXT" value="22" />
-          <entry key="Python" value="99" />
+          <entry key="PLAIN_TEXT" value="27" />
+          <entry key="Python" value="101" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="7963" />
+          <entry key="py" value="8275" />
           <entry key="txt" value="499" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="499" />
-          <entry key="Python" value="7963" />
+          <entry key="Python" value="8275" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -29383,11 +29383,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+            <state relative-caret-position="105">
+              <caret line="269" column="46" selection-start-line="269" selection-start-column="46" selection-end-line="269" selection-end-column="46" />
               <folding>
                 <marker date="1545125725557" expanded="true" signature="6227:6233" ph="..." />
               </folding>
@@ -29396,10 +29396,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="341">
+              <caret line="911" column="46" selection-start-line="911" selection-start-column="46" selection-end-line="911" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/testing/test-log.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/check.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -29408,10 +29426,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-304">
+              <caret line="710" column="26" selection-start-line="710" selection-start-column="26" selection-end-line="710" selection-end-column="26" />
+              <folding>
+                <element signature="e#843#863#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/training-20-log.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="447" column="33" lean-forward="true" selection-start-line="447" selection-start-column="33" selection-end-line="447" selection-end-column="33" />
+            <state relative-caret-position="255">
+              <caret line="424" column="8" lean-forward="true" selection-start-line="424" selection-start-column="8" selection-end-line="424" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -29419,8 +29458,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-333">
-              <caret line="205" column="48" selection-start-line="205" selection-start-column="48" selection-end-line="205" selection-end-column="48" />
+            <state relative-caret-position="284">
+              <caret line="203" column="36" lean-forward="true" selection-start-line="203" selection-start-column="36" selection-end-line="203" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/checkpoint">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -29428,10 +29476,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="422" column="55" selection-start-line="420" selection-start-column="20" selection-end-line="422" selection-end-column="55" />
+            <state relative-caret-position="153">
+              <caret line="428" column="42" selection-start-line="428" selection-start-column="42" selection-end-line="428" selection-end-column="42" />
               <folding>
-                <marker date="1544714340235" expanded="true" signature="5005:6262" ph="..." />
+                <marker date="1545139369888" expanded="true" signature="5005:6262" ph="..." />
               </folding>
             </state>
           </provider>
@@ -29494,13 +29542,14 @@
         <option value="$PROJECT_DIR$/evaluation_all.py" />
         <option value="$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/a.py" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_single.py" />
-        <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/ROLO_evaluation.py" />
         <option value="$PROJECT_DIR$/experiments/training/train_BiLSTM.py" />
-        <option value="$PROJECT_DIR$/experiments/training/panchen/output/check.py" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
         <option value="$PROJECT_DIR$/experiments/testing/test_all.py" />
+        <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/experiments/training/train_all.py" />
+        <option value="$PROJECT_DIR$/experiments/training/panchen/output/check.py" />
+        <option value="$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/checkpoint" />
       </list>
     </option>
   </component>
@@ -29557,6 +29606,30 @@
               <item name="experiments" type="462c0819:PsiDirectoryNode" />
               <item name="training" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="panchen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="panchen" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="training" type="462c0819:PsiDirectoryNode" />
+              <item name="panchen" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+              <item name="ROLO_model" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -29584,7 +29657,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test_all">
+  <component name="RunManager" selected="Python.check">
     <configuration name="ROLO_network_test_all" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ROLO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -29699,9 +29772,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_all" />
         <item itemvalue="Python.check" />
         <item itemvalue="Python.train_all" />
+        <item itemvalue="Python.test_all" />
         <item itemvalue="Python.ROLO_network_test_all" />
         <item itemvalue="Python.ROLO_step6_train_20_exp1" />
       </list>
@@ -29717,13 +29790,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542078505495</updated>
-    </task>
-    <task id="LOCAL-00018" summary="consle:False">
-      <created>1543972515923</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1543972515923</updated>
     </task>
     <task id="LOCAL-00019" summary="consle:False">
       <created>1543976473148</created>
@@ -30061,7 +30127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545125337310</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="train_all:bi_lstm">
+      <created>1545127111920</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1545127111920</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TodoView">
@@ -30077,12 +30150,12 @@
     <frame x="10" y="51" width="1400" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.32994923" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20739667" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32892805" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5924583" weight="0.26284876" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5924583" visible="true" weight="0.26284876" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.64104426" weight="0.34067547" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -30162,13 +30235,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/panchen/output/check.py</url>
-          <line>10</line>
+          <line>11</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py</url>
           <line>210</line>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experiments/training/train_all.py</url>
+          <line>317</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -30177,13 +30255,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/gen_array_ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="3489" selection-start-line="3489" selection-end-line="3489" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/training/optimizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -30346,9 +30417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/test-log.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/3rd party/sort_yolo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -30367,13 +30435,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/training-20-log.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -30418,16 +30479,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="708" column="14" selection-start-line="708" selection-start-column="14" selection-end-line="708" selection-end-column="14" />
-          <folding>
-            <element signature="e#843#863#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/train_BiLSTM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -30438,60 +30489,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="515" column="31" selection-start-line="515" selection-start-column="31" selection-end-line="515" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/checkpoint">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/tensor_value.txt">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="422" column="55" selection-start-line="420" selection-start-column="20" selection-end-line="422" selection-end-column="55" />
+        <state relative-caret-position="153">
+          <caret line="428" column="42" selection-start-line="428" selection-start-column="42" selection-end-line="428" selection-end-column="42" />
           <folding>
-            <marker date="1544714340235" expanded="true" signature="5005:6262" ph="..." />
+            <marker date="1545139369888" expanded="true" signature="5005:6262" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
+    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-333">
-          <caret line="205" column="48" selection-start-line="205" selection-start-column="48" selection-end-line="205" selection-end-column="48" />
+        <state relative-caret-position="105">
+          <caret line="269" column="46" selection-start-line="269" selection-start-column="46" selection-end-line="269" selection-end-column="46" />
+          <folding>
+            <marker date="1545125725557" expanded="true" signature="6227:6233" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/check.py">
+    <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="341">
+          <caret line="911" column="46" selection-start-line="911" selection-start-column="46" selection-end-line="911" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-304">
+          <caret line="710" column="26" selection-start-line="710" selection-start-column="26" selection-end-line="710" selection-end-column="26" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#843#863#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="447" column="33" lean-forward="true" selection-start-line="447" selection-start-column="33" selection-end-line="447" selection-end-column="33" />
+        <state relative-caret-position="255">
+          <caret line="424" column="8" lean-forward="true" selection-start-line="424" selection-start-column="8" selection-end-line="424" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
+    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/training-20-log.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+        <state relative-caret-position="180">
+          <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/testing/test-log.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="203" column="36" lean-forward="true" selection-start-line="203" selection-start-column="36" selection-end-line="203" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/checkpoint">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
           <folding>
-            <marker date="1545125725557" expanded="true" signature="6227:6233" ph="..." />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -329,7 +329,9 @@ class ROLO_TF:
         include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
                    'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
                    'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
+                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias'
+                   'weight/Variable'
+                   'bias/Variable']
         variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
         self.saver = tf.train.Saver(variables_to_restore,max_to_keep=4)
         config = tf.ConfigProto()
@@ -412,22 +414,21 @@ class ROLO_TF:
                         writer.add_summary(summary, id)
 
                 cycle_time = time.time() - start_time
-                print('epoch is %d, time is %.2f' % (epoch, cycle_time))
+                print('epoch is %d, video: %d time is %.2f' % (epoches/epoch, epoch, cycle_time))
                 total_time += cycle_time
                 # print "Optimization Finished!"
                 avg_loss = total_loss / id
                 print "Avg loss: " + sequence_name + ": " + str(avg_loss)
-
                 log_file.write(str("{:.3f}".format(avg_loss)) + '  ')
-                if i + 1 == num_videos:
-                    log_file.write('\n')
-                    log_file.write(str(total_time) + '\n')
-                    save_path = self.saver.save(sess, self.rolo_weights_file)
-                    print("Model saved in file: %s" % save_path)
-                    print 'total_time is %.2f' % total_time
-                if epoch+1 % 100 == 0 :
-                    self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
 
+                if i + 1 == num_videos:
+                    log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
+                    log_file.write('total time: ' + str(total_time) + '\n')
+                    print 'total_time is %.2f' % total_time
+
+                if epoch+1 % 100 == 0 :
+                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
+                    print ("Model saved in file: %s" % save_path)
         log_file.close()
         return
 
