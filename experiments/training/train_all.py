@@ -425,11 +425,13 @@ class ROLO_TF:
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
+                    log_file.close()
+                    log_file=open('panchen/output/training-20-log.txt', 'a')
 
                 if epoch+1 % 100 == 0 :
                     save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
                     print ("Model saved in file: %s" % save_path)
-        log_file.close()
+            log_file.close()
         return
 
     def ROLO(self, argvs):
