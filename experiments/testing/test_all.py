@@ -222,14 +222,14 @@ class ROLO_TF:
             total_time = 0.0
             # id= 1
             evaluate_st = 0
-            evaluate_ed = 21
+            evaluate_ed = 29
 
             for test in range(evaluate_st, evaluate_ed + 1):
                 [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test + 1, sequence_name)
                 # Keep training until reach max iterations
@@ -254,6 +254,7 @@ class ROLO_TF:
 
                     start_time = time.time()
                     pred_location = sess.run(self.pred_location, feed_dict={self.x: batch_xs})
+                    print pred_location[0]
                     cycle_time = time.time() - start_time
                     total_time += cycle_time
                     # print("ROLO Pred: ", pred_location)

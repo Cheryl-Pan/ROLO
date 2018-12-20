@@ -306,13 +306,12 @@ class ROLO_TF:
 
     def train_20(self):
         print("TRAINING ROLO...")
-        log_file = open("panchen/output/training-20-log.txt", "a")  # open in append mode
         # print ("build_network...")
         # self.build_networks()
 
         ''' TUNE THIS'''
         num_videos = 22
-        epoches = 20 * 40   # 20 * 100
+        epoches = 22 * 40   # 20 * 100
 
         # Use rolo_input for LSTM training
         self.pred_location = self.lstm_single_2("bi_lstm",self.x)
@@ -332,8 +331,8 @@ class ROLO_TF:
                    'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias'
                    'weight/Variable'
                    'bias/Variable']
-        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(variables_to_restore,max_to_keep=4)
+        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        self.saver = tf.train.Saver(max_to_keep=2)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -348,13 +347,13 @@ class ROLO_TF:
                 sess.run(init)
 
             total_time = 0
-            for epoch in range(epoches):  # 20
-                i = epoch % num_videos  # 20
+            for epoch in range(epoches):  # 22
+                i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train_fc/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train/')
                 utils.createFolder(self.output_path)
                 total_loss = 0
                 id = 0
@@ -422,15 +421,21 @@ class ROLO_TF:
                 log_file.write(str("{:.3f}".format(avg_loss)) + '  ')
 
                 if i + 1 == num_videos:
+                    log_file = open('panchen/output/training-20-log.txt', 'a')
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
                     log_file.close()
-                    log_file=open('panchen/output/training-20-log.txt', 'a')
 
-                if epoch+1 % 100 == 0 :
+
+                if epoch+1 % 110 == 0 :
+                    log_file2 = open('panchen/output/model-save.txt', 'a')
+                    log_file2.write('\n model is saved in epoch: ' + str(epoch+1))
                     save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
                     print ("Model saved in file: %s" % save_path)
+                    log_file2.close()
+
+
             log_file.close()
         return
 
