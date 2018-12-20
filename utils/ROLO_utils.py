@@ -315,7 +315,7 @@ class ROLO_utils:
                 paths = [os.path.join(fold,fn) for fn in next(os.walk(fold))[2]]
                 paths = sorted(paths)
                 st= id
-                ed= id + batch_size*num_steps # 1*6
+                ed= id + batch_size*num_steps
                 paths_batch = paths[st:ed]
 
                 yolo_output_batch= []

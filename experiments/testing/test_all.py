@@ -70,7 +70,7 @@ class ROLO_TF:
     rolo_weights_file = '../training/panchen/output/ROLO_model'
     # rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
-    num_steps = 6  # number of frames as an input sequence
+    num_steps = 3  # number of frames as an input sequence
     num_feat = 4096
     num_predict = 6  # final output of LSTM 6 loc parameters
     num_gt = 4

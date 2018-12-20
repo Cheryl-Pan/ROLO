@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+
 '''
 Script File: ROLO_step6_train_20_exp1.py
 
@@ -362,6 +364,7 @@ class ROLO_TF:
 
                 # Keep training until reach max iterations
                 while id < self.training_iters - self.num_steps:
+                    print('id is %d:' % (id))
                     # Load training data & ground truth
                     batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps,
                                                                      id)  # [num_of_examples, num_input] (depth == 1)
@@ -413,7 +416,7 @@ class ROLO_TF:
                         writer.add_summary(summary, id)
 
                 cycle_time = time.time() - start_time
-                print('epoch is %d, video: %d time is %.2f' % (epoches/epoch, epoch, cycle_time))
+                print('video iteration is %d, video: %d time is %.2f' % (epoch/22+1, epoch, cycle_time))
                 total_time += cycle_time
                 # print "Optimization Finished!"
                 avg_loss = total_loss / id
