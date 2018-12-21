@@ -29018,9 +29018,7 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/experiments/training/train_BiLSTM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/testing/test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/test_all.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/training/train_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/train_all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/ROLO_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/ROLO_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29032,14 +29030,14 @@
     <session id="-1937218032">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.0" value="2" />
-          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -29061,14 +29059,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="8652" />
+          <entry key="py" value="8658" />
           <entry key="txt" value="512" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="512" />
-          <entry key="Python" value="8652" />
+          <entry key="Python" value="8658" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -29079,17 +29077,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="315" selection-start-line="315" selection-end-line="315" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/update/src/training.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="187" column="89" selection-start-line="187" selection-start-column="89" selection-end-line="187" selection-end-column="89" />
+            <state relative-caret-position="-583">
+              <caret line="351" column="70" selection-start-line="351" selection-start-column="70" selection-end-line="351" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -29097,8 +29086,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="317" column="45" lean-forward="true" selection-start-line="317" selection-start-column="45" selection-end-line="317" selection-end-column="45" />
+            <state relative-caret-position="178">
+              <caret line="316" column="22" selection-start-line="316" selection-start-column="22" selection-end-line="316" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -29115,7 +29104,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/numpy/lib/npyio.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
+            <state relative-caret-position="5715">
               <caret line="405" selection-start-line="405" selection-end-line="405" />
             </state>
           </provider>
@@ -29124,7 +29113,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/os.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
+            <state relative-caret-position="4275">
               <caret line="285" selection-start-line="285" selection-end-line="285" />
             </state>
           </provider>
@@ -29133,8 +29122,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="239" column="59" lean-forward="true" selection-start-line="239" selection-start-column="59" selection-end-line="239" selection-end-column="59" />
+            <state relative-caret-position="3585">
+              <caret line="239" column="59" selection-start-line="239" selection-start-column="59" selection-end-line="239" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -29265,38 +29254,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
               <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-              <item name="benchmark" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-              <item name="benchmark" type="462c0819:PsiDirectoryNode" />
-              <item name="DATA" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-              <item name="benchmark" type="462c0819:PsiDirectoryNode" />
-              <item name="DATA" type="462c0819:PsiDirectoryNode" />
-              <item name="Dog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-              <item name="benchmark" type="462c0819:PsiDirectoryNode" />
-              <item name="DATA" type="462c0819:PsiDirectoryNode" />
-              <item name="Human2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
@@ -29334,6 +29297,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -29490,13 +29454,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542078505495</updated>
-    </task>
-    <task id="LOCAL-00022" summary="tf.variable_scope,reuse=tf.AUOT_REUSE">
-      <created>1543986238278</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1543986238278</updated>
     </task>
     <task id="LOCAL-00023" summary="tf.variable_scope,reuse=tf.AUOT_REUSE">
       <created>1543986399956</created>
@@ -29834,7 +29791,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545308840572</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="train_all:bi_lstm">
+      <created>1545315713758</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1545315713759</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TodoView">
@@ -29856,7 +29820,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32892805" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5924583" weight="0.26284876" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.64104426" visible="true" weight="0.34067547" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.64104426" weight="0.34067547" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32892805" />
@@ -29966,7 +29930,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/train_all.py</url>
-          <line>368</line>
+          <line>369</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -30200,6 +30164,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/update/src/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="187" column="89" selection-start-line="187" selection-start-column="89" selection-end-line="187" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmark/DATA/Human2/groundtruth_rect.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/numpy/lib/npyio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5715">
+          <caret line="405" selection-start-line="405" selection-end-line="405" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/os.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4275">
+          <caret line="285" selection-start-line="285" selection-end-line="285" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3585">
+          <caret line="239" column="59" selection-start-line="239" selection-start-column="59" selection-end-line="239" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/framework/ops.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8610">
@@ -30224,52 +30223,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/os.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="285" selection-start-line="285" selection-end-line="285" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/numpy/lib/npyio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="405" selection-start-line="405" selection-end-line="405" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/benchmark/DATA/Human2/groundtruth_rect.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/update/src/training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="187" column="89" selection-start-line="187" selection-start-column="89" selection-end-line="187" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="239" column="59" lean-forward="true" selection-start-line="239" selection-start-column="59" selection-end-line="239" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="317" column="45" lean-forward="true" selection-start-line="317" selection-start-column="45" selection-end-line="317" selection-end-column="45" />
+        <state relative-caret-position="178">
+          <caret line="316" column="22" selection-start-line="316" selection-start-column="22" selection-end-line="316" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="315" selection-start-line="315" selection-end-line="315" />
+        <state relative-caret-position="-583">
+          <caret line="351" column="70" selection-start-line="351" selection-start-column="70" selection-end-line="351" selection-end-column="70" />
         </state>
       </provider>
     </entry>

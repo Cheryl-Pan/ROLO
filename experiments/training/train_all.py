@@ -349,6 +349,7 @@ class ROLO_TF:
                 sess.run(init)
 
             total_time = 0
+            log_file = open('panchen/output/training-20-log.txt', 'a')
             for epoch in range(epoches):  # 22
                 i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
@@ -363,7 +364,7 @@ class ROLO_TF:
                 start_time = time.time()
 
                 # Keep training until reach max iterations
-                while id < self.training_iters - self.num_steps:
+                while id < self.training_iters - self.num_steps + 1:
                     print('id is %d:' % (id))
                     # Load training data & ground truth
                     batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps,
@@ -424,7 +425,6 @@ class ROLO_TF:
                 log_file.write(str("{:.3f}".format(avg_loss)) + '  ')
 
                 if i + 1 == num_videos:
-                    log_file = open('panchen/output/training-20-log.txt', 'a')
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
