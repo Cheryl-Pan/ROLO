@@ -349,8 +349,8 @@ class ROLO_TF:
                 sess.run(init)
 
             total_time = 0
-            log_file = open('panchen/output/training-20-log.txt', 'a')
             for epoch in range(epoches):  # 22
+                log_file = open('panchen/output/training-20-log.txt', 'a')
                 i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
 
@@ -365,7 +365,7 @@ class ROLO_TF:
 
                 # Keep training until reach max iterations
                 while id < self.training_iters - self.num_steps + 1:
-                    print('id is %d:' % (id))
+                    # print('id is %d:' % (id))
                     # Load training data & ground truth
                     batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps,
                                                                      id)  # [num_of_examples, num_input] (depth == 1)
@@ -417,18 +417,20 @@ class ROLO_TF:
                         writer.add_summary(summary, id)
 
                 cycle_time = time.time() - start_time
-                print('video iteration is %d, video: %d time is %.2f' % (epoch/22+1, epoch, cycle_time))
+                print('video iteration is %d, video: %d time is %.2f' % (epoch/22+1, epoch%22+1, cycle_time))
+                log_file.write(str('video iteration is %d, video: %d \n' % (epoch/22+1, epoch%22+1)))
                 total_time += cycle_time
                 # print "Optimization Finished!"
                 avg_loss = total_loss / id
                 print "Avg loss: " + sequence_name + ": " + str(avg_loss)
-                log_file.write(str("{:.3f}".format(avg_loss)) + '  ')
+                log_file.write(sequence_name+ "avg loss is "+str(avg_loss))
 
                 if i + 1 == num_videos:
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
-                    log_file.close()
+                    # log_file.close()
+                    # log_file = open('','a')
 
 
                 if epoch+1 % 110 == 0 :
@@ -438,8 +440,7 @@ class ROLO_TF:
                     print ("Model saved in file: %s" % save_path)
                     log_file2.close()
 
-
-            log_file.close()
+                log_file.close()
         return
 
     def ROLO(self, argvs):
