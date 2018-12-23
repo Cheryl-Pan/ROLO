@@ -73,7 +73,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
     # rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
-    rolo_weights_file = 'panchen/output/ROLO_model'
+    rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -334,7 +334,7 @@ class ROLO_TF:
                    'weight/Variable'
                    'bias/Variable']
         # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(max_to_keep=2)
+        self.saver = tf.train.Saver(max_to_keep=3)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -349,7 +349,7 @@ class ROLO_TF:
                 sess.run(init)
 
             total_time = 0
-            for epoch in range(epoches):  # 22
+            for epoch in range(epoches):  # 22*40
                 log_file = open('panchen/output/training-20-log.txt', 'a')
                 i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
@@ -367,8 +367,8 @@ class ROLO_TF:
                 while id < self.training_iters - self.num_steps + 1:
                     # print('id is %d:' % (id))
                     # Load training data & ground truth
-                    batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps,
-                                                                     id)  # [num_of_examples, num_input] (depth == 1)
+                    batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps, id)  # [num_of_examples, num_input] (depth == 1)
+
 
                     # Apply dropout to batch_xs
                     # for item in range(len(batch_xs)):
@@ -429,11 +429,8 @@ class ROLO_TF:
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
-                    # log_file.close()
-                    # log_file = open('','a')
 
-
-                if epoch+1 % 110 == 0 :
+                if (epoch+1) % 110 == 0 :
                     log_file2 = open('panchen/output/model-save.txt', 'a')
                     log_file2.write('\n model is saved in epoch: ' + str(epoch+1))
                     save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
