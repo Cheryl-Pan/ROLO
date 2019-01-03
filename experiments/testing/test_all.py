@@ -253,7 +253,6 @@ class ROLO_TF:
 
                     start_time = time.time()
                     pred_location = sess.run(self.pred_location, feed_dict={self.x: batch_xs})
-                    print pred_location[0]
                     cycle_time = time.time() - start_time
                     total_time += cycle_time
                     # print("ROLO Pred: ", pred_location)

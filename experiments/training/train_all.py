@@ -74,7 +74,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
     # rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
-    rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1'
+    rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -328,12 +328,12 @@ class ROLO_TF:
         merged_summary = tf.summary.merge_all()
         # Initializing the variables
         init = tf.global_variables_initializer()
-        include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias'
-                   'weight/Variable'
-                   'bias/Variable']
+        # include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+        #            'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias'
+        #            'weight/Variable'
+        #            'bias/Variable']
         # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
         self.saver = tf.train.Saver(max_to_keep=3)
         config = tf.ConfigProto()
@@ -342,15 +342,13 @@ class ROLO_TF:
         with tf.Session(config=config) as sess:
             writer = tf.summary.FileWriter('log_train_all')
             writer.add_graph(sess.graph)
-            if (self.restore_weights == True): #False
-                sess.run(init)
-                self.saver.restore(sess, self.rolo_weights_file)
-                print "Loading complete!" + '\n'
-            else:
-                sess.run(init)
+            sess.run(init)
+            ckpt = tf.train.get_checkpoint_state(self.rolo_weights_file)
+            if ckpt and ckpt.model_checkpoint_path:
+                self.saver.restore(sess, ckpt.model_checkpoint_path)
 
             total_time = 0
-            for epoch in range(epoches):  # 22*40
+            for epoch in range(epoches):  # 22*50
                 log_file = open('panchen/output/training-20-log.txt', 'a')
                 i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
@@ -418,13 +416,13 @@ class ROLO_TF:
                         writer.add_summary(summary, id)
 
                 cycle_time = time.time() - start_time
-                print('video iteration is %d, video: %d time is %.2f' % (epoch/22+1, epoch%22+1, cycle_time))
+                print('video iteration is %d, video: %d time is %.2f ' % (epoch/22+1, epoch%22+1, cycle_time))
                 log_file.write(str('video iteration is %d, video: %d \n' % (epoch/22+1, epoch%22+1)))
                 total_time += cycle_time
                 # print "Optimization Finished!"
                 avg_loss = total_loss / id
                 print "Avg loss: " + sequence_name + ": " + str(avg_loss)
-                log_file.write(sequence_name+ "avg loss is "+str(avg_loss))
+                log_file.write(sequence_name+ "  avg loss is "+str(avg_loss)+'\n')
 
                 if i + 1 == num_videos:
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
