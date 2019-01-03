@@ -879,7 +879,7 @@ def evaluate_AUC():        # calculate AUC(Average Under Curve)
             img_fold_path = os.path.join('benchmark/DATA', sequence_name, 'img/')
             gt_file_path= os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
             yolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
-            rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test/')
+            rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
 
             print(rolo_out_path)
 
@@ -1020,7 +1020,7 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
         img_fold_path = os.path.join('benchmark/DATA', sequence_name, 'img/')
         gt_file_path= os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
         yolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
-        rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test/')
+        rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
 
         print(rolo_out_path)
 

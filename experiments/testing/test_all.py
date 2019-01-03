@@ -221,7 +221,7 @@ class ROLO_TF:
 
             total_time = 0.0
             # id= 1
-            evaluate_st = 0
+            evaluate_st = 23
             evaluate_ed = 29
 
             for test in range(evaluate_st, evaluate_ed + 1):
@@ -229,7 +229,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test + 1, sequence_name)
                 # Keep training until reach max iterations
@@ -237,8 +237,7 @@ class ROLO_TF:
                 id = 0  # don't change this
                 while id < self.testing_iters - self.num_steps:
                     # Load training data & ground truth
-                    batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps,
-                                                                     id)  # [num_of_examples, num_input] (depth == 1)
+                    batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps, id)  # [num_of_examples, num_input] (depth == 1)
 
                     # Apply dropout to batch_xs
                     # for item in range(len(batch_xs)):
