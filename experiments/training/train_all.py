@@ -41,12 +41,13 @@ import tensorflow as tf
 import cv2
 
 import numpy as np
+import os
 import os.path
 import time
 import random
 
 # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
 class ROLO_TF:
