@@ -207,7 +207,7 @@ class ROLO_TF:
         #            'bias/Variable']
         # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
         # self.saver = tf.train.Saver(variables_to_restore)
-        self.saver = tf.trainS.Saver()
+        self.saver = tf.train.Saver()
         ckpt = tf.train.latest_checkpoint(self.rolo_weights_file)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
