@@ -71,7 +71,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
     # rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
-    rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
+    rolo_weights_file = 'panchen/output/ROLO_model_2/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -315,7 +315,7 @@ class ROLO_TF:
 
     def train_20(self):
         print("TRAINING ROLO...")
-        log_file = open("panchen/output/training-20-log.txt", "a")  # open in append mode
+        log_file = open("panchen/output/training_log.txt", "a")  # open in append mode
         # print ("build_network...")
         # self.build_networks()
 
@@ -423,7 +423,8 @@ class ROLO_TF:
                         writer.add_summary(summary, id)
 
                 cycle_time = time.time() - start_time
-                print('epoch is %d, time is %.2f' % (epoch, cycle_time))
+                print('video iteration is %d, video: %d time is %.2f ' % (epoch/22+1, epoch%22+1, cycle_time))
+                log_file.write(str('video iteration is %d, video: %d \n' % (epoch/22+1, epoch%22+1)))
                 total_time += cycle_time
                 # print "Optimization Finished!"
                 avg_loss = total_loss / id
@@ -435,7 +436,7 @@ class ROLO_TF:
                     log_file.write('total time: '+str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
 
-                if epoch+1  % 100 == 0:
+                if (epoch+1)  % 110 == 0:
                     save_path = self.saver.save(sess, self.rolo_weights_file, global_step = epoch+1)
                     print ("Model saved in file: %s" % save_path)
 

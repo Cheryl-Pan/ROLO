@@ -310,7 +310,7 @@ class ROLO_TF:
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
             tf.summary.histogram('loss', self.accuracy)
-        self.learning_rate = 0.0001 #0.00001
+        self.learning_rate = 0.00001 #0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
 
         merged_summary = tf.summary.merge_all()
