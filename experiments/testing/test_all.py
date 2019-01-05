@@ -90,7 +90,7 @@ class ROLO_TF:
 
     with tf.variable_scope("weight", reuse=True):
         weights = {
-            'out': tf.Variable(tf.random_normal([2*num_input, num_gt]))
+            'out': tf.Variable(tf.random_normal([num_input, num_gt]))
         }
     with tf.variable_scope("bias", reuse=True):
         biases = {
@@ -199,14 +199,15 @@ class ROLO_TF:
         # Initializing the variables
 
         init = tf.global_variables_initializer()
-        include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias'
-                   'weight/Variable'
-                   'bias/Variable']
-        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(variables_to_restore)
+        # include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
+        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
+        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
+        #            'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias',
+        #            'weight/Variable'
+        #            'bias/Variable']
+        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
+        # self.saver = tf.train.Saver(variables_to_restore)
+        self.saver = tf.trainS.Saver()
         ckpt = tf.train.latest_checkpoint(self.rolo_weights_file)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()
@@ -223,8 +224,8 @@ class ROLO_TF:
 
             total_time = 0.0
             # id= 1
-            evaluate_st = 23
-            evaluate_ed = 29
+            evaluate_st = 22
+            evaluate_ed = 22
 
             for test in range(evaluate_st, evaluate_ed + 1):
                 [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
@@ -279,7 +280,7 @@ class ROLO_TF:
                 print ("Time Spent on Tracking: " + str(total_time))
                 print ("fps: " + str(id / total_time))
                 print ("Testing Finished!")
-                log_file.write(str("video: %d \nAvg loss: %.3f \nTime: %.3f \nfps: %.3f" % (
+                log_file.write(str("\nvideo: %d \nAvg loss: %.3f \nTime: %.3f \nfps: %.3f" % (
                 test, avg_loss, total_time, id / total_time)))
         log_file.close()
 

@@ -432,7 +432,7 @@ def draw_AUC_OPE():
 
     num_methods = 9 + 1
 
-    with open('output/AUC_score.pickle') as f:
+    with open('output/AUC_score_fc.pickle') as f:
         [yolo_AUC_score, rolo_AUC_score] = pickle.load(f)
     yolo_AUC_score.append(0)
     rolo_AUC_score.append(0)
@@ -860,7 +860,7 @@ def evaluate_AUC():        # calculate AUC(Average Under Curve)
     ''' PARAMETERS '''
     num_steps= 6
 
-    evaluate_st = 0
+    evaluate_st = 22
     evaluate_ed = 29
     num_evaluate= evaluate_ed - evaluate_st + 1
 
@@ -933,7 +933,7 @@ def evaluate_AUC():        # calculate AUC(Average Under Curve)
         print("(thresh, yolo_AUC_score) = ", thresh, ' ', yolo_avg_score/num_evaluate)
         print("(thresh, rolo_AUC_score) = ", thresh, ' ', rolo_avg_score/num_evaluate)
 
-    with open('output/AUC_score.pickle', 'w') as f:
+    with open('output/AUC_score_fc.pickle', 'w') as f:
         pickle.dump([yolo_AUC_score, rolo_AUC_score], f)
     #draw_AUC()
 
@@ -1008,7 +1008,7 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
     output_video = False
     display_video = False
 
-    evaluate_st = 0
+    evaluate_st = 22
     evaluate_ed = 29
     yolo_ious = []
     rolo_ious = []
@@ -1087,7 +1087,7 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
 
     print('yolo_ious: ', yolo_ious)
     print('rolo_ious: ', rolo_ious)
-    log_file = open("output/testing-log-final.txt", "a")
+    log_file = open("output/testing_fc.txt", "a")
     log_file.write('YOLO_avg_IOU: ')
     for item in range(len(yolo_ious)):
         log_file.write(str("{:.3f}".format(yolo_ious[item])) + '  ')
@@ -1363,7 +1363,7 @@ def main(argv):
     #for method_id in range(0, 9):
     #    evaluate_benchmark_AUC_SRE(method_id)
 
-    draw_AUC_OPE()
+    # draw_AUC_OPE()
     # draw_AUC_TRE()
     # draw_AUC_SRE()
 
