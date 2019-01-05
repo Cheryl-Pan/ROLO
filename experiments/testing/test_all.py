@@ -70,7 +70,7 @@ class ROLO_TF:
     rolo_weights_file = '../training/panchen/output/ROLO_model'
     # rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
-    num_steps = 3  # number of frames as an input sequence
+    num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
     num_predict = 6  # final output of LSTM 6 loc parameters
     num_gt = 4
@@ -88,12 +88,14 @@ class ROLO_TF:
 
     # Define weights
 
-    weights = {
-        'out': tf.Variable(tf.random_normal([num_input, num_gt]), name="weight")
-    }
-    biases = {
-        'out': tf.Variable(tf.random_normal([num_gt]), name='biases')
-    }
+    with tf.variable_scope("weight", reuse=True):
+        weights = {
+            'out': tf.Variable(tf.random_normal([2*num_input, num_gt]))
+        }
+    with tf.variable_scope("bias", reuse=True):
+        biases = {
+            'out': tf.Variable(tf.random_normal([num_gt]))
+        }
 
     def __init__(self, argvs=[]):
         print("ROLO init")
