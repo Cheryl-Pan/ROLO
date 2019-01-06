@@ -152,8 +152,6 @@ class ROLO_TF:
 
         output_fw = outputs_fw[-1][:,4097:4101]
         output_bw = outputs_bw[-1][:,4097:4101]
-        # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
-        # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
         final_out = tf.add(output_fw, output_bw) /2
         return final_out
 
@@ -224,8 +222,8 @@ class ROLO_TF:
 
             total_time = 0.0
             #id= 1
-            evaluate_st = 0
-            evaluate_ed = 21
+            evaluate_st = 22
+            evaluate_ed = 29
 
 
             for test in range(evaluate_st, evaluate_ed + 1):
@@ -233,7 +231,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_50/')
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test+1,sequence_name)
             # Keep training until reach max iterations

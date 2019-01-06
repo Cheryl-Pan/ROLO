@@ -181,10 +181,6 @@ class ROLO_TF:
         output_fw=outputs_fw[-1][:,4097:4101]
         output_bw = outputs_bw[-1][:,4097:4101]
         final_out = tf.add(output_fw, output_bw)/2
-
-        # output_fw = tf.layers.dense(outputs_fw[-1], units=self.num_gt)  # limit output to num_gt via a fully connected layer
-        # output_bw = tf.layers.dense(outputs_bw[-1], units=self.num_gt)
-        # final_out = tf.add(output_fw, output_bw) /2
         return final_out
 
     def bi_lstm_2(self, name, X):
@@ -356,8 +352,8 @@ class ROLO_TF:
 
 
             total_time = 0
-            for epoch in range(epoches):  # 20
-                i = epoch % num_videos  # 20
+            for epoch in range(epoches):  # 22
+                i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
