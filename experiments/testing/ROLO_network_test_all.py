@@ -66,7 +66,6 @@ class ROLO_TF:
     # ROLO Network Parameters
 
     rolo_weights_file = '../training/panchen/output/ROLO_model_2'
-    #rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096

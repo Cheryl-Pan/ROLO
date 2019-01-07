@@ -73,7 +73,6 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    # rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
     rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence

@@ -73,7 +73,6 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    # rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
     rolo_weights_file = 'panchen/output/ROLO_model_3/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
@@ -330,7 +329,7 @@ class ROLO_TF:
 
             total_time = 0
             for epoch in range(epoches):  # 22*50
-                log_file = open('panchen/output/training-20-log.txt', 'a')
+                log_file = open('panchen/output/train_model_3.txt', 'a')
                 i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
 
@@ -411,10 +410,10 @@ class ROLO_TF:
                     print 'total_time is %.2f' % total_time
 
                 if (epoch+1) % 220 == 0 :
+                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch + 1)
+                    print ("Model saved in file: %s" % save_path)
                     log_file2 = open('panchen/output/model-save.txt', 'a')
                     log_file2.write('\n model is saved in epoch: ' + str(epoch+1))
-                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
-                    print ("Model saved in file: %s" % save_path)
                     log_file2.close()
 
                 log_file.close()
