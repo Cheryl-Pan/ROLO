@@ -65,7 +65,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
 
-    rolo_weights_file = '../training/panchen/output/ROLO_model'
+    rolo_weights_file = '../training/panchen/output/ROLO_model_2'
     #rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
@@ -83,16 +83,6 @@ class ROLO_TF:
     x = tf.placeholder("float32", [None, num_steps, num_input],name='input_x')
     istate = tf.placeholder("float32", [None, 2*num_input],name='y') #state & cell => 2x num_input
     y = tf.placeholder("float32", [None, num_gt])
-
-    # Define weights
-
-    weights = {
-        'out': tf.Variable(tf.random_normal([num_input, num_predict]),name="weight")
-    }
-    biases = {
-        'out': tf.Variable(tf.random_normal([num_predict]), name='biases')
-    }
-
 
     def __init__(self,argvs = []):
         print("ROLO init")
@@ -199,12 +189,8 @@ class ROLO_TF:
         # Initializing the variables
 
         init = tf.global_variables_initializer()
-        include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-                   'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-                   'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias']
-        variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(variables_to_restore)
+
+        self.saver = tf.train.Saver()
         ckpt = tf.train.latest_checkpoint(self.rolo_weights_file)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
         config = tf.ConfigProto()

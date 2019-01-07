@@ -94,7 +94,7 @@ class ROLO_TF:
     # tf Graph input
     x = tf.placeholder(tf.float32, shape=[None, num_steps, num_input])
     print (x.shape)
-    istate = tf.placeholder(tf.float32, shape=[None, 2 * num_input])  # state & cell => 2x num_input
+    istate = tf.placeholder(tf.float32, shape=[None, 2 *num_input])  # state & cell => 2x num_input
     y = tf.placeholder(tf.float32, [None, num_gt])
 
     # Define weights
@@ -328,14 +328,8 @@ class ROLO_TF:
         merged_summary = tf.summary.merge_all()
         # Initializing the variables
         init = tf.global_variables_initializer()
-        # include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias'
-        #            'weight/Variable'
-        #            'bias/Variable']
-        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(max_to_keep=3)
+
+        self.saver = tf.train.Saver(max_to_keep=1)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph

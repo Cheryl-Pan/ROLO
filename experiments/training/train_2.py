@@ -74,7 +74,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
     # rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step6_exp1.ckpt'
-    rolo_weights_file = 'panchen/output/ROLO_model_2/model_step6_exp1.ckpt'
+    rolo_weights_file = 'panchen/output/ROLO_model_3/model_step6_exp1.ckpt'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -302,7 +302,7 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 22
-        epoches = 22 * 50   # 20 * 100
+        epoches = 22 * 80   # 20 * 100
 
         # Use rolo_input for LSTM training
         self.pred_location = self.lstm_single_2("bi_lstm",self.x)
@@ -316,14 +316,7 @@ class ROLO_TF:
         merged_summary = tf.summary.merge_all()
         # Initializing the variables
         init = tf.global_variables_initializer()
-        # include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias'
-        #            'weight/Variable'
-        #            'bias/Variable']
-        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        self.saver = tf.train.Saver(max_to_keep=3)
+        self.saver = tf.train.Saver(max_to_keep=1)
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
@@ -343,7 +336,7 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train_2/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train/')
                 utils.createFolder(self.output_path)
                 total_loss = 0
                 id = 0
@@ -417,7 +410,7 @@ class ROLO_TF:
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
 
-                if (epoch+1) % 110 == 0 :
+                if (epoch+1) % 220 == 0 :
                     log_file2 = open('panchen/output/model-save.txt', 'a')
                     log_file2.write('\n model is saved in epoch: ' + str(epoch+1))
                     save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
