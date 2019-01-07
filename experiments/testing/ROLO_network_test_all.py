@@ -127,7 +127,7 @@ class ROLO_TF:
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
         lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
         lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        with tf.variable_scope('bidirectional_lstm',reuse= tf.AUTO_REUSE)as scope:
+        with tf.variable_scope('bidirectional_lstm')as scope:
             # forward direction
             with tf.variable_scope('fw_direction') :
                 outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
@@ -226,10 +226,6 @@ class ROLO_TF:
                     # Load training data & ground truth
                     batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps, id) # [num_of_examples, num_input] (depth == 1)
 
-                    # Apply dropout to batch_xs
-                    #for item in range(len(batch_xs)):
-                    #    batch_xs[item] = self.dropout_features(batch_xs[item], 0.4)
-
                     batch_ys = self.rolo_utils.load_rolo_gt_test(y_path, self.batch_size, self.num_steps, id)
                     batch_ys = utils.locations_from_0_to_1(self.w_img, self.h_img, batch_ys)
 
@@ -242,10 +238,6 @@ class ROLO_TF:
                     pred_location= sess.run(self.pred_location,feed_dict={self.x: batch_xs})
                     cycle_time = time.time() - start_time
                     total_time += cycle_time
-                    #print("ROLO Pred: ", pred_location)
-                    #print("len(pred) = ", len(pred_location))
-                    #print("ROLO Pred in pixel: ", pred_location[0][0]*self.w_img, pred_location[0][1]*self.h_img, pred_location[0][2]*self.w_img, pred_location[0][3]*self.h_img)
-                    #print("correct_prediction int: ", (pred_location + 0.1).astype(int))
 
                     # Save pred_location to file
                     utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)

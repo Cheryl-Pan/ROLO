@@ -84,7 +84,7 @@ class ROLO_TF:
 
     # ROLO Training Parameters
     # learning_rate = 0.00001 #training
-    learning_rate = 0.0001  # testing
+    learning_rate = 0.00001  # testing
 
     training_iters = 210  # 100000
     batch_size = 1  # a kind of piceture only have one
