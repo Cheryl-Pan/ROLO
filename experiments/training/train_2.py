@@ -301,7 +301,7 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 22
-        epoches = 22 * 30   # 20 * 100
+        epoches = 22 * 40   # 20 * 100
 
         # Use rolo_input for LSTM training
         self.pred_location = self.lstm_single_2("bi_lstm",self.x)
