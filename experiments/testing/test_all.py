@@ -67,7 +67,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
 
-    rolo_weights_file = '../training/panchen/output/ROLO_model'
+    rolo_weights_file = '../training/panchen/output/ROLO_model_3'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -89,7 +89,7 @@ class ROLO_TF:
 
     with tf.variable_scope("weight", reuse=True):
         weights = {
-            'out': tf.Variable(tf.random_normal([num_input, num_gt]))
+            'out': tf.Variable(tf.random_normal([2*num_input, num_gt]))
         }
     with tf.variable_scope("bias", reuse=True):
         biases = {
@@ -148,10 +148,13 @@ class ROLO_TF:
                 tmp, states_bw = tf.nn.dynamic_rnn(lstm_cell_bw,input_reverse,dtype=tf.float32, time_major=True)
                 outputs_bw = tf.reverse(tmp, axis=[0])
 
-        out = tf.add(outputs_fw[-1], outputs_bw[-1])/2
+        out = (outputs_fw,outputs_bw)
+        outputs = tf.concat(out, 2) #concatenate outputs along dimension 2
+        # out = tf.add(outputs_fw[-1], outputs_bw[-1])/2
         weight = self.weights['out']
         bias = self.biases['out']
-        final_out = tf.matmul(out, weight) + bias
+        # chose the last timestep as the final prediction
+        final_out = tf.matmul(outputs[-1], weight) + bias
         return final_out
 
     # Experiment with dropout
@@ -180,7 +183,7 @@ class ROLO_TF:
         if self.disp_console: print "Loading  graph complete!" + '\n'
 
     def testing(self):
-        log_file = open("test-log.txt", 'a')
+        log_file = open("test-log-train-2.txt", 'a')
         # Use rolo_input for LSTM training
         # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         # print("pred: ", pred)
@@ -224,14 +227,14 @@ class ROLO_TF:
             total_time = 0.0
             # id= 1
             evaluate_st = 22
-            evaluate_ed = 22
+            evaluate_ed = 29
 
             for test in range(evaluate_st, evaluate_ed + 1):
                 [self.w_img, self.h_img, sequence_name, dummy_1, self.testing_iters] = utils.choose_video_sequence(test)
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_train2/')
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test + 1, sequence_name)
                 # Keep training until reach max iterations

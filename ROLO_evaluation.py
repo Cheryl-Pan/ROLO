@@ -38,7 +38,7 @@ import pickle
 import scipy.io
 import re
 #import h5py
-# import matlab.engine
+import matlab.engine
 
 ''' -----------------------------Deal with benchmark results: matlab format-------------------------- '''
 def choose_benchmark_method(id):
@@ -879,7 +879,7 @@ def evaluate_AUC():        # calculate AUC(Average Under Curve)
             img_fold_path = os.path.join('benchmark/DATA', sequence_name, 'img/')
             gt_file_path= os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
             yolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
-            rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
+            rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test/')
 
             print(rolo_out_path)
 
@@ -1020,7 +1020,7 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
         img_fold_path = os.path.join('benchmark/DATA', sequence_name, 'img/')
         gt_file_path= os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
         yolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
-        rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test_fc/')
+        rolo_out_path= os.path.join('benchmark_origin/DATA', sequence_name, 'rolo_out_test_train2/')
 
         print(rolo_out_path)
 
@@ -1340,11 +1340,10 @@ def main(argv):
     # evaluate_avg_IOU_kalman()
     #evaluate_avg_IOU_kalman_TRE()
 
-    evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
+    # evaluate_AUC()   #AUC_OPE and AUC_SRE is the same for ROLO and YOLO
     # evaluate_AUC_TRE()
     #evaluate_kalman_AUC()
     #evaluate_kalman_AUC_TRE()
-
     #for method_id in range(9, 10):
     #    evaluate_benchmark_avg_IOU(method_id)
 
@@ -1363,7 +1362,7 @@ def main(argv):
     #for method_id in range(0, 9):
     #    evaluate_benchmark_AUC_SRE(method_id)
 
-    # draw_AUC_OPE()
+    draw_AUC_OPE()
     # draw_AUC_TRE()
     # draw_AUC_SRE()
 

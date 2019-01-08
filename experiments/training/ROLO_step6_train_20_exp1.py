@@ -341,7 +341,6 @@ class ROLO_TF:
         with tf.Session(config=config) as sess:
             writer = tf.summary.FileWriter('panchen/output/log')
             writer.add_graph(sess.graph)
-
             if (self.restore_weights == True):
                 sess.run(init)
                 self.saver.restore(sess, self.rolo_weights_file)
