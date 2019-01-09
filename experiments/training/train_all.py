@@ -73,7 +73,8 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_weights_file = 'panchen/output/ROLO_model/model_step6_exp1.ckpt'
+    rolo_model_file = 'panchen/output/ROLO_model'
+    rolo_weights_file = os.path.join(rolo_model_file, 'model_step6_exp1.ckpt')
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -313,10 +314,10 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 22
-        epoches = 22 * 50   # 20 * 100
+        epoches = 22 * 40   # 20 * 100
 
         # Use rolo_input for LSTM training
-        self.pred_location = self.lstm_single_2("bi_lstm",self.x)
+        self.pred_location = self.bi_lstm_2("bi_lstm",self.x)
         with tf.name_scope('loss'):
             self.correct_prediction = tf.square(self.pred_location - self.y)
             self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
@@ -337,6 +338,7 @@ class ROLO_TF:
             writer.add_graph(sess.graph)
             sess.run(init)
             ckpt = tf.train.get_checkpoint_state(self.rolo_weights_file)
+            print ckpt.model_checkpoint_path
             if ckpt and ckpt.model_checkpoint_path:
                 self.saver.restore(sess, ckpt.model_checkpoint_path)
 
@@ -425,7 +427,7 @@ class ROLO_TF:
                 if (epoch+1) % 110 == 0 :
                     log_file2 = open('panchen/output/model-save.txt', 'a')
                     log_file2.write('\n model is saved in epoch: ' + str(epoch+1))
-                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
+                    save_path = self.saver.save(sess,self.rolo_weights_file , global_step=epoch+1)
                     print ("Model saved in file: %s" % save_path)
                     log_file2.close()
 
