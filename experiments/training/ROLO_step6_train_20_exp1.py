@@ -350,7 +350,7 @@ class ROLO_TF:
 
 
             total_time = 0
-            for epoch in range(epoches):  # 22
+            for epoch in range(epoches):  # 22*50
                 i = epoch % num_videos  # 22
                 [self.w_img, self.h_img, sequence_name, dummy, self.training_iters] = utils.choose_video_sequence(i)
 
@@ -407,7 +407,6 @@ class ROLO_TF:
                         if self.disp_console:print "Iter " + str(
                                 id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
                                 loss)  # + "{:.5f}".format(self.accuracy)
-
                         total_loss += loss
                     id += 1
                     if self.disp_console: print(id)
@@ -429,10 +428,10 @@ class ROLO_TF:
                     log_file.write('\n'+ 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: '+str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
-
-                if (epoch+1)  % 110 == 0:
-                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step = epoch+1)
+                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch + 1)
                     print ("Model saved in file: %s" % save_path)
+
+
 
         log_file.close()
         return

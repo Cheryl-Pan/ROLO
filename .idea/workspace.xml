@@ -29017,6 +29017,8 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/training/train_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/train_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/training/train_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/train_all.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/ROLO_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/ROLO_utils.py" afterDir="false" />
     </list>
@@ -29048,7 +29050,7 @@
           <entry key="jpg" value="2" />
           <entry key="md" value="1" />
           <entry key="npy" value="3" />
-          <entry key="py" value="168" />
+          <entry key="py" value="182" />
           <entry key="txt" value="27" />
         </counts>
       </usages-collector>
@@ -29057,20 +29059,20 @@
           <entry key="Image" value="2" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="36" />
-          <entry key="Python" value="168" />
+          <entry key="Python" value="182" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="checkpoint" value="9" />
-          <entry key="py" value="10080" />
+          <entry key="py" value="10266" />
           <entry key="txt" value="568" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="577" />
-          <entry key="Python" value="10080" />
+          <entry key="Python" value="10266" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -29079,79 +29081,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
+        <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="1022" column="46" selection-start-line="1022" selection-start-column="46" selection-end-line="1022" selection-end-column="46" />
+            <state relative-caret-position="1203">
+              <caret line="139" column="45" selection-start-line="139" selection-start-column="45" selection-end-line="139" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+        <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/check.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="466" column="4" selection-start-line="466" selection-start-column="4" selection-end-line="466" selection-end-column="4" />
-              <folding>
-                <marker date="1546920076613" expanded="true" signature="13754:14332" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="198" column="22" selection-start-line="198" selection-start-column="22" selection-end-line="198" selection-end-column="22" />
-              <folding>
-                <marker date="1546831932738" expanded="true" signature="4912:6169" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3368">
-              <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step1_train_30_exp2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step3_train_30_exp2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="83" column="61" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/training/saver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="1107" column="64" selection-start-line="1107" selection-start-column="64" selection-end-line="1107" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/checkpoint">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="45" selection-start-column="24" selection-end-column="45" />
+            <state relative-caret-position="60">
+              <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -29159,8 +29101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="226" column="157" selection-start-line="226" selection-start-column="157" selection-end-line="226" selection-end-column="157" />
+            <state relative-caret-position="2938">
+              <caret line="214" column="76" selection-start-line="214" selection-start-column="76" selection-end-line="214" selection-end-column="76" />
               <folding>
                 <marker date="1546825923471" expanded="true" signature="5706:5712" ph="..." />
               </folding>
@@ -29169,10 +29111,53 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="331" column="28" selection-start-line="331" selection-start-column="28" selection-end-line="331" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3693">
+              <caret line="780" column="4" selection-start-line="780" selection-start-column="4" selection-end-line="780" selection-end-column="4" />
+              <folding>
+                <element signature="e#843#863#0" expanded="true" />
+                <marker date="1546920076613" expanded="true" signature="13754:14332" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/training/train_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="413" column="64" selection-start-line="413" selection-start-column="64" selection-end-line="413" selection-end-column="64" />
+            <state relative-caret-position="170">
+              <caret line="324" column="70" lean-forward="true" selection-start-line="324" selection-start-column="70" selection-end-line="324" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/gen_math_ops.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="37">
+              <caret line="279" column="4" selection-start-line="279" selection-start-column="4" selection-end-line="279" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="428" column="4" selection-start-line="428" selection-start-column="4" selection-end-line="428" selection-end-column="4" />
+              <folding>
+                <marker date="1547045502352" expanded="true" signature="4912:6169" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -29211,6 +29196,7 @@
       <find>AUC_score_</find>
       <find>load_mat_results</find>
       <find>join</find>
+      <find>device</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/benchmark/DATA/Bird1/rolo_out_train</dir>
@@ -29242,14 +29228,14 @@
         <option value="$PROJECT_DIR$/experiments/training/panchen/output/check.py" />
         <option value="$PROJECT_DIR$/experiments/training/panchen/train_2.py" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
-        <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/experiments/training/train_3.py" />
         <option value="$PROJECT_DIR$/experiments/testing/test_all.py" />
         <option value="$PROJECT_DIR$/utils/ROLO_utils.py" />
         <option value="$PROJECT_DIR$/ROLO_evaluation.py" />
         <option value="$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/checkpoint" />
-        <option value="$PROJECT_DIR$/experiments/training/train_2.py" />
+        <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
         <option value="$PROJECT_DIR$/experiments/training/train_all.py" />
+        <option value="$PROJECT_DIR$/experiments/training/train_2.py" />
       </list>
     </option>
   </component>
@@ -29329,15 +29315,6 @@
             <path>
               <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
               <item name="ROLO" type="462c0819:PsiDirectoryNode" />
-              <item name="experiments" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-              <item name="panchen" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="ROLO_model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ROLO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ROLO" type="462c0819:PsiDirectoryNode" />
               <item name="heatmap" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -29373,7 +29350,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.train_all">
+  <component name="RunManager" selected="Python.train_2">
     <configuration name="ROLO_evaluation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ROLO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -29395,27 +29372,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="check" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ROLO" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/experiments/training/panchen/output" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiments/training/panchen/output/check.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test_all" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ROLO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -29429,6 +29385,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiments/testing/test_all.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ROLO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/experiments/training" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiments/training/train_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -29481,18 +29458,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.train_all" />
-      <item itemvalue="Python.check" />
       <item itemvalue="Python.test_all" />
       <item itemvalue="Python.train_BiLSTM" />
       <item itemvalue="Python.ROLO_evaluation" />
+      <item itemvalue="Python.train_2" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train_2" />
         <item itemvalue="Python.train_all" />
         <item itemvalue="Python.ROLO_evaluation" />
         <item itemvalue="Python.test_all" />
         <item itemvalue="Python.train_BiLSTM" />
-        <item itemvalue="Python.check" />
       </list>
     </recent_temporary>
   </component>
@@ -29506,13 +29483,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542078505495</updated>
-    </task>
-    <task id="LOCAL-00042" summary="train_all:bi_lstm">
-      <created>1544521076253</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1544521076253</updated>
     </task>
     <task id="LOCAL-00043" summary="train_all:bi_lstm">
       <created>1544521886748</created>
@@ -29850,7 +29820,14 @@
       <option name="project" value="LOCAL" />
       <updated>1546934873764</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="train_all:bi_lstm">
+      <created>1546994170529</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1546994170529</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TodoView">
@@ -29866,13 +29843,13 @@
     <frame x="10" y="50" width="1377" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29498526" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29498526" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32892805" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5924583" weight="0.26284876" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.64104426" visible="true" weight="0.22613803" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.64104426" visible="true" weight="0.22613803" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32892805" />
@@ -29931,9 +29908,9 @@
     <MESSAGE value="aaa" />
     <MESSAGE value="a" />
     <MESSAGE value="test_all:train_2" />
-    <MESSAGE value="train_all:bi_lstm" />
     <MESSAGE value="train:train_2contitune" />
-    <option name="LAST_COMMIT_MESSAGE" value="train:train_2contitune" />
+    <MESSAGE value="train_all:bi_lstm" />
+    <option name="LAST_COMMIT_MESSAGE" value="train_all:bi_lstm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -29974,9 +29951,24 @@
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experiments/training/train_2.py</url>
+          <line>363</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/train_all.py</url>
-          <line>340</line>
-          <option name="timeStamp" value="39" />
+          <line>404</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experiments/training/train_2.py</url>
+          <line>366</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experiments/training/train_2.py</url>
+          <line>324</line>
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -29985,7 +29977,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/trainging-20-log.txt" />
     <entry file="file://$PROJECT_DIR$/update/utils/utils_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -30004,13 +29995,6 @@
     <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/matlab/engine/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/client/session.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7670">
-          <caret line="1099" selection-start-line="1099" selection-end-line="1099" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/rnn_cell_impl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4695">
@@ -30018,21 +30002,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/rnn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="685" column="21" lean-forward="true" selection-start-line="685" selection-start-column="21" selection-end-line="685" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/a.py" />
-    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-349">
-          <caret line="2686" column="4" selection-start-line="2686" selection-start-column="4" selection-end-line="2686" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/variable_scope.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-41">
@@ -30139,13 +30109,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/output/testing_fc.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -30196,40 +30159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-588">
-          <caret line="137" column="8" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="466" column="4" selection-start-line="466" selection-start-column="4" selection-end-line="466" selection-end-column="4" />
-          <folding>
-            <marker date="1546920076613" expanded="true" signature="13754:14332" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="1022" column="46" selection-start-line="1022" selection-start-column="46" selection-end-line="1022" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="226" column="157" selection-start-line="226" selection-start-column="157" selection-end-line="226" selection-end-column="157" />
-          <folding>
-            <marker date="1546825923471" expanded="true" signature="5706:5712" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/training/saver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
@@ -30244,20 +30173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/train_2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="413" column="64" selection-start-line="413" selection-start-column="64" selection-end-line="413" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step1_train_30_exp2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step3_train_30_exp2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
@@ -30265,20 +30180,104 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ROLO_evaluation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-877">
+          <caret line="1004" column="4" selection-start-line="1004" selection-start-column="4" selection-end-line="1004" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step1_train_30_exp2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2938">
+          <caret line="214" column="76" selection-start-line="214" selection-start-column="76" selection-end-line="214" selection-end-column="76" />
+          <folding>
+            <marker date="1546825923471" expanded="true" signature="5706:5712" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/panchen/output/check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1203">
+          <caret line="139" column="45" selection-start-line="139" selection-start-column="45" selection-end-line="139" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="2700" column="24" lean-forward="true" selection-start-line="2700" selection-start-column="24" selection-end-line="2700" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/rnn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="423" column="33" lean-forward="true" selection-start-line="423" selection-start-column="33" selection-end-line="423" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="198" column="22" selection-start-line="198" selection-start-column="22" selection-end-line="198" selection-end-column="22" />
+        <state relative-caret-position="200">
+          <caret line="428" column="4" selection-start-line="428" selection-start-column="4" selection-end-line="428" selection-end-column="4" />
           <folding>
-            <marker date="1546831932738" expanded="true" signature="4912:6169" ph="..." />
+            <marker date="1547045502352" expanded="true" signature="4912:6169" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/client/session.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1334" selection-start-line="1334" selection-end-line="1334" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/gen_math_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37">
+          <caret line="279" column="4" selection-start-line="279" selection-start-column="4" selection-end-line="279" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3368">
-          <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
+        <state relative-caret-position="81">
+          <caret line="331" column="28" selection-start-line="331" selection-start-column="28" selection-end-line="331" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3693">
+          <caret line="780" column="4" selection-start-line="780" selection-start-column="4" selection-end-line="780" selection-end-column="4" />
+          <folding>
+            <element signature="e#843#863#0" expanded="true" />
+            <marker date="1546920076613" expanded="true" signature="13754:14332" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/train_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="324" column="70" lean-forward="true" selection-start-line="324" selection-start-column="70" selection-end-line="324" selection-end-column="70" />
         </state>
       </provider>
     </entry>

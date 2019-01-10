@@ -47,7 +47,7 @@ import time
 import random
 
 # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
 class ROLO_TF:
@@ -73,8 +73,8 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_weights_file = 'panchen/output/ROLO_model_3/'
-    model_file = os.path.join(rolo_weights_file, 'model_step6_exp1.ckpt')
+    rolo_model_file = 'panchen/output/ROLO_model_3/'
+    weights_file = os.path.join(rolo_model_file, 'model_step6_exp1.ckpt')
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -153,14 +153,11 @@ class ROLO_TF:
         output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
                                                                  time_major=True)
         # output_bi_lstm is a tuple,(output_fw,output_bw)
-        # output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
-        # output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
+        output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
+        output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
+        out = tf.add(output_fw_pred, output_bw_pred,name="add")/2
 
-        out = tf.add(output_bi_lstm[0][-1], output_bi_lstm[1][-1]) / 2
-        weight = self.weights['out']
-        bias = self.biases['out']
-        final_out = tf.matmul(out, weight) + bias
-        return final_out  # last time_step output,(1,tensor([batch_size,num_input*2]))
+        return [output_fw_pred, output_bw_pred, out]  # last time_step output,(1,tensor([batch_size,num_input*2]))
 
     def lstm_single_2(self,name, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
@@ -302,13 +299,14 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 22
-        epoches = 22 * 30   # 20 * 100
+        epoches = 22 * 100   # 20 * 100
 
         # Use rolo_input for LSTM training
-        self.pred_location = self.lstm_single_2("bi_lstm",self.x)
+        [fw_prediction,bw_prediction,pred]= self.bi_lstm("bi_lstm",self.x)
         with tf.name_scope('loss'):
-            self.correct_prediction = tf.square(self.pred_location - self.y)
-            self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
+            self.correct_prediction = tf.square(pred - self.y)
+            self.lstm_prediction = tf.square(fw_prediction-bw_prediction)
+            self.accuracy = (tf.reduce_mean(self.correct_prediction)+tf.reduce_mean(self.lstm_prediction))* 100
             tf.summary.histogram('loss', self.accuracy)
         self.learning_rate = 0.00001 #0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
@@ -324,7 +322,7 @@ class ROLO_TF:
             writer = tf.summary.FileWriter('log_train_all')
             writer.add_graph(sess.graph)
             sess.run(init)
-            ckpt = tf.train.get_checkpoint_state(self.rolo_weights_file)
+            ckpt = tf.train.get_checkpoint_state(self.rolo_model_file)
             if ckpt and ckpt.model_checkpoint_path:
                 self.saver.restore(sess, ckpt.model_checkpoint_path)
 
@@ -363,7 +361,7 @@ class ROLO_TF:
                     batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
                     if self.disp_console: print("Batch_ys: ", batch_ys)
 
-                    pred_location = sess.run(self.pred_location, feed_dict={self.x: batch_xs, self.y: batch_ys,
+                    pred_location = sess.run(pred, feed_dict={self.x: batch_xs, self.y: batch_ys,
                                                                             self.istate: np.zeros(
                                                                                 (self.batch_size, 2 * self.num_input))})
                     if self.disp_console: print("ROLO Pred: ", pred_location)
@@ -409,13 +407,8 @@ class ROLO_TF:
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
-
-                if (epoch+1) % 220 == 0 :
-                    save_path = self.saver.save(sess, self.model_file, global_step=epoch + 1)
+                    save_path = self.saver.save(sess, self.weights_file, global_step=epoch + 1)
                     print ("Model saved in file: %s" % save_path)
-                    log_file2 = open('panchen/output/model-save.txt', 'a')
-                    log_file2.write('\n model is saved in epoch: ' + str(epoch+1))
-                    log_file2.close()
 
                 log_file.close()
         return
