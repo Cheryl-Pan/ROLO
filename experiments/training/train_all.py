@@ -47,7 +47,7 @@ import time
 import random
 
 # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1,3"
 
 
 class ROLO_TF:
@@ -142,44 +142,39 @@ class ROLO_TF:
         # print("state: ", state)
         return outputs  # outputis a list,include one tensor, TensorShape:[batch_size, num_input]
 
-    # bi-LSTM
-    def bi_lstm(self, name, X):
-        _X = tf.reshape(X, [-1, self.num_input])
-        x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
-        x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
-        lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-        lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
-
-        output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
-                                                                 time_major=True)
-        # output_bi_lstm is a tuple,(output_fw,output_bw)
-        # output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
-        # output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
-
-        out = tf.add(output_bi_lstm[0][-1], output_bi_lstm[1][-1]) / 2
-        weight = self.weights['out']
-        bias = self.biases['out']
-        final_out = tf.matmul(out, weight) + bias
-        return final_out  # last time_step output,(1,tensor([batch_size,num_input*2]))
 
     def lstm_single_2(self,name, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
-        lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        with tf.variable_scope('bidirectional_lstm')as scope:
-            # forward direction
-            with tf.variable_scope('fw_direction') as fw_scope:
-                outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
-            with tf.variable_scope('bw_direction'):
-                input_reverse = tf.reverse(x_in,axis=[0])
-                tmp, states_bw = tf.nn.dynamic_rnn(lstm_cell_bw,input_reverse,dtype=tf.float32, time_major=True)
-                outputs_bw = tf.reverse(tmp, axis=[0])
+        print x_in.shape
+        print '\n'
+        x_in = tf.reshape(x_in,[self.num_steps * self.batch_size, self.num_input])
+        print x_in.shape
+        print '\n'
+        x_reverse = tf.reverse(x_in,axis=[0])
+        x_in_fw = tf.split(x_in, self.num_steps, 0)
+        x_in_bw = tf.split(x_reverse,self.num_steps,0)
 
-        out = tf.add(outputs_fw[-1], outputs_bw[-1])/2
-        weight = self.weights['out']
-        bias = self.biases['out']
-        final_out = tf.matmul(out, weight) + bias
-        return final_out
+        lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+        lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+
+        out_list_fw = []
+        out_list_bw = []
+        with tf.variable_scope('bidirectional_lstm',reuse=tf.AUTO_REUSE)as scope:
+            # forward direction
+            for step in range(self.num_steps):
+                if step > 0:
+                    tf.get_variable_scope().reuse_variables()
+                outputs_fw, _ = tf.nn.static_rnn(lstm_cell_fw,[x_in_fw[step]],dtype=tf.float32)
+                outputs_bw, _ = tf.nn.static_rnn(lstm_cell_bw,[x_in_bw[step]],dtype=tf.float32)
+                out_list_fw.append(outputs_fw[0])
+                out_list_bw.append(outputs_bw[0])
+            out_list_bw = list(reversed(out_list_bw))
+            print 'len of out list fw\n',len(out_list_fw)
+            print 'len of out list bw\n',len(out_list_bw)
+            fw_pred = out_list_fw[-1][:,4097:4101]
+            bw_pred = out_list_bw[-1][:,4097:4101]
+            final_out = tf.add(fw_pred,bw_pred)/2
+        return fw_pred,bw_pred,final_out
 
     def bi_lstm_2(self, name, X):
         x_in = tf.transpose(X, [1, 0, 2])  # [n_step,batch_size,num_input]
@@ -314,15 +309,16 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 22
-        epoches = 22 * 40   # 20 * 100
+        epoches = 22 * 100   # 20 * 100
 
         # Use rolo_input for LSTM training
-        self.pred_location = self.bi_lstm_2("bi_lstm",self.x)
+        fw_pred, bw_pred, pred = self.lstm_single_2("bi_lstm",self.x)
         with tf.name_scope('loss'):
-            self.correct_prediction = tf.square(self.pred_location - self.y)
-            self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
+            correct_prediction = tf.square(pred - self.y)
+            lstm_pred = tf.square(fw_pred-bw_pred)
+            self.accuracy = (tf.reduce_mean(correct_prediction)+tf.reduce_mean(lstm_pred)) * 100
             tf.summary.histogram('loss', self.accuracy)
-        self.learning_rate = 0.0001 #0.00001
+        self.learning_rate = 0.00001 #0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
 
         merged_summary = tf.summary.merge_all()
@@ -337,10 +333,10 @@ class ROLO_TF:
             writer = tf.summary.FileWriter('log_train_all')
             writer.add_graph(sess.graph)
             sess.run(init)
-            ckpt = tf.train.get_checkpoint_state(self.rolo_weights_file)
-            print ckpt.model_checkpoint_path
-            if ckpt and ckpt.model_checkpoint_path:
-                self.saver.restore(sess, ckpt.model_checkpoint_path)
+            # ckpt = tf.train.get_checkpoint_state(self.rolo_model_file)
+            # if ckpt and ckpt.model_checkpoint_path:
+            #     print ckpt.model_checkpoint_path
+            #     self.saver.restore(sess, ckpt.model_checkpoint_path)
 
             total_time = 0
             for epoch in range(epoches):  # 22*50
@@ -377,35 +373,29 @@ class ROLO_TF:
                     batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
                     if self.disp_console: print("Batch_ys: ", batch_ys)
 
-                    pred_location = sess.run(self.pred_location, feed_dict={self.x: batch_xs, self.y: batch_ys,
+                    pred_location,loss, _ = sess.run([pred,self.accuracy,self.optimizer], feed_dict={self.x: batch_xs, self.y: batch_ys,
                                                                             self.istate: np.zeros(
                                                                                 (self.batch_size, 2 * self.num_input))})
                     if self.disp_console: print("ROLO Pred: ", pred_location)
                     # print("len(pred) = ", len(pred_location))
-                    if self.disp_console: print(
-                    "ROLO Pred in pixel: ", pred_location[0][0] * self.w_img, pred_location[0][1] * self.h_img,
-                    pred_location[0][2] * self.w_img, pred_location[0][3] * self.h_img)
+                    utils.save_rolo_output(self.output_path, pred_location, id, self.num_steps, self.batch_size)
+
                     # print("correct_prediction int: ", (pred_location + 0.1).astype(int))
 
                     # Save pred_location to file
-                    utils.save_rolo_output(self.output_path, pred_location, id, self.num_steps, self.batch_size)
+                    # sess.run(self.optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys,self.istate: np.zeros((self.batch_size, 2 * self.num_input))})
 
-                    sess.run(self.optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys,
-                                                        self.istate: np.zeros((self.batch_size, 2 * self.num_input))})
-
-                    if id % self.display_step == 0:
-                        # Calculate batch loss
-                        loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys,
-                                                                  self.istate: np.zeros(
-                                                                      (self.batch_size, 2 * self.num_input))})
-                        if self.disp_console:print "Iter " + str(
+                    # if id % self.display_step == 0:
+                    #     # Calculate batch loss
+                    #     loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys,
+                    #                                               self.istate: np.zeros(
+                    #                                                   (self.batch_size, 2 * self.num_input))})
+                    if self.disp_console:print ("Iter " + str(
                                 id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
-                                loss)  # + "{:.5f}".format(self.accuracy)
-
-                        total_loss += loss
+                                loss))  # + "{:.5f}".format(self.accuracy)
+                    total_loss += loss
                     id += 1
                     if self.disp_console: print(id)
-
                     if id % 1000 == 0:
                         summary = sess.run(merged_summary,feed_dict={self.x:batch_xs,self.y:batch_ys})
                         writer.add_summary(summary, id)
@@ -414,7 +404,7 @@ class ROLO_TF:
                 print('video iteration is %d, video: %d time is %.2f ' % (epoch/22+1, epoch%22+1, cycle_time))
                 log_file.write(str('video iteration is %d, video: %d \n' % (epoch/22+1, epoch%22+1)))
                 total_time += cycle_time
-                # print "Optimization Finished!"
+
                 avg_loss = total_loss / id
                 print "Avg loss: " + sequence_name + ": " + str(avg_loss)
                 log_file.write(sequence_name+ "  avg loss is "+str(avg_loss)+'\n')
@@ -423,14 +413,8 @@ class ROLO_TF:
                     log_file.write('\n' + 'epoch is ' + str(epoch) + '\n')
                     log_file.write('total time: ' + str(total_time) + '\n')
                     print 'total_time is %.2f' % total_time
-
-                if (epoch+1) % 110 == 0 :
-                    log_file2 = open('panchen/output/model-save.txt', 'a')
-                    log_file2.write('\n model is saved in epoch: ' + str(epoch+1))
-                    save_path = self.saver.save(sess,self.rolo_weights_file , global_step=epoch+1)
+                    save_path = self.saver.save(sess, self.rolo_weights_file, global_step=epoch+1)
                     print ("Model saved in file: %s" % save_path)
-                    log_file2.close()
-
                 log_file.close()
         return
 
