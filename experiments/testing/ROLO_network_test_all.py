@@ -205,7 +205,7 @@ class ROLO_TF:
                 sess.run(init)
 
 
-            total_time = 0.0
+
             #id= 1
             evaluate_st = 22
             evaluate_ed = 29
@@ -220,6 +220,7 @@ class ROLO_TF:
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test+1,sequence_name)
             # Keep training until reach max iterations
+                total_time = 0.0
                 total_loss = 0
                 id = 0  # don't change this
                 while id < self.testing_iters - self.num_steps:

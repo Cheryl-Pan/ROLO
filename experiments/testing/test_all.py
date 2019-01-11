@@ -67,7 +67,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
 
-    rolo_weights_file = '../training/panchen/output/ROLO_model_3'
+    rolo_weights_file = '../training/panchen/output/ROLO_model_2'
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
     num_feat = 4096
@@ -87,14 +87,14 @@ class ROLO_TF:
 
     # Define weights
 
-    with tf.variable_scope("weight", reuse=True):
-        weights = {
-            'out': tf.Variable(tf.random_normal([2*num_input, num_gt]))
-        }
-    with tf.variable_scope("bias", reuse=True):
-        biases = {
-            'out': tf.Variable(tf.random_normal([num_gt]))
-        }
+    # with tf.variable_scope("weight", reuse=True):
+    #     weights = {
+    #         'out': tf.Variable(tf.random_normal([2*num_input, num_gt]))
+    #     }
+    # with tf.variable_scope("bias", reuse=True):
+    #     biases = {
+    #         'out': tf.Variable(tf.random_normal([num_gt]))
+    #     }
 
     def __init__(self, argvs=[]):
         print("ROLO init")
@@ -137,25 +137,36 @@ class ROLO_TF:
 
     def lstm_single_2(self,name, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
-        lstm_cell_fw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        lstm_cell_bw = tf.nn.rnn_cell.BasicLSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
-        with tf.variable_scope('bidirectional_lstm')as scope:
-            # forward direction
-            with tf.variable_scope('fw_direction') as fw_scope:
-                outputs_fw, states_fw = tf.nn.dynamic_rnn(lstm_cell_fw, x_in, dtype=tf.float32, time_major=True)
-            with tf.variable_scope('bw_direction'):
-                input_reverse = tf.reverse(x_in,axis=[0])
-                tmp, states_bw = tf.nn.dynamic_rnn(lstm_cell_bw,input_reverse,dtype=tf.float32, time_major=True)
-                outputs_bw = tf.reverse(tmp, axis=[0])
+        print x_in.shape
+        print '\n'
+        x_in = tf.reshape(x_in,[self.num_steps * self.batch_size, self.num_input])
+        print x_in.shape
+        print '\n'
+        x_reverse = tf.reverse(x_in,axis=[0])
+        x_in_fw = tf.split(x_in, self.num_steps, 0)
+        x_in_bw = tf.split(x_reverse,self.num_steps,0)
 
-        out = (outputs_fw,outputs_bw)
-        outputs = tf.concat(out, 2) #concatenate outputs along dimension 2
-        # out = tf.add(outputs_fw[-1], outputs_bw[-1])/2
-        weight = self.weights['out']
-        bias = self.biases['out']
-        # chose the last timestep as the final prediction
-        final_out = tf.matmul(outputs[-1], weight) + bias
-        return final_out
+        lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+        lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(num_units=self.num_unit, forget_bias=1.0, state_is_tuple=True)
+
+        out_list_fw = []
+        out_list_bw = []
+        with tf.variable_scope('bidirectional_lstm',reuse=tf.AUTO_REUSE)as scope:
+            # forward direction
+            for step in range(self.num_steps):
+                if step > 0:
+                    tf.get_variable_scope().reuse_variables()
+                outputs_fw, _ = tf.nn.static_rnn(lstm_cell_fw,[x_in_fw[step]],dtype=tf.float32)
+                outputs_bw, _ = tf.nn.static_rnn(lstm_cell_bw,[x_in_bw[step]],dtype=tf.float32)
+                out_list_fw.append(outputs_fw[0])
+                out_list_bw.append(outputs_bw[0])
+            out_list_bw = list(reversed(out_list_bw))
+            print 'len of out list fw\n',len(out_list_fw)
+            print 'len of out list bw\n',len(out_list_bw)
+            fw_pred = out_list_fw[-1][:,4097:4101]
+            bw_pred = out_list_bw[-1][:,4097:4101]
+            final_out = tf.add(fw_pred,bw_pred)/2
+        return fw_pred,bw_pred,final_out
 
     # Experiment with dropout
     def dropout_features(self, feature, prob):
@@ -188,13 +199,14 @@ class ROLO_TF:
         # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         # print("pred: ", pred)
         # self.pred_location = pred[0][:, 4097:4101]
-        self.pred_location = self.lstm_single_2('bilstm',self.x)
+        fw_pred, bw_pred, pred = self.lstm_single_2('bilstm',self.x)
         for v in tf.all_variables():
             print(v.name)
         # self.pred_location = tf.get_collection('lstm_single_2')
-        self.correct_prediction = tf.square(self.pred_location - self.y)
         with tf.name_scope('loss'):
-            self.loss = tf.reduce_mean(self.correct_prediction) * 100
+            self.correct_prediction = tf.square(pred - self.y)
+            lstm_pred = tf.square(fw_pred - bw_pred)
+            self.loss = (tf.reduce_mean(self.correct_prediction) + tf.reduce_mean(lstm_pred)) * 100
             tf.summary.scalar('loss', self.loss)
 
         merged_summary = tf.summary.merge_all()
@@ -224,7 +236,7 @@ class ROLO_TF:
             else:
                 sess.run(init)
 
-            total_time = 0.0
+
             # id= 1
             evaluate_st = 22
             evaluate_ed = 29
@@ -234,10 +246,11 @@ class ROLO_TF:
 
                 x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
                 y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test_train2/')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_test/')
                 utils.createFolder(self.output_path)
                 print 'video: %d   TESTING ROLO on video sequence: %s' % (test + 1, sequence_name)
                 # Keep training until reach max iterations
+                total_time = 0.0
                 total_loss = 0
                 id = 0  # don't change this
                 while id < self.testing_iters - self.num_steps:
