@@ -117,7 +117,7 @@ class ROLO_TF:
             tf.get_variable_scope().reuse_variables()
         return outputs
 
-    def bi_lstm(self, name, _X):
+    def lstm(self, name, _X):
         _X = tf.transpose(_X, [1, 0, 2])  # [n_step,batch_size,num_input]
         with tf.variable_scope('forward'):
             lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
@@ -134,6 +134,21 @@ class ROLO_TF:
         # outputs = tf.concat(output_bi_lstm,2) #(n_step,batchsize,num_input*2)
         # outputs[-1][:,4097:4101]
         return final_output  # last time_step output,(1,tensor([batch_size,num_input*2]))
+    def bi_lstm(self, name, X):
+        _X = tf.reshape(X, [-1, self.num_input])
+        x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
+        x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
+        lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+        lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+
+        output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
+                                                                 time_major=True)
+        # output_bi_lstm is a tuple,(output_fw,output_bw)
+        output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
+        output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
+        out = tf.add(output_fw_pred, output_bw_pred,name="add")/2
+
+        return [output_fw_pred, output_bw_pred, out]
 
     def lstm_single_2(self,name, x_input):
         x_in = tf.transpose(x_input, [1, 0, 2])  # [n_step, batch_size, num_input]
@@ -199,7 +214,7 @@ class ROLO_TF:
         # pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
         # print("pred: ", pred)
         # self.pred_location = pred[0][:, 4097:4101]
-        fw_pred, bw_pred, pred = self.lstm_single_2('bilstm',self.x)
+        [fw_pred, bw_pred, pred] = self.bi_lstm('bilstm',self.x)
         for v in tf.all_variables():
             print(v.name)
         # self.pred_location = tf.get_collection('lstm_single_2')
@@ -270,7 +285,7 @@ class ROLO_TF:
                     # print("Batch_ys: ", batch_ys)
 
                     start_time = time.time()
-                    pred_location = sess.run(self.pred_location, feed_dict={self.x: batch_xs})
+                    pred_location = sess.run(pred, feed_dict={self.x: batch_xs})
                     cycle_time = time.time() - start_time
                     total_time += cycle_time
                     # print("ROLO Pred: ", pred_location)
