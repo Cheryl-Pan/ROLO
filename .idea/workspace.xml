@@ -29017,8 +29017,10 @@
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/98.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmark/DATA/Suv/yolo_output_kalman_txt/99.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/testing/test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/testing/test_all.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/training/ROLO_step3_train_30_exp2.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/ROLO_step3_train_30_exp2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/training/panchen/output/check.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/panchen/output/check.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/training/train_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/train_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/training/train_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/training/train_all.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/ROLO_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/ROLO_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29031,15 +29033,15 @@
     <session id="-1937218032">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="3" />
-          <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.4" value="2" />
+          <entry key="project.open.time.3" value="3" />
+          <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -29049,7 +29051,7 @@
           <entry key="jpg" value="34" />
           <entry key="md" value="1" />
           <entry key="npy" value="3" />
-          <entry key="py" value="203" />
+          <entry key="py" value="206" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
@@ -29058,20 +29060,20 @@
           <entry key="Image" value="34" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="40" />
-          <entry key="Python" value="203" />
+          <entry key="Python" value="206" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="checkpoint" value="9" />
-          <entry key="py" value="11116" />
+          <entry key="py" value="11395" />
           <entry key="txt" value="619" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="628" />
-          <entry key="Python" value="11116" />
+          <entry key="Python" value="11395" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -29079,11 +29081,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
+            <state relative-caret-position="3240">
               <caret line="216" column="32" selection-start-line="216" selection-start-column="32" selection-end-line="216" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step3_train_30_exp2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="945">
+              <caret line="63" column="29" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -29091,7 +29102,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
+            <state relative-caret-position="13665">
               <caret line="917" column="20" selection-start-line="917" selection-start-column="20" selection-end-line="917" selection-end-column="20" />
               <folding>
                 <element signature="e#843#863#0" expanded="true" />
@@ -29101,10 +29112,19 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="803">
+              <caret line="323" column="65" selection-start-line="323" selection-start-column="65" selection-end-line="323" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmark/DATA/Skater/groundtruth_rect.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
+            <state relative-caret-position="2160">
               <caret line="144" column="13" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
             </state>
           </provider>
@@ -29113,8 +29133,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/training/train_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="145" selection-start-line="145" selection-end-line="159" selection-end-column="52" />
+            <state relative-caret-position="210">
+              <caret line="96" column="4" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -29187,13 +29207,14 @@
         <option value="$PROJECT_DIR$/ROLO_evaluation.py" />
         <option value="$PROJECT_DIR$/experiments/training/panchen/output/ROLO_model/checkpoint" />
         <option value="$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py" />
-        <option value="$PROJECT_DIR$/experiments/training/train_2.py" />
-        <option value="$PROJECT_DIR$/experiments/training/train_all.py" />
         <option value="$PROJECT_DIR$/3rd party/YOLO_network.py" />
         <option value="$PROJECT_DIR$/experiments/training/panchen/output/check.py" />
         <option value="$PROJECT_DIR$/3rd party/weights/check.py" />
         <option value="$PROJECT_DIR$/experiments/testing/ROLO_network_test_all.py" />
         <option value="$PROJECT_DIR$/experiments/testing/test_all.py" />
+        <option value="$PROJECT_DIR$/experiments/training/train_2.py" />
+        <option value="$PROJECT_DIR$/experiments/training/ROLO_step3_train_30_exp2.py" />
+        <option value="$PROJECT_DIR$/experiments/training/train_all.py" />
       </list>
     </option>
   </component>
@@ -29421,13 +29442,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542078505495</updated>
-    </task>
-    <task id="LOCAL-00048" summary="train_all:bi_lstm">
-      <created>1544540569879</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1544540569879</updated>
     </task>
     <task id="LOCAL-00049" summary="train_all:bi_lstm">
       <created>1544541394988</created>
@@ -29765,7 +29779,14 @@
       <option name="project" value="LOCAL" />
       <updated>1547167597679</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="train_all:bi_lstm">
+      <created>1547341267746</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1547341267746</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TodoView">
@@ -29781,19 +29802,19 @@
     <frame x="10" y="50" width="1377" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29498526" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29498526" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32892805" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.59070796" visible="true" weight="0.26284876" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.59070796" weight="0.26284876" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.609882" weight="0.38179147" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32892805" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49891225" weight="0.32892805" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49528643" weight="0.32892805" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.40929204" side_tool="true" visible="true" weight="0.26284876" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.40929204" side_tool="true" weight="0.26284876" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49963742" weight="0.32892805" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -29842,13 +29863,13 @@
     <MESSAGE value="a" />
     <MESSAGE value="test_all:train_2" />
     <MESSAGE value="train:train_2contitune" />
-    <MESSAGE value="train_all:bi_lstm" />
     <MESSAGE value="1.10" />
     <MESSAGE value="1.10 3:53" />
     <MESSAGE value="1.10-4:18" />
     <MESSAGE value="1.10 4:39" />
     <MESSAGE value="1.11 8:45" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.11 8:45" />
+    <MESSAGE value="train_all:bi_lstm" />
+    <option name="LAST_COMMIT_MESSAGE" value="train_all:bi_lstm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -29885,22 +29906,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/train_2.py</url>
-          <line>363</line>
+          <line>342</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/train_all.py</url>
-          <line>309</line>
+          <line>306</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/train_2.py</url>
-          <line>366</line>
+          <line>345</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/train_2.py</url>
-          <line>324</line>
+          <line>303</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -29915,7 +29936,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/experiments/training/train_all.py</url>
-          <line>306</line>
+          <line>304</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -29945,27 +29966,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/rnn_cell_impl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="672" lean-forward="true" selection-start-line="672" selection-end-line="672" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///anaconda3/envs/tensorflow/lib/python2.7/site-packages/tensorflow/python/ops/rnn.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="427" column="49" selection-start-line="427" selection-start-column="49" selection-end-line="427" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="162" selection-start-line="162" selection-end-line="162" />
-          <folding>
-            <marker date="1547045502352" expanded="true" signature="4912:6169" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -30028,13 +30032,6 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="294" column="85" selection-start-line="294" selection-start-column="85" selection-end-line="294" selection-end-column="85" />
         </state>
       </provider>
     </entry>
@@ -30158,9 +30155,33 @@
     <entry file="file://$PROJECT_DIR$/benchmark/DATA/Dancer/img/0001.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step6_train_20_exp1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="72" column="52" lean-forward="true" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="52" />
+          <folding>
+            <marker date="1547045502352" expanded="true" signature="4912:6169" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3240">
+          <caret line="216" column="32" selection-start-line="216" selection-start-column="32" selection-end-line="216" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/training/ROLO_step3_train_30_exp2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="63" column="29" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/ROLO_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
+        <state relative-caret-position="13665">
           <caret line="917" column="20" selection-start-line="917" selection-start-column="20" selection-end-line="917" selection-end-column="20" />
           <folding>
             <element signature="e#843#863#0" expanded="true" />
@@ -30171,22 +30192,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmark/DATA/Skater/groundtruth_rect.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
+        <state relative-caret-position="2160">
           <caret line="144" column="13" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/training/train_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="145" selection-start-line="145" selection-end-line="159" selection-end-column="52" />
+        <state relative-caret-position="210">
+          <caret line="96" column="4" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/testing/test_all.py">
+    <entry file="file://$PROJECT_DIR$/experiments/training/train_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="216" column="32" selection-start-line="216" selection-start-column="32" selection-end-line="216" selection-end-column="32" />
+        <state relative-caret-position="803">
+          <caret line="323" column="65" selection-start-line="323" selection-start-column="65" selection-end-line="323" selection-end-column="65" />
         </state>
       </provider>
     </entry>

@@ -24,10 +24,16 @@ Description:
 '''
 
 # Imports
-import ROLO_utils as utils
+import os,sys
+
+
+abspath = os.path.abspath("..")  # ~/ROLO/experiments
+rootpath = os.path.split(abspath)[0]  # ~/ROLO
+sys.path.append(rootpath)
+import utils.ROLO_utils as utils
 
 import tensorflow as tf
-from tensorflow.models.rnn import rnn, rnn_cell
+# from tensorflow.models.rnn import rnn, rnn_cell
 import cv2
 
 import numpy as np
@@ -58,7 +64,8 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_weights_file = '/u03/Guanghan/dev/ROLO-dev/output/ROLO_model/model_step3_exp2.ckpt'
+    rolo_model_file = 'panchen/output/ROLO_model_exp2/'
+    rolo_weights_file = os.path.join(rolo_model_file,'model_step3_exp2.ckpt')
     lstm_depth = 3
     num_steps = 3  # number of frames as an input sequence
     num_feat = 4096
@@ -80,12 +87,12 @@ class ROLO_TF:
     y = tf.placeholder("float32", [None, num_gt])
 
     # Define weights
-    weights = {
-        'out': tf.Variable(tf.random_normal([num_input, num_predict]))
-    }
-    biases = {
-        'out': tf.Variable(tf.random_normal([num_predict]))
-    }
+    # weights = {
+    #     'out': tf.Variable(tf.random_normal([num_input, num_predict]))
+    # }
+    # biases = {
+    #     'out': tf.Variable(tf.random_normal([num_predict]))
+    # }
 
 
     def __init__(self,argvs = []):
@@ -113,6 +120,22 @@ class ROLO_TF:
         #print("state: ", state)
         return outputs
 
+    def bi_lstm(self, name, X):
+        _X = tf.reshape(X, [-1, self.num_input])
+        x_in = tf.reshape(_X, [-1, self.num_steps, self.num_input])
+        x_in = tf.transpose(x_in, [1, 0, 2])  # [n_step,batch_size,num_input]
+        lstm_cell_fw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+        lstm_cell_bw = tf.nn.rnn_cell.LSTMCell(self.num_input)
+
+        output_bi_lstm, states = tf.nn.bidirectional_dynamic_rnn(lstm_cell_fw, lstm_cell_bw, x_in, dtype=tf.float32,
+                                                                 time_major=True)
+        # output_bi_lstm is a tuple,(output_fw,output_bw)
+        output_fw_pred = output_bi_lstm[0][-1][:, 4097:4101]
+        output_bw_pred = output_bi_lstm[1][-1][:, 4097:4101]
+        out = tf.add(output_fw_pred, output_bw_pred,name="add")/2
+
+        return [output_fw_pred, output_bw_pred, out]
+
 
     # Experiment with dropout
     def dropout_features(self, feature, prob):
@@ -131,11 +154,11 @@ class ROLO_TF:
         if self.disp_console : print "Building ROLO graph..."
 
         # Build rolo layers
-        self.lstm_module = self.LSTM_single('lstm_test', self.x, self.istate, self.weights, self.biases)
-        self.ious= tf.Variable(tf.zeros([self.batch_size]), name="ious")
-        self.sess = tf.Session()
-        self.sess.run(tf.initialize_all_variables())
-        self.saver = tf.train.Saver()
+        self.lstm_module = self.bi_lstm('lstm_test', self.x)
+        # self.ious= tf.Variable(tf.zeros([self.batch_size]), name="ious")
+        # self.sess = tf.Session()
+        # self.sess.run(tf.initialize_all_variables())
+
         #self.saver.restore(self.sess, self.rolo_weights_file)
         if self.disp_console : print "Loading complete!" + '\n'
 
@@ -226,24 +249,25 @@ class ROLO_TF:
         epoches = 30 * 300
 
         # Use rolo_input for LSTM training
-        pred = self.LSTM_single('lstm_train', self.x, self.istate, self.weights, self.biases)
-        self.pred_location = pred[0][:, 4097:4101]
-        self.correct_prediction = tf.square(self.pred_location - self.y)
-        self.accuracy = tf.reduce_mean(self.correct_prediction) * 100
+        [fw_prediction, bw_prediction, pred] = self.bi_lstm('lstm_train', self.x)
+        lstm_prediction = tf.square(fw_prediction - bw_prediction)
+        correct_prediction = tf.square(pred - self.y)
+        self.accuracy = (tf.reduce_mean(correct_prediction)+tf.reduce_mean(lstm_prediction) )* 100
         self.learning_rate = 0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy) # Adam Optimizer
 
         # Initializing the variables
-        init = tf.initialize_all_variables()
-
+        init = tf.global_variables_initializer()
+        self.saver = tf.train.Saver(max_to_keep=1)
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
         # Launch the graph
-        with tf.Session() as sess:
-            if (self.restore_weights == True):
-                sess.run(init)
-                self.saver.restore(sess, self.rolo_weights_file)
+        with tf.Session(config=config) as sess:
+            sess.run(init)
+            ckpt = tf.train.get_checkpoint_state(self.rolo_model_file)
+            if ckpt and ckpt.model_checkpoint_path:
+                self.saver.restore(sess,ckpt.mdoel_checkpoint_path)
                 print "Loading complete!" + '\n'
-            else:
-                sess.run(init)
 
             for epoch in range(epoches):
                 i = epoch % num_videos
@@ -274,7 +298,7 @@ class ROLO_TF:
                     batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
                     if self.disp_console: print("Batch_ys: ", batch_ys)
 
-                    pred_location= sess.run(self.pred_location,feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
+                    pred_location= sess.run(pred,feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
                     if self.disp_console: print("ROLO Pred: ", pred_location)
                     #print("len(pred) = ", len(pred_location))
                     if self.disp_console: print("ROLO Pred in pixel: ", pred_location[0][0]*self.w_img, pred_location[0][1]*self.h_img, pred_location[0][2]*self.w_img, pred_location[0][3]*self.h_img)

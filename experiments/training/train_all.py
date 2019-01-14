@@ -73,7 +73,7 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_model_file = 'panchen/output/ROLO_model_2'
+    rolo_model_file = 'panchen/output/ROLO_model'
     rolo_weights_file = os.path.join(rolo_model_file, 'model_step6_exp1.ckpt')
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
@@ -225,14 +225,14 @@ class ROLO_TF:
 
         ''' TUNE THIS'''
         num_videos = 22
-        epoches = 22 * 100   # 20 * 100
+        epoches = 22 * 40   # 20 * 100
 
         # Use rolo_input for LSTM training
-        fw_pred, bw_pred, pred = self.lstm_single_2("bi_lstm",self.x)
+        pred = self.bi_lstm_2("bi_lstm",self.x)
         with tf.name_scope('loss'):
             correct_prediction = tf.square(pred - self.y)
-            lstm_pred = tf.square(fw_pred-bw_pred)
-            self.accuracy = (tf.reduce_mean(correct_prediction)+tf.reduce_mean(lstm_pred)) * 100
+            # lstm_pred = tf.square(fw_pred-bw_pred)
+            self.accuracy = (tf.reduce_mean(correct_prediction)) * 100
             tf.summary.histogram('loss', self.accuracy)
         self.learning_rate = 0.00001 #0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
@@ -289,7 +289,7 @@ class ROLO_TF:
                     batch_ys = np.reshape(batch_ys, [self.batch_size, 4])
                     if self.disp_console: print("Batch_ys: ", batch_ys)
 
-                    pred_location,loss, _ = sess.run([pred,self.accuracy,self.optimizer], feed_dict={self.x: batch_xs, self.y: batch_ys})
+                    pred_location = sess.run(pred, feed_dict={self.x: batch_xs, self.y: batch_ys})
                     if self.disp_console: print("ROLO Pred: ", pred_location)
                     # print("len(pred) = ", len(pred_location))
                     utils.save_rolo_output(self.output_path, pred_location, id, self.num_steps, self.batch_size)
@@ -297,20 +297,17 @@ class ROLO_TF:
                     # print("correct_prediction int: ", (pred_location + 0.1).astype(int))
 
                     # Save pred_location to file
-                    # sess.run(self.optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys,self.istate: np.zeros((self.batch_size, 2 * self.num_input))})
+                    sess.run(self.optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys})
 
-                    # if id % self.display_step == 0:
-                    #     # Calculate batch loss
-                    #     loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys,
-                    #                                               self.istate: np.zeros(
-                    #                                                   (self.batch_size, 2 * self.num_input))})
+                    if id % self.display_step == 0:
+                        # Calculate batch loss
+                        loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys})
                     if self.disp_console:print ("Iter " + str(
-                                id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(
-                                loss))  # + "{:.5f}".format(self.accuracy)
+                                id * self.batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss))  # + "{:.5f}".format(self.accuracy)
                     total_loss += loss
                     id += 1
                     if self.disp_console: print(id)
-                    if id % 1000 == 0:
+                    if id % 30 == 0:
                         summary = sess.run(merged_summary,feed_dict={self.x:batch_xs,self.y:batch_ys})
                         writer.add_summary(summary, id)
 
