@@ -249,10 +249,10 @@ class ROLO_TF:
             writer = tf.summary.FileWriter('log_train_all')
             writer.add_graph(sess.graph)
             sess.run(init)
-            # ckpt = tf.train.get_checkpoint_state(self.rolo_model_file)
-            # if ckpt and ckpt.model_checkpoint_path:
-            #     print ckpt.model_checkpoint_path
-            #     self.saver.restore(sess, ckpt.model_checkpoint_path)
+            ckpt = tf.train.get_checkpoint_state(self.rolo_model_file)
+            if ckpt and ckpt.model_checkpoint_path:
+                print ckpt.model_checkpoint_path
+                self.saver.restore(sess, ckpt.model_checkpoint_path)
 
             total_time = 0
             for epoch in range(epoches):  # 22*50
