@@ -253,9 +253,10 @@ class ROLO_TF:
         lstm_prediction = tf.square(fw_prediction - bw_prediction)
         correct_prediction = tf.square(pred - self.y)
         self.accuracy = (tf.reduce_mean(correct_prediction)+tf.reduce_mean(lstm_prediction) )* 100
-        self.learning_rate = tf.train.exponential_decay(0.1, global_step=epoches,decay_steps=600,decay_rate=0.96,staircase=True)
-        current_iter = tf.Variable(0)
-        self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy,global_step=current_iter) # Adam Optimizer
+        global_step = tf.Variable(0)
+        self.learning_rate = tf.train.exponential_decay(0.1, global_step=global_step,decay_steps=600,decay_rate=0.96,staircase=True)
+        self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(
+            self.accuracy,global_step= global_step) # Adam Optimizer
 
         # Initializing the variables
         init = tf.global_variables_initializer()
@@ -271,6 +272,7 @@ class ROLO_TF:
                 print "Loading complete!" + '\n'
 
             for epoch in range(epoches):
+                global_step = epoch
                 i = epoch % num_videos
                 [self.w_img, self.h_img, sequence_name, self.training_iters, dummy]= utils.choose_video_sequence(i)
 
@@ -308,7 +310,7 @@ class ROLO_TF:
                     # Save pred_location to file
                     utils.save_rolo_output_test(self.output_path, pred_location, id, self.num_steps, self.batch_size)
 
-                    sess.run(self.optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys, current_iter:epoch, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
+                    sess.run(self.optimizer, feed_dict={self.x: batch_xs, self.y: batch_ys,self.istate: np.zeros((self.batch_size, 2*self.num_input))})
                     if id % self.display_step == 0:
                         # Calculate batch loss
                         loss = sess.run(self.accuracy, feed_dict={self.x: batch_xs, self.y: batch_ys, self.istate: np.zeros((self.batch_size, 2*self.num_input))})
