@@ -241,8 +241,8 @@ class ROLO_TF:
 
     def train_30_2(self):
         print("TRAINING ROLO...")
-        log_file = open("output/trainging-30-2-log.txt", "a") #open in append mode
-        self.build_networks()
+        log_file = open("panchen/output/trainging-30-2-log.txt", "a") #open in append mode
+        #self.build_networks()
 
         ''' TUNE THIS'''
         num_videos = 30
@@ -274,9 +274,9 @@ class ROLO_TF:
                 i = epoch % num_videos
                 [self.w_img, self.h_img, sequence_name, self.training_iters, dummy]= utils.choose_video_sequence(i)
 
-                x_path = os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
-                y_path = os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
-                self.output_path = os.path.join('benchmark/DATA', sequence_name, 'rolo_out_train/')
+                x_path = os.path.join('../../benchmark/DATA', sequence_name, 'yolo_out/')
+                y_path = os.path.join('../../benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
+                self.output_path = os.path.join('../../benchmark/DATA', sequence_name, 'rolo_out_train/')
                 utils.createFolder(self.output_path)
                 total_loss = 0
                 id = 0
