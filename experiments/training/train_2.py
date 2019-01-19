@@ -284,8 +284,10 @@ class ROLO_TF:
         [fw_prediction,bw_prediction,pred]= self.bi_lstm("bi_lstm",self.x)
         with tf.name_scope('loss'):
             self.correct_prediction = tf.square(pred - self.y)
-            self.lstm_prediction = tf.square(fw_prediction-bw_prediction)
-            self.accuracy = (tf.reduce_mean(self.correct_prediction)+tf.reduce_mean(self.lstm_prediction))* 100
+            self.lstm_pred_1 = tf.square(fw_prediction-self.y)
+            self.lstm_pred_2 = tf.square(bw_prediction-self.y)
+            self.accuracy = (0.25*tf.reduce_mean(self.correct_prediction)+0.25*tf.reduce_mean(self.lstm_pred_1)
+                             +0.5*tf.reduce_mean(self.lstm_pred_2))* 100
             tf.summary.histogram('loss', self.accuracy)
         self.learning_rate = 0.00001 #0.00001
         self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.accuracy)  # Adam Optimizer
