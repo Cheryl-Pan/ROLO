@@ -67,9 +67,9 @@ class ROLO_TF:
 
     # ROLO Network Parameters
 
-    rolo_weights_file = '../training/panchen/output/ROLO_model_2'
+    rolo_weights_file = '../training/panchen/output/ROLO_model_exp2'
     lstm_depth = 3
-    num_steps = 6  # number of frames as an input sequence
+    num_steps = 3  # number of frames as an input sequence
     num_feat = 4096
     num_predict = 6  # final output of LSTM 6 loc parameters
     num_gt = 4
@@ -228,14 +228,6 @@ class ROLO_TF:
         # Initializing the variables
 
         init = tf.global_variables_initializer()
-        # include = ['bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/bias',
-        #            'bidirectional_lstm/fw_direction/rnn/basic_lstm_cell/kernel',
-        #            'bidirectional_lstm/bw_direction/rnn/basic_lstm_cell/bias',
-        #            'weight/Variable'
-        #            'bias/Variable']
-        # variables_to_restore = tf.contrib.slim.get_variables_to_restore(include=include)
-        # self.saver = tf.train.Saver(variables_to_restore)
         self.saver = tf.train.Saver()
         ckpt = tf.train.latest_checkpoint(self.rolo_weights_file)
         # self.saver = tf.train.import_meta_graph("../training/panchen/output/ROLO_model/model_step6_exp1.ckpt.meta")
@@ -251,9 +243,8 @@ class ROLO_TF:
             else:
                 sess.run(init)
 
-
             # id= 1
-            evaluate_st = 22
+            evaluate_st = 0
             evaluate_ed = 29
 
             for test in range(evaluate_st, evaluate_ed + 1):
@@ -267,14 +258,10 @@ class ROLO_TF:
                 # Keep training until reach max iterations
                 total_time = 0.0
                 total_loss = 0
-                id = 0  # don't change this
+                id = dummy_1  # don't change this
                 while id < self.testing_iters - self.num_steps:
                     # Load training data & ground truth
                     batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps, id)  # [num_of_examples, num_input] (depth == 1)
-
-                    # Apply dropout to batch_xs
-                    # for item in range(len(batch_xs)):
-                    #    batch_xs[item] = self.dropout_features(batch_xs[item], 0.4)
 
                     batch_ys = self.rolo_utils.load_rolo_gt_test(y_path, self.batch_size, self.num_steps, id)
                     batch_ys = utils.locations_from_0_to_1(self.w_img, self.h_img, batch_ys)
