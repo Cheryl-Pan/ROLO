@@ -67,7 +67,7 @@ class ROLO_TF:
 
     # ROLO Network Parameters
 
-    rolo_weights_file = '../training/panchen/output/ROLO_model_exp2'
+    rolo_weights_file = '../training/panchen/output/ROLO_model_3'
     lstm_depth = 3
     num_steps = 3  # number of frames as an input sequence
     num_feat = 4096
@@ -244,7 +244,7 @@ class ROLO_TF:
                 sess.run(init)
 
             # id= 1
-            evaluate_st = 0
+            evaluate_st = 20
             evaluate_ed = 29
 
             for test in range(evaluate_st, evaluate_ed + 1):
@@ -258,7 +258,7 @@ class ROLO_TF:
                 # Keep training until reach max iterations
                 total_time = 0.0
                 total_loss = 0
-                id = dummy_1  # don't change this
+                id = 0  # don't change this
                 while id < self.testing_iters - self.num_steps:
                     # Load training data & ground truth
                     batch_xs = self.rolo_utils.load_yolo_output_test(x_path, self.batch_size, self.num_steps, id)  # [num_of_examples, num_input] (depth == 1)
