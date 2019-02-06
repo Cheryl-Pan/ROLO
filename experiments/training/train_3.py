@@ -277,8 +277,8 @@ class ROLO_TF:
         # self.build_networks()
 
         ''' TUNE THIS'''
-        num_videos = 22
-        epoches = 22 * 40   # 20 * 100
+        num_videos = 20
+        epoches = 20 * 40   # 20 * 100
 
         # Use rolo_input for LSTM training
         [fw_prediction,bw_prediction,pred]= self.bi_lstm("bi_lstm",self.x)
