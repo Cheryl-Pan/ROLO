@@ -177,7 +177,7 @@ class ROLO_TF:
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         # Launch the graph
-        with tf.Session(config) as sess:
+        with tf.Session(config=config) as sess:
             sess.run(init)
             ckpt = tf.train.get_checkpoint_state(self.rolo_model_file)
             if ckpt and ckpt.model_checkpoint_path:
