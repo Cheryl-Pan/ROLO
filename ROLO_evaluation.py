@@ -1004,7 +1004,7 @@ def evaluate_kalman_AUC():        # calculate AUC(Average Under Curve)
 
 def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each sequence
     ''' PARAMETERS '''
-    num_steps= 6
+    num_steps= 3
     output_video = False
     display_video = False
 
@@ -1020,7 +1020,7 @@ def evaluate_avg_IOU():    # calculate AOS(Average Overlap Score) for each seque
         img_fold_path = os.path.join('benchmark/DATA', sequence_name, 'img/')
         gt_file_path= os.path.join('benchmark/DATA', sequence_name, 'groundtruth_rect.txt')
         yolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'yolo_out/')
-        rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test_train2/')
+        rolo_out_path= os.path.join('benchmark/DATA', sequence_name, 'rolo_out_test/')
 
         print(rolo_out_path)
 
@@ -1344,8 +1344,6 @@ def main(argv):
     # evaluate_AUC_TRE()
     #evaluate_kalman_AUC()
     #evaluate_kalman_AUC_TRE()
-    #for method_id in range(9, 10):
-    #    evaluate_benchmark_avg_IOU(method_id)
 
     #for method_id in range(0, 9):
     #    evaluate_benchmark_avg_IOU_TRE(method_id)
