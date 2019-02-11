@@ -64,7 +64,7 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_model_file = 'panchen/output/mode_step6_exp2/'
+    rolo_model_file = 'panchen/output/model_step6_exp2/'
     rolo_weights_file = os.path.join(rolo_model_file, 'model_step6_exp2.ckpt')
     lstm_depth = 3
     num_steps = 6  # number of frames as an input sequence
