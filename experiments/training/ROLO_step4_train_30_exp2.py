@@ -64,10 +64,10 @@ class ROLO_TF:
     w_img, h_img = [352, 240]
 
     # ROLO Network Parameters
-    rolo_model_file = 'panchen/output/model_step3_exp2/'
-    rolo_weights_file = os.path.join(rolo_model_file, 'model_step3_exp2.ckpt')
+    rolo_model_file = 'panchen/output/model_step4_exp2/'
+    rolo_weights_file = os.path.join(rolo_model_file, 'model_step4_exp2.ckpt')
     lstm_depth = 3
-    num_steps = 3  # number of frames as an input sequence
+    num_steps = 4  # number of frames as an input sequence
     num_feat = 4096
     num_predict = 6  # final output of LSTM 6 loc parameters
     num_gt = 4
